@@ -93,26 +93,7 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 </style></head><body>
 <div id="app">
 
-<div class="pwd-screen" id="pwd-screen">
-  <div style="font-size:60px;margin-bottom:8px">&#129355;</div>
-  <div class="pwd-logo">TAEKWON<span>-DO</span></div>
-  <div style="font-size:16px;letter-spacing:2px;color:var(--gold);font-weight:700;margin-top:4px">MASTER DUTTON</div>
-  <div class="pwd-line"></div>
-  <div style="font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:20px">Members Only</div>
-  <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px;margin-bottom:16px;width:100%">
-    <div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">&#128241; Save to your home screen</div>
-    <div style="font-size:12px;color:var(--muted);line-height:1.7"><strong style="color:var(--white)">iPhone:</strong> Tap Share then "Add to Home Screen"<br/><strong style="color:var(--white)">Android:</strong> Tap Menu then "Add to Home Screen"</div>
-  </div>
-  <div style="font-size:11px;color:var(--muted);margin-bottom:14px;text-align:center">Save it like a bookmark &#128279;</div>
-  <div style="position:relative;width:100%;margin-bottom:10px">
-    <input class="pwd-input" id="pwd-input" type="password" placeholder="Enter access code" style="width:100%;padding:16px 60px 16px 16px;font-size:18px;letter-spacing:2px;margin-bottom:0"/>
-    <button id="pwd-eye" onclick="var i=document.getElementById('pwd-input');if(i.type==='password'){i.type='text';this.textContent='&#128064;';}else{i.type='password';this.textContent='&#128065;';}" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:28px;line-height:1;padding:4px;touch-action:manipulation;color:#f0f0f8;">&#128065;</button>
-  </div>
-  <div class="pwd-err" id="pwd-err"></div>
-  <button class="pwd-btn" onclick="checkPwd()">ENTER</button>
-  <div style="font-size:11px;color:var(--muted);margin-top:20px;text-align:center;line-height:1.6">Access code from your instructor.</div>
-  <div style="margin-top:12px;text-align:center"><span onclick="localStorage.clear();location.reload();" style="font-size:10px;color:#444;cursor:pointer;text-decoration:underline">reset app</span></div>
-</div>
+
 
 <div class="spl" id="spl"><div style="font-size:60px;margin-bottom:8px">&#129355;</div><div class="sll">TAEKWON<span>-DO</span></div><div class="slln"></div><div style="font-size:22px;letter-spacing:2px;color:var(--gold);margin-top:4px;font-weight:700">MASTER DUTTON</div><div style="font-size:13px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:8px">ITF &middot; Scotland</div><div style="position:absolute;bottom:60px;font-size:11px;color:var(--muted);letter-spacing:2px">LOADING...</div></div>
 <div class="belt-strip" id="belt-strip"></div>
@@ -299,34 +280,45 @@ var GLOSS=[
 {cat:"Attacks",terms:[["Jirugi","Punch / twist"],["Taerigi","Strike"],["Tulgi","Thrust"],["Chagi","Kick"],["Baro","Obverse (same side)"],["Bandae","Reverse (opposite side)"]]},
 {cat:"Blocks",terms:[["Makgi","Block"],["Chookyo Makgi","Rising block"],["Daebi Makgi","Guarding block"],["Hechyo Makgi","Wedging block"],["Sang Palmok Makgi","Twin forearm block"]]},
 {cat:"Hand Tools",terms:[["Ap Joomuk","Forefist"],["Dung Joomuk","Back fist"],["Sonkal","Knifehand"],["Sonbadak","Palm"],["An Palmok","Inner forearm"],["Bakat Palmok","Outer forearm"],["Palkup","Elbow"]]},
-{cat:"Foot Tools",terms:[["Apkumchi","Ball of foot"],["Dwitchumok","Heel"],["Baltung","Instep"],["Balkal","Footsword (outer edge)"]]},
+{cat:"Foot Tools",terms:[["Apkumchi","Ball of the foot"],["Baldung","Instep"],["Balkal","Footsword (outer edge of foot)"],["Balk Kut","Toes"],["Dwitchook","Back heel"],["Moorup","Knee"],["Balbadak","Sole of foot"],["Dwit Kumchi","Back sole"],["Yop Baldung","Side instep"],["Twimyo Chagi","Flying kick"],["Jok-Gi","Foot technique"]]},
 {cat:"Rank & Title",terms:[["Kup","Grade (colour belt)"],["Dan","Degree (black belt)"],["Jeja","Student"],["Sabum","Instructor"],["Boosabum","Assistant instructor (1st-3rd Dan)"],["Sahyun","Master (7th-8th Dan)"],["Saseong","Grand Master (9th Dan)"]]},
 {cat:"Sparring",terms:[["Matsogi","Sparring"],["Jayu Matsogi","Free sparring"],["Ilbo Matsogi","One-step sparring"],["Sambo Matsogi","Three-step sparring"]]}
 ];
 
 var KICKS=[
-{name:"Front Kick",k:"Ap Cha Busigi",lv:"Basic",desc:"A snap kick using the ball of the foot.",tgt:"Middle or high section"},
-{name:"Turning Kick",k:"Dollyo Chagi",lv:"Basic",desc:"A circular kick using the instep.",tgt:"Middle or high section"},
-{name:"Side Piercing Kick",k:"Yop Cha Jirugi",lv:"Basic",desc:"A thrusting kick using the heel or footsword.",tgt:"Middle section"},
-{name:"Back Kick",k:"Dwit Cha Jirugi",lv:"Basic",desc:"A powerful kick delivered backwards using the heel.",tgt:"Middle section"},
-{name:"Low Front Snap Kick",k:"Ap Najunde Cha Busigi",lv:"Basic",desc:"A snap kick to the low section.",tgt:"Low section"},
-{name:"Side Front Snap Kick",k:"Yop Ap Cha Busigi",lv:"Basic",desc:"A kick combining side and front motion.",tgt:"Middle section"},
-{name:"Reverse Turning Kick",k:"Bandae Dollyo Chagi",lv:"Advanced",desc:"A turning kick delivered in the reverse direction.",tgt:"High section"},
-{name:"Hook Kick",k:"Goro Chagi",lv:"Advanced",desc:"A kick that hooks inward at the target.",tgt:"High section"},
-{name:"Crescent Kick",k:"Bandal Chagi",lv:"Advanced",desc:"A sweeping kick in a crescent motion.",tgt:"High section"},
-{name:"Reverse Hook Kick",k:"Bandae Goro Chagi",lv:"Advanced",desc:"A hook kick in the reverse direction.",tgt:"High section"},
-{name:"Downward Kick (Axe Kick)",k:"Naeryo Chagi",lv:"Advanced",desc:"A kick that rises high and comes down with force onto the target like an axe.",tgt:"Head or shoulder"},
-{name:"Pressing Kick",k:"Noolo Chagi",lv:"Advanced",desc:"A downward pressing kick used to stomp or trap a fallen opponent.",tgt:"Low section"},
-{name:"Hooking Kick",k:"Golcho Chagi",lv:"Advanced",desc:"A kick that hooks around the guard to strike the target from the side.",tgt:"Head or body"},
-{name:"Waving Kick",k:"Doro Chagi",lv:"Advanced",desc:"A circular waving motion kick used to sweep around blocks.",tgt:"Middle or high section"},
-{name:"Twisting Kick",k:"Bituro Chagi",lv:"Advanced",desc:"A kick with a twisting motion of the foot on impact.",tgt:"Middle section"},
-{name:"Flying Side Kick",k:"Twimyo Yop Cha Jirugi",lv:"Flying",desc:"A jumping side kick delivered while airborne.",tgt:"Middle or high"},
-{name:"Flying Front Kick",k:"Twimyo Ap Cha Jirugi",lv:"Flying",desc:"A jumping front kick.",tgt:"High section"},
-{name:"Flying Back Kick",k:"Twimyo Dwit Cha Jirugi",lv:"Flying",desc:"A jumping back kick.",tgt:"Middle section"},
-{name:"Flying Turning Kick",k:"Twimyo Dollyo Chagi",lv:"Flying",desc:"A jumping turning kick.",tgt:"High section"},
-{name:"Flying High Kick",k:"Twimyo Nopi Chagi",lv:"Flying",desc:"A jumping kick aimed at maximum height.",tgt:"High section"},
-{name:"Flying Reverse Turning Kick",k:"Twimyo Bandae Dollyo Chagi",lv:"Flying",desc:"A jumping reverse turning kick.",tgt:"High section"},
+{name:"Front Rising Kick",k:"Ap Cha Olligi",lv:"Basic",desc:"A rising kick using the ball of the foot, swinging the leg upward to the front to stretch and loosen the legs.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Side Rising Kick",k:"Yop Cha Olligi",lv:"Basic",desc:"A rising kick to the side using the footsword, swinging the leg upward in a lateral arc.",tgt:"High section",tool:"Footsword (Balkal)"},
+{name:"Front Snap Kick",k:"Ap Cha Busigi",lv:"Basic",desc:"A fast snapping kick to the front using the ball of the foot. Chamber the knee first, then snap the lower leg out and retract sharply.",tgt:"Middle or high section",tool:"Ball of foot (Apkumchi)"},
+{name:"Side Piercing Kick",k:"Yop Cha Jirugi",lv:"Basic",desc:"A powerful kick delivered directly to the side using the footsword or heel. The hips turn fully to face the target.",tgt:"Middle section",tool:"Footsword (Balkal) or heel"},
+{name:"Turning Kick",k:"Dollyo Chagi",lv:"Basic",desc:"A circular kick using the ball of the foot. The supporting foot pivots fully and the hips rotate to generate power through the circular arc.",tgt:"Middle or high section",tool:"Ball of foot (Apkumchi)"},
+{name:"Back Piercing Kick",k:"Dwit Cha Jirugi",lv:"Basic",desc:"A powerful kick delivered backwards using the footsword or heel. Look over the shoulder before driving the heel straight back into the target.",tgt:"Middle section",tool:"Footsword (Balkal) or heel"},
+{name:"Inward Crescent Kick",k:"Anuro Bandal Chagi",lv:"Basic",desc:"A sweeping kick that travels in an inward crescent arc across the body, using the sole of the foot.",tgt:"High section",tool:"Sole of foot (Balbadak)"},
+{name:"Outward Crescent Kick",k:"Bakuro Bandal Chagi",lv:"Basic",desc:"A sweeping kick that travels in an outward crescent arc away from the body, using the footsword.",tgt:"High section",tool:"Footsword (Balkal)"},
+{name:"Knee Kick",k:"Moorup Chagi",lv:"Basic",desc:"A short-range kick using the knee. Drives the knee upward or forward into the target at close quarters.",tgt:"Low or middle section",tool:"Knee (Moorup)"},
+{name:"Stamping Kick",k:"Cha Busigi",lv:"Basic",desc:"A downward stamping kick using the footsword, usually directed at a fallen opponent or the instep.",tgt:"Low section",tool:"Footsword (Balkal)"},
+{name:"Low Front Snap Kick",k:"Moorup Ap Cha Busigi",lv:"Basic",desc:"A low front snap kick using the ball of the foot. Similar to the front snap kick but directed at the low section.",tgt:"Low section",tool:"Ball of foot (Apkumchi)"},
+{name:"Side Thrusting Kick",k:"Yop Cha Tulgi",lv:"Intermediate",desc:"A thrusting side kick that drives through the target using the ball of the foot. Longer reach than the side piercing kick.",tgt:"Middle section",tool:"Ball of foot (Apkumchi)"},
+{name:"Reverse Turning Kick",k:"Bandae Dollyo Chagi",lv:"Intermediate",desc:"A turning kick delivered in the reverse direction using the back heel. The body spins before the kick is launched.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Hooking Kick",k:"Golcha Chagi",lv:"Intermediate",desc:"A kick that hooks inward at the target using the back heel. The leg swings out then hooks back into the target.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Reverse Hooking Kick",k:"Bandae Golcha Chagi",lv:"Intermediate",desc:"A hooking kick delivered in the reverse direction using the back heel. Spins before hooking back into the target.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Downward Kick",k:"Naeryo Chagi",lv:"Intermediate",desc:"A kick that rises high then comes down with force onto the target like an axe, using the back heel.",tgt:"Head or shoulder",tool:"Back heel (Dwitchook)"},
+{name:"Sweeping Kick",k:"Goro Chagi",lv:"Intermediate",desc:"A sweeping kick that takes the opponent's supporting leg away. Executed low along the ground.",tgt:"Low section",tool:"Sole of foot (Balbadak)"},
+{name:"Twisting Kick",k:"Bituro Chagi",lv:"Intermediate",desc:"A kick with a twisting motion of the foot on impact using the ball of the foot. The foot twists inward as it contacts the target.",tgt:"Middle or high section",tool:"Ball of foot (Apkumchi)"},
+{name:"Vertical Kick",k:"Sewo Chagi",lv:"Intermediate",desc:"A kick in which the foot is held vertically using the ball of the foot, driving straight up through the target.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Checking Kick",k:"Cha Mum Chagi",lv:"Intermediate",desc:"A kick used to check or intercept an opponent's attack or movement. Stops the opponent in their tracks.",tgt:"Middle section",tool:"Ball of foot (Apkumchi)"},
+{name:"Consecutive Kick",k:"Yonsok Chagi",lv:"Advanced",desc:"Two or more kicks delivered in rapid succession without putting the foot down between them, e.g. turning kick followed by back kick.",tgt:"Multiple sections",tool:"Varies by kick combination"},
+{name:"Pick-shape Kick",k:"Gokgaeng-i Chagi",lv:"Advanced",desc:"A kick shaped like a pick or hook, targeting the opponent with a downward hooking motion.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Flying Front Kick",k:"Twimyo Ap Chagi",lv:"Flying",desc:"A jumping front kick using the ball of the foot. Jump and drive the leading knee up before extending the kick at the peak of the jump.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Turning Kick",k:"Twimyo Dollyo Chagi",lv:"Flying",desc:"A jumping turning kick using the ball of the foot. Jump and rotate in the air before releasing the circular kick.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Reverse Turning Kick",k:"Twimyo Bandae Dollyo Chagi",lv:"Flying",desc:"A jumping reverse turning kick. Jump, spin in the air and deliver the kick at the peak of the rotation.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Flying Side Piercing Kick",k:"Twimyo Yop Cha Jirugi",lv:"Flying",desc:"A jumping side kick using the footsword. One of the most powerful kicks in Taekwon-Do when executed correctly.",tgt:"Middle or high",tool:"Footsword (Balkal)"},
+{name:"Flying Side Thrusting Kick",k:"Twimyo Yop Cha Tulgi",lv:"Flying",desc:"A jumping side thrusting kick using the ball of the foot. Drives through the target with full body weight behind it.",tgt:"Middle section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying High Kick",k:"Twimyo Nopi Chagi",lv:"Flying",desc:"A jumping kick aimed at maximum height using the ball of the foot. Tests flexibility and jumping ability.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Twisting Kick",k:"Twimyo Bituro Chagi",lv:"Flying",desc:"A jumping twisting kick using the ball of the foot. Combines the jump with the twisting foot motion.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Two Direction Kick",k:"Twimyo Sangbang Chagi",lv:"Flying",desc:"A split kick in the air — both legs kick in opposite directions simultaneously at the peak of the jump.",tgt:"Two opponents",tool:"Ball of foot (Apkumchi)"},
+{name:"Dodging Reverse Turning Kick",k:"Pihamyo Bandae Dollyo Chagi",lv:"Flying",desc:"A reverse turning kick that incorporates a dodge or evasion before the kick is launched.",tgt:"High section",tool:"Back heel (Dwitchook)"}
 ];
+
 var BLOCKS=[
 {name:"Low Block",k:"Najunde Makgi",desc:"Blocks attacks to the low section using the outer forearm."},
 {name:"Inner Forearm Block",k:"An Palmok Makgi",desc:"Blocks to the middle section using the inner forearm."},
@@ -347,90 +339,96 @@ var BLOCKS=[
 var STANCE_SVGS={};
 
 var STANCES=[
+{name:"Attention Stance",k:"Charyot Sogi",
+width:"Feet form 45° angle, heels together",
+length:"N/A",
+weight:"50% / 50%",
+feet:"Heels together, toes angled 45° apart",
+desc:"Heels together with feet forming a 45 degree angle. Weight distributed evenly, legs straight. Arms held slightly out and in front of the waist, elbows bent, fists lightly clenched facing downward. Always say Taekwon when bowing."},
 {name:"Parallel Ready Stance",k:"Narani Junbi Sogi",
-width:"One shoulder width apart (side to side)",
-length:"N/A — feet level, no front/rear foot",
+width:"1 shoulder width measured from footswords",
+length:"N/A — feet level",
 weight:"50% / 50%",
-feet:"Both feet parallel, toes pointing forward",
-desc:"Stand with feet one shoulder width apart, toes pointing directly forward. Knees slightly relaxed. The standard ready position used at the start and end of most patterns."},
+feet:"Both feet parallel, pointing forward",
+desc:"1 shoulder width wide measured from the footswords. Feet parallel. Weight evenly distributed, legs straight. Fists clenched slightly, 5cm apart, approximately 7cm from the abdomen. Upper arms forward at 30 degrees, lower arms bent upward at 40 degrees."},
 {name:"Closed Ready Stance",k:"Moa Junbi Sogi",
-width:"Feet together — no gap",
-length:"N/A — feet level, no front/rear foot",
+width:"Feet together — no width",
+length:"N/A — feet level",
 weight:"50% / 50%",
-feet:"Both feet together, toes pointing forward",
-desc:"Stand with feet together, toes pointing forward. Used as a ready stance in several patterns including Toi-Gye and Eui-Am. Variations A, B, C and D differ only in hand position."},
+feet:"Both feet together and parallel",
+desc:"Both feet together and parallel — no length or width. Weight distributed evenly, legs straight. Performed either full or side facing. Variations A, B, C and D differ in hand position."},
 {name:"Walking Stance",k:"Gunnun Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One and a half shoulder widths (front to rear)",
+width:"1 shoulder width — measured between centre of insteps",
+length:"1.5 shoulder widths — from big toe of rear foot to big toe of front foot",
 weight:"50% / 50%",
-feet:"Front foot points forward (0°). Rear foot points 25° outward.",
-desc:"The most common attacking stance. Feet are one shoulder width apart side to side and one and a half shoulder widths front to rear. Front foot points straight ahead, rear foot turned 25° outward. Weight evenly distributed 50/50. Leading leg is the front leg."},
+feet:"Front foot points straight forward. Rear foot points outward up to 25°.",
+desc:"1 shoulder width wide measured between the centre of the insteps. 1.5 shoulder widths long from big toe to big toe. Weight evenly distributed. Back leg straight and locked, back foot pointed outward up to 25 degrees. Front leg bent with kneecap directly over the heel, front foot pointing straight forward. Foot muscles tensed as if pulling the feet together."},
 {name:"L-Stance",k:"Niunja Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One and a half shoulder widths (front to rear)",
-weight:"30% front / 70% rear",
-feet:"Both feet point 15° inward toward each other.",
-desc:"The primary defensive stance. Feet are one shoulder width apart side to side and one and a half shoulder widths front to rear. Both feet point 15° inward. 70% of weight on the rear leg, 30% on the front. Leading leg is the rear leg. Used extensively for blocking."},
-{name:"Sitting Stance",k:"Annun Sogi",
-width:"One and a half shoulder widths each side (total 3 shoulder widths)",
-length:"N/A — feet level, no front/rear foot",
-weight:"50% / 50%",
-feet:"Both feet parallel, toes pointing forward",
-desc:"A wide power stance used for side attacks. Feet are one and a half shoulder widths to each side of the centre line, making the total width approximately three shoulder widths. Both feet point straight forward. Knees bent outward over the toes. No leading leg."},
+width:"2.5cm — from inside heel of front foot to back heel of rear foot",
+length:"1.5 shoulder widths — from footsword of rear foot to toes of front foot",
+weight:"70% rear / 30% front",
+feet:"Both feet turned inward 15°",
+desc:"Width is 2.5cm from inside heel of front foot to back heel of rear foot. 1.5 shoulder widths long from footsword of rear to toes of front. 70% weight on rear foot, 30% on front. Both feet turned inward 15 degrees. Rear knee bent so kneecap is over toes of rear foot. Rear hip aligned with inner knee of rear leg. Always performed half facing. Primary defensive stance."},
 {name:"Fixed Stance",k:"Gojung Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One and a half shoulder widths (front to rear)",
+width:"2.5cm — from inside heel of front foot to back heel of rear foot",
+length:"1.5 shoulder widths — from big toe of rear foot to big toe of front foot (1 foot width longer than L-Stance)",
 weight:"50% / 50%",
-feet:"Both feet point 15° inward toward each other.",
-desc:"Similar to Walking Stance in dimensions — one shoulder width side to side, one and a half shoulder widths front to rear — but both feet are turned 15° inward and the rear heel is fixed flat on the ground. Weight is 50/50. Leading leg is the front leg."},
-{name:"Low Stance",k:"Nachuo Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One and a half shoulder widths plus one extra foot length (front to rear)",
+feet:"Both feet turned inward 15°",
+desc:"Same width as L-Stance (2.5cm) but 1 foot width longer. 1.5 shoulder widths long from big toe to big toe. Weight 50/50. Both feet turned inward 15 degrees. Rear knee over toes, rear hip aligned with inner knee. Always performed half facing."},
+{name:"Sitting Stance",k:"Annun Sogi",
+width:"1.5 shoulder widths measured from big toes",
+length:"N/A — feet level",
 weight:"50% / 50%",
-feet:"Front foot points forward (0°). Rear foot points 25° outward.",
-desc:"Similar to Walking Stance in foot position but longer by one foot length front to rear. Both knees are bent lower, making this a deeper, more powerful stance. Weight is 50/50. Leading leg is the front leg."},
-{name:"X-Stance",k:"Kyocha Sogi",
-width:"Feet cross — almost no width",
-length:"Almost no length — feet very close together",
-weight:"Almost 100% on the balancing foot",
-feet:"Rear foot crosses behind the front foot.",
-desc:"One foot crosses behind the other with almost all body weight on the balancing foot. Used for jumping and spinning techniques and fast directional changes. The leading leg is whichever leg carries the weight."},
-{name:"One-Leg Stance",k:"Waebal Sogi",
-width:"N/A — standing on one foot",
-length:"N/A — standing on one foot",
-weight:"100% on standing foot",
-feet:"Standing foot flat on floor. Other foot raised.",
-desc:"All body weight balanced on one foot. The other foot is raised, usually with the knee bent and the foot tucked in at knee height. Used as a kicking chamber position and for balance training."},
+feet:"Feet even and parallel, pointing forward",
+desc:"1.5 shoulder widths wide measured from the big toes. Feet even and parallel. Weight evenly distributed, knees bent over the balls of the feet. Chest and abdomen pushed out, hips pulled back. Performed full or side facing. Used for strong lateral strikes."},
 {name:"Rear Foot Stance",k:"Dwit Bal Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One and a half shoulder widths (front to rear)",
-weight:"10% front / 90% rear",
-feet:"Front foot points 25° inward. Rear foot points 15° inward.",
-desc:"Almost all weight (90%) is on the rear leg with only 10% on the front foot, which barely touches the ground. Front foot points 25° inward, rear foot 15° inward. One shoulder width side to side, one and a half shoulder widths front to rear. Leading leg is the rear leg."},
-{name:"Diagonal Stance",k:"Sasun Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One shoulder width (front to rear)",
+width:"No width — heel of rear foot slightly beyond heel of front",
+length:"1 shoulder width — from small toes of rear foot to small toes of front foot",
+weight:"90% rear / 10% front",
+feet:"Rear foot 15° inward. Front foot 25° inward, ball barely touching floor.",
+desc:"No width — heel of rear foot extends just past outside edge of heel of front foot. 1 shoulder width long. 90% weight on rear foot. Rear leg bent, kneecap over toes, rear foot turned in 15 degrees. Front leg bent, ball of front foot barely touching floor, heel slightly raised, foot pointing in 25 degrees. Always performed half facing."},
+{name:"Bending Ready Stance",k:"Guburyo Junbi Sogi",
+width:"N/A — standing on one leg",
+length:"N/A — standing on one leg",
+weight:"100% on supporting leg",
+feet:"Supporting foot flat. Non-supporting foot sole placed on knee joint of supporting leg, footsword parallel to floor.",
+desc:"Standing on one bent supporting leg — no length or width. All weight on the bent supporting leg. Non-supporting foot placed on the knee joint of the supporting leg with footsword parallel to the floor. Type A: non-supporting knee faces 45° inward, fists in guarding block. Type B: knee faces front as if preparing for back kick."},
+{name:"X-Stance",k:"Kyocha Sogi",
+width:"Virtually no width",
+length:"Virtually no length",
+weight:"Almost 100% on stationary leg",
+feet:"Ball of non-supporting foot barely touching floor beside stationary foot, both legs bent. Cross in front when stepping, behind when jumping.",
+desc:"Standing on one leg with ball of other foot barely touching the floor beside it. Virtually no length or width. Almost all weight on the stationary leg. Non-supporting leg crosses in front when stepping, behind when jumping. Both legs bent. Performed full, side or half facing."},
+{name:"Low Stance",k:"Nachuo Sogi",
+width:"1 shoulder width — measured between centre of insteps",
+length:"1.5 shoulder widths — from big toe of rear foot to heel of front foot",
 weight:"50% / 50%",
-feet:"Both feet angled 45° to the direction of movement.",
-desc:"Both feet are turned 45° diagonally. Used in specific patterns for attacks delivered at diagonal angles. Approximately one shoulder width in both width and length."},
-{name:"Bending Ready Stance",k:"Goburyo Junbi Sogi",
-width:"N/A — one foot raised",
-length:"N/A — one foot raised",
-weight:"100% on standing foot",
-feet:"Standing foot flat. Opposite knee raised to hip height.",
-desc:"One foot flat on the ground carrying 100% of the weight. The opposite knee is raised to hip height, chambering the leg ready to deliver a side piercing kick. Variations A and B differ in hand guard position."},
+feet:"Front foot straight forward. Rear foot outward up to 25°.",
+desc:"Same width as Walking Stance but measured from big toe of rear foot to heel of front foot. 1 shoulder width wide, 1.5 shoulder widths long. Weight evenly distributed. Back leg straight and locked, back foot pointed outward up to 25 degrees. Front leg bent with kneecap over heel. Similar to Walking Stance but longer and lower."},
 {name:"Vertical Stance",k:"Soojik Sogi",
-width:"One shoulder width apart (side to side)",
-length:"One shoulder width (front to rear)",
-weight:"40% front / 60% rear",
-feet:"Both feet point 15° inward toward each other.",
-desc:"Feet are one shoulder width apart both side to side and front to rear, forming a near-square shape. Both feet point 15° inward. 60% of weight is on the rear leg. Leading leg is the rear leg. Used in higher Dan patterns."},
+width:"No width — heel of rear slightly beyond heel of front",
+length:"1 shoulder width — from big toe of rear to big toe of front",
+weight:"60% rear / 40% front",
+feet:"Both feet turned inward 15°. Both legs straight.",
+desc:"No width — similar to Rear Foot Stance in positioning. 1 shoulder width long from big toe to big toe. 60% weight on rear foot, 40% on front. Both feet turned inward 15 degrees. Both legs straight. Always performed half facing."},
+{name:"Diagonal Stance",k:"Sasun Sogi",
+width:"1.5 shoulder widths measured from balls of feet",
+length:"Heel of front foot level with toes of rear foot",
+weight:"50% / 50%",
+feet:"Feet parallel, both angled diagonally",
+desc:"1.5 shoulder widths wide measured from the balls of the feet. Feet parallel with heel of front foot even with toes of rear foot. Weight evenly distributed, knees bent over balls of feet. Hips pulled back. Named for the more advanced foot, performed full or side facing."},
+{name:"One-Leg Stance",k:"Waebal Sogi",
+width:"N/A — standing on one leg",
+length:"N/A — standing on one leg",
+weight:"100% on stationary leg",
+feet:"Stationary leg straight. Non-supporting foot placed on side of knee joint (reverse footsword flat, toes pulled back) OR instep placed in hollow at rear of supporting knee.",
+desc:"Standing on one straight stationary leg — no length or width. All weight on the stationary leg. Non-supporting foot placed either with reverse footsword on the side of the knee joint (flat, toes pulled back), or with the instep in the hollow at the rear of the supporting knee. Named for the stationary leg, performed full or side facing."},
 {name:"Warrior Ready Stance",k:"Soo Sogi",
 width:"Slightly wider than shoulder width",
-length:"N/A — feet level, no front/rear foot",
+length:"N/A — feet level",
 weight:"50% / 50%",
-feet:"Both feet parallel, toes pointing forward",
-desc:"Similar to Parallel Ready Stance but slightly wider. Feet are parallel with toes pointing forward. Used as a ready stance in higher Dan patterns. The hand position distinguishes it from the Parallel Ready Stance."}
+feet:"Both feet parallel, pointing forward",
+desc:"Similar to Parallel Ready Stance but slightly wider. Feet parallel with toes pointing forward. Used as a ready stance in higher Dan patterns. The specific hand position distinguishes it from the Parallel Ready Stance."}
 ];
 
 var BELTS=[
@@ -498,56 +496,57 @@ function showBeltPicker(){
 }
 
 var MD_QUOTES=[
-  "You showed up. That's already suspicious behaviour.",
-  "We're not chasing perfection\u2026 just less excuses.",
-  "If it feels hard\u2026 good. That means it's working.",
-  "Slow is fine. Stopping is not.",
-  "You don't need to be great\u2026 just don't quit.",
-  "One step at a time. No drama.",
-  "You're doing better than the version of you on the couch.",
-  "This isn't punishment\u2026 it just feels like it.",
-  "Breathe\u2026 move\u2026 repeat. That's the plan.",
-  "You've survived worse. Probably.",
-  "Don't overthink it\u2026 just move.",
-  "Even a bad workout counts. Remember that.",
-  "You've done this before\u2026 stop acting new.",
-  "If it's easy, you're cheating.",
-  "You said you wanted this\u2026 remember?",
-  "Push now\u2026 thank yourself later.",
-  "This is where most people quit. Don't.",
-  "You're stronger than your excuses. Barely\u2026 but still.",
-  "Stop negotiating. Just get on with it.",
-  "You're not tired\u2026 you're uncomfortable. Big difference.",
-  "One more rep. Then prove it again.",
-  "You're too far in to start slacking now.",
-  "If you can talk\u2026 you can go harder.",
-  "Average effort = average results. Choose better.",
-  "This is where it hurts. Stay here.",
-  "No shortcuts. No sympathy. Just work.",
-  "Your legs are shaking? Good. Carry on.",
-  "Pain is temporary. Weakness is embarrassing.",
-  "If you stop now\u2026 it was all for nothing.",
-  "You wanted a challenge\u2026 here it is.",
-  "Go again. You're not done. Not even close.",
-  "Break the limit\u2026 then ignore the new one.",
-  "If you're still standing\u2026 you've got more.",
-  "This is the part that changes you. Don't waste it.",
-  "Empty the tank. Then find more.",
-  "You don't need motivation now\u2026 just guts.",
-  "There is only one height\u2026 head height.",
-  "Stretching begins at 180 degrees.",
-  "Rules\u2026 what rules?",
-  "If in doubt\u2026 kick higher.",
-  "I don't sweat\u2026 I leak greatness.",
-  "If found on the floor\u2026 I gave everything.",
-  "Confidence first. Skill catches up later.",
-  "Be the problem people complain about.",
-  "Fall down. Get up. Pretend it didn't happen.",
-  "If it looks ridiculous but works\u2026 it still looks ridiculous.",
-  "I came. I saw. I nearly passed out.",
-  "If you've got it\u2026 flaunt it\u2026 then kick someone.",
-  "As long as you look good, the rest doesn't matter."
+  "You showed up. That alone puts you ahead of the people on the sofa judging you.",
+  "Pain is temporary. Embarrassing yourself in patterns is forever.",
+  "If your kick isn't head height, it's a foot massage. Try again.",
+  "I've seen better stances from people falling down stairs.",
+  "Confidence is not optional. Fake it until your kicks prove it.",
+  "You don't need to be perfect. You just need to be better than yesterday. Low bar. Meet it.",
+  "If it's easy, you're doing it wrong. This isn't yoga.",
+  "I don't do sympathy. I do results. Crack on.",
+  "Your patterns looked great. Said no one. Yet. Keep going.",
+  "I've trained people older, slower and less flexible than you. They're all black belts now. No excuses.",
+  "Three things improve your kicks: flexibility, flexibility and flexibility. Go stretch. Now.",
+  "If you quit every time it gets hard, enjoy being a white belt forever.",
+  "A black belt is just a white belt who refused to give up. Simple. Not easy.",
+  "Your technique is a work in progress. Your effort should not be.",
+  "There is only one target height. Head height. Everything else is warming up.",
+  "You're not tired. You're comfortable. Big difference. Keep moving.",
+  "I don't care how it looks. I care how hard you try. Look terrible. Try hard.",
+  "If you practiced as much as you made excuses, you'd be a Dan grade by now.",
+  "Sweat now. Impress me later.",
+  "You came to class. Brilliant. Now actually do something in it.",
+  "The person who trains when they don't want to beats the person who only trains when they feel like it. Every time.",
+  "I have literally never once been impressed by someone giving up. Funny that.",
+  "Your body can do more than your brain thinks. Your brain is a liar. Don't listen to it.",
+  "Stop thinking. Start kicking. You can overthink it from the floor.",
+  "If you're not sweating, I'm not watching.",
+  "Train hard or go home. Actually — train hard OR go home and train harder.",
+  "Mediocre effort gets mediocre results. Shocking news, I know.",
+  "There is no bad training session. There is only training and skipping training.",
+  "I once saw someone cry during warm-up. They're a black belt now. What's your excuse.",
+  "Kick higher. No, higher than that. Higher. There. Was that so hard.",
+  "You can rest when you're a Grand Master. You're not a Grand Master.",
+  "Rules? What rules? There is only one height — head height.",
+  "Stretching begins at 180 degrees. Everything before that is just sitting on the floor.",
+  "I don't sweat. I leak excellence. You should try it.",
+  "Fall down seven times, get up eight. Ideally without being asked twice.",
+  "Your sparring partner isn't your enemy. Your laziness is.",
+  "If found unconscious on the mat, please inform the examiner I gave everything.",
+  "Some people want a trophy. Some people want to be good. Only one of those requires actual work.",
+  "The difference between a good student and a great student is what they do when no one is watching.",
+  "I believe in you. Prove me right. Or prove me wrong. Either way, kick something.",
+  "Low kick is an insult. To me and to your leg. Raise it.",
+  "You will get out of this exactly what you put in. Currently you're putting in... something. Aim higher.",
+  "Patterns done slowly with precision are worth ten done fast with nonsense.",
+  "I have never once handed out a belt to someone who didn't earn it. I'm not starting today.",
+  "Confidence first. Skill catches up. It always does.",
+  "Be the student your instructor brags about. Not the one they use as a cautionary tale.",
+  "Every black belt in this club was once standing exactly where you are. Most of them were worse.",
+  "If it looks like Taekwon-Do, feels like Taekwon-Do and hurts like Taekwon-Do — you're doing it right.",
+  "Train like the grading examiner is always watching. Because one day, they will be."
 ];
+
 function getMDQuote(){return MD_QUOTES[Math.floor(Math.random()*MD_QUOTES.length)];}
 
 function getStats(){
@@ -785,13 +784,164 @@ function newWorkout(level){
 }
 
 
+
+var CHALLENGES=[
+{id:"tc60",name:"Turning Kick Challenge",desc:"How many turning kicks can you do in 60 seconds?",duration:60,unit:"kicks",tip:"Alternate legs or one leg — your choice. Full technique counts."},
+{id:"fk60",name:"Front Kick Blitz",desc:"How many front snap kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Chamber properly every rep. Sloppy ones don't count."},
+{id:"sk60",name:"Side Kick Power",desc:"How many side kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Drive through fully. Half-hearted side kicks are not side kicks."},
+{id:"bk60",name:"Back Kick Burn",desc:"How many back kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Look over your shoulder every rep. Drive the heel straight back."},
+{id:"pu60",name:"Press Up Test",desc:"How many press ups in 60 seconds?",duration:60,unit:"reps",tip:"Chest to floor every rep. Chin-ups don't count as press ups."},
+{id:"sq60",name:"Squat Challenge",desc:"How many squats in 60 seconds?",duration:60,unit:"squats",tip:"Below parallel every rep. Your knees will hate you. Good."},
+{id:"hk60",name:"High Kick Challenge",desc:"How many head-height kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Head height only. Chest height is not head height. Be honest."},
+{id:"bj60",name:"Burpee Challenge",desc:"How many burpees in 60 seconds?",duration:60,unit:"burpees",tip:"Chest to floor, jump at top. No shortcuts. Master Dutton is watching."},
+{id:"rk60",name:"Reverse Turning Kick",desc:"How many reverse turning kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Spin fast, kick clean. Speed and technique together."},
+{id:"lunge60",name:"Lunge Challenge",desc:"How many walking lunges in 60 seconds?",duration:60,unit:"lunges",tip:"Full depth, upright torso. Count each leg separately."}
+];
+
+var CC=null; // current challenge
+var CT_RUNNING=false; // timer running
+var CT_TIME=0; // time remaining
+var CT_INTERVAL=null; // interval ref
+var CC_SCORE=0; // current score being entered
+
+function getChallengePB(id){
+  try{var s=localStorage.getItem('tkd-pb-'+id);return s?parseInt(s):null;}catch(e){return null;}
+}
+function saveChallengePB(id,score){
+  try{var pb=getChallengePB(id);if(!pb||score>pb)localStorage.setItem('tkd-pb-'+id,score);}catch(e){}
+}
+function startChallenge(idx){
+  CC=CHALLENGES[idx];
+  CT_RUNNING=false;CT_TIME=CC.duration;CC_SCORE=0;
+  if(CT_INTERVAL)clearInterval(CT_INTERVAL);
+  render();
+  setTimeout(function(){var el=document.getElementById('challenge-box');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+function startTimer(){
+  if(CT_RUNNING)return;
+  CT_RUNNING=true;CT_TIME=CC.duration;
+  render();
+  CT_INTERVAL=setInterval(function(){
+    CT_TIME--;
+    var el=document.getElementById('ct-time');
+    if(el)el.textContent=CT_TIME;
+    var bar=document.getElementById('ct-bar');
+    if(bar)bar.style.width=((CT_TIME/CC.duration)*100)+'%';
+    if(CT_TIME<=0){
+      clearInterval(CT_INTERVAL);CT_INTERVAL=null;CT_RUNNING=false;
+      render();
+      setTimeout(function(){var el=document.getElementById('challenge-box');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }
+  },1000);
+}
+function submitScore(score){
+  var s=parseInt(score);
+  if(isNaN(s)||s<0)return;
+  saveChallengePB(CC.id,s);
+  CC=null;CT_RUNNING=false;CT_TIME=0;
+  if(CT_INTERVAL){clearInterval(CT_INTERVAL);CT_INTERVAL=null;}
+  render();
+  setTimeout(function(){var el=document.getElementById('challenge-box');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+function clearChallenge(){
+  CC=null;CT_RUNNING=false;CT_TIME=0;
+  if(CT_INTERVAL){clearInterval(CT_INTERVAL);CT_INTERVAL=null;}
+  render();
+}
+function randomChallenge(){
+  var idx=Math.floor(Math.random()*CHALLENGES.length);
+  startChallenge(idx);
+}
+
+function rChallengeBox(){
+  var h='<div id="challenge-box">';
+  if(!CC){
+    // Show challenge picker
+    h+='<div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#9889; Kicking Challenges</div>';
+    h+='<div onclick="randomChallenge()" style="background:linear-gradient(135deg,rgba(232,25,60,.15),rgba(201,168,76,.08));border:2px dashed rgba(232,25,60,.4);border-radius:14px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation;margin-bottom:10px">'
+      +'<div style="font-size:36px;margin-bottom:6px">&#9889;</div>'
+      +'<div style="font-size:16px;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Random Challenge</div>'
+      +'<div style="font-size:12px;color:var(--muted)">Tap for a random 60-second challenge</div>'
+      +'</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    CHALLENGES.forEach(function(c,i){
+      var pb=getChallengePB(c.id);
+      h+='<div onclick="startChallenge('+i+')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px;cursor:pointer;touch-action:manipulation">'
+        +'<div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">60 sec</div>'
+        +'<div style="font-size:12px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:4px">'+c.name+'</div>'
+        +(pb?'<div style="font-size:11px;color:var(--gold)">&#11088; PB: '+pb+' '+c.unit+'</div>':'<div style="font-size:10px;color:var(--muted)">No record yet</div>')
+        +'</div>';
+    });
+    h+='</div>';
+  } else if(CT_TIME===0&&!CT_RUNNING){
+    // Time up - enter score
+    h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden">'
+      +'<div style="background:linear-gradient(135deg,rgba(232,25,60,.2),rgba(232,25,60,.05));padding:14px 16px;border-bottom:1px solid var(--border)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<button onclick="clearChallenge()" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;touch-action:manipulation">&#8592; Back</button>'
+      +'<span style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase">TIME UP!</span>'
+      +'</div>'
+      +'<div style="font-size:20px;font-weight:900;color:var(--white)">&#9889; '+CC.name+'</div>'
+      +'</div>'
+      +'<div style="padding:16px">'
+      +'<div style="font-size:14px;color:var(--text);margin-bottom:14px;text-align:center">How many did you get?</div>'
+      +'<input id="score-input" type="number" min="0" placeholder="Enter your score" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:24px;padding:12px;border-radius:10px;outline:none;font-family:inherit;text-align:center;margin-bottom:10px"/>';
+    var pb=getChallengePB(CC.id);
+    if(pb)h+='<div style="font-size:12px;color:var(--gold);text-align:center;margin-bottom:10px">&#11088; Your PB: '+pb+' '+CC.unit+'</div>';
+    h+='<button onclick="submitScore(CC_SCORE)" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;padding:14px;border-radius:12px;cursor:pointer;touch-action:manipulation;text-transform:uppercase;letter-spacing:1px">SAVE SCORE</button>'
+      +'</div></div>';
+  } else {
+    // Challenge active - show timer
+    var pb=getChallengePB(CC.id);
+    h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden">'
+      +'<div style="background:linear-gradient(135deg,rgba(232,25,60,.2),rgba(232,25,60,.05));padding:14px 16px;border-bottom:1px solid var(--border)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<button onclick="clearChallenge()" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;touch-action:manipulation">&#8592; Back</button>'
+      +(pb?'<span style="font-size:11px;color:var(--gold)">&#11088; PB: '+pb+' '+CC.unit+'</span>':'')
+      +'</div>'
+      +'<div style="font-size:20px;font-weight:900;color:var(--white)">&#9889; '+CC.name+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);margin-top:4px">'+CC.desc+'</div>'
+      +'</div>'
+      +'<div style="padding:16px;text-align:center">'
+      +'<div style="font-size:72px;font-weight:900;color:'+(CT_TIME<=10?'var(--red)':'var(--white)')+';line-height:1;margin-bottom:8px" id="ct-time">'+CT_TIME+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);margin-bottom:14px">seconds remaining</div>'
+      +'<div style="background:var(--border);height:8px;border-radius:4px;overflow:hidden;margin-bottom:16px">'
+      +'<div id="ct-bar" style="height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:4px;transition:width .9s linear;width:'+((CT_TIME/CC.duration)*100)+'%"></div>'
+      +'</div>'
+      +(CT_RUNNING
+        ?'<div style="font-size:14px;color:var(--gold);font-weight:700;font-style:italic;padding:10px">GO! GO! GO!</div>'
+        :'<button onclick="startTimer()" style="width:100%;background:linear-gradient(135deg,var(--green),#1a7a30);border:none;color:#fff;font-size:18px;font-weight:900;padding:16px;border-radius:12px;cursor:pointer;touch-action:manipulation;text-transform:uppercase;letter-spacing:2px">&#9654; START</button>'
+      )
+      +'<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:10px;margin-top:12px">'
+      +'<div style="font-size:11px;color:var(--gold);line-height:1.5">'+CC.tip+'</div>'
+      +'</div>'
+      +'</div></div>';
+  }
+  h+='</div>';
+  return h;
+}
+function getBeltGrade(){
+  var grades={
+    'White Belt':'10th Kup','White Belt - Yellow Stripe':'9th Kup',
+    'Yellow Belt':'8th Kup','Yellow Belt - Green Stripe':'7th Kup',
+    'Green Belt':'6th Kup','Green Belt - Blue Stripe':'5th Kup',
+    'Blue Belt':'4th Kup','Blue Belt - Red Stripe':'3rd Kup',
+    'Red Belt':'2nd Kup','Red Belt - Black Stripe':'1st Kup',
+    '1st Dan - Boo Sabum':'1st Dan','2nd Dan - Boo Sabum':'2nd Dan',
+    '3rd Dan - Boo Sabum':'3rd Dan','4th Dan - Sabum':'4th Dan',
+    '5th Dan - Sabum':'5th Dan','6th Dan - Sabum':'6th Dan',
+    '7th Dan - Sahyun':'7th Dan','8th Dan - Sahyun':'8th Dan',
+    '9th Dan - Saseong':'9th Dan'
+  };
+  return grades[BELT]||BELT;
+}
 function rHome(){
   var st=getStats();
   var lvl=st.total===0?'New!':st.total<10?'Beginner':st.total<50?'Student':st.total<100?'Warrior':'Master';
   var sm=st.streak===0?'Start your streak!':st.streak+' day'+(st.streak>1?'s':'')+' - keep it up!';
   var h='';
   h+='<div class="hero"><div class="htxt"><div class="hgr">Welcome back, Warrior</div><div class="hnm">MASTER <span>DUTTON</span></div><div class="streak"><span class="sn">'+st.streak+'</span><div><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px">DAY STREAK</div><div style="font-size:9px;color:var(--muted)">'+sm+'</div></div></div></div><div class="him" style=""><img src="'+PH+'" alt="Master Dutton" style="width:100%;height:100%;object-fit:cover;object-position:40% 15%;display:block;min-height:160px"/></div></div>';
-  h+='<div class="srow"><div class="sc"><div class="scn">'+st.total+'</div><div class="scl">Sessions</div></div><div class="sc"><div class="scn">'+st.week+'</div><div class="scl">This Week</div></div><div class="sc"><div class="scn" style="font-size:16px;margin-top:6px">'+lvl+'</div><div class="scl">Level</div></div></div>';
+  h+='<div class="srow"><div class="sc"><div class="scn">'+st.total+'</div><div class="scl">Sessions</div></div><div class="sc"><div class="scn">'+st.week+'</div><div class="scl">This Week</div></div><div class="sc" onclick="randomChallenge()" style="cursor:pointer;touch-action:manipulation"><div class="scn" style="font-size:22px;margin-top:2px">&#9889;</div><div class="scl">Challenge</div></div></div>';
   h+='<div onclick="sT(\'ask\')" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(37,211,102,.08));border:1px solid rgba(37,211,102,.3);border-radius:14px;padding:12px 16px;margin-bottom:12px;cursor:pointer"><div style="width:38px;height:38px;border-radius:10px;background:rgba(37,211,102,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">&#129355;</div><div style="flex:1"><div style="font-size:14px;font-weight:700;color:#25d366">Ask Master Dutton</div><div style="font-size:11px;color:var(--muted);margin-top:1px">Pattern help &middot; Technique &middot; Grading &middot; Theory</div></div><span style="font-size:18px;color:#25d366">&#8250;</span></div>';
   h+='<button onclick="logSession()" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;margin-bottom:14px;text-transform:uppercase;touch-action:manipulation">&#129355; LOG TRAINING SESSION</button>';
   h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px"><div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">&#129355; Master Dutton Says...</div><div style="font-size:13px;color:var(--text);line-height:1.6;font-style:italic">&ldquo;'+getMDQuote()+'&rdquo;</div></div>';
@@ -835,6 +985,7 @@ function rHome(){
       +'</div></div>';
   }
   h+='</div>';
+  h+=rChallengeBox();
   return h;
 }
 
@@ -873,9 +1024,9 @@ function rPats(){
 function rTech(){
   var cats=[['kicks','Kicks &#129355;'],['blocks','Blocks &#129306;'],['stances','Stances &#129485;']];
   var items=TC==='kicks'?KICKS:TC==='blocks'?BLOCKS:STANCES;
-  var lvls=TC==='kicks'?['All','Basic','Advanced','Flying']:null;
+  var lvls=TC==='kicks'?['All','Basic','Intermediate','Advanced','Flying']:null;
   var vis=(TC==='kicks'&&TL!=='All')?items.filter(function(k){return k.lv===TL;}):items;
-  var h=h1('TECHNIQUES')+'<div class="pills">'+cats.map(function(c){return '<span class="pill'+(TC===c[0]?' a':'')+'" onclick="sTC(\''+c[0]+'\')">'+c[1]+'</span>';}).join('')+'</div>';
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>'+h1('TECHNIQUES')+'<div class="pills">'+cats.map(function(c){return '<span class="pill'+(TC===c[0]?' a':'')+'" onclick="sTC(\''+c[0]+'\')">'+c[1]+'</span>';}).join('')+'</div>';
   if(lvls) h+='<div class="pills">'+lvls.map(function(l){return '<span class="pill'+(TL===l?' a':'')+'" onclick="sTL(\''+l+'\')">'+l+'</span>';}).join('')+'</div>';
   vis.forEach(function(item,i){
     var isOpen=TO===i;
@@ -916,7 +1067,7 @@ function rTech(){
           +svgDiagram
           +stanceInfo
           +'<div style="font-size:13px;color:var(--text);line-height:1.6;margin-top:10px">'+e(item.desc)+'</div>'
-          +(item.tgt?'<div style="font-size:12px;color:var(--muted);margin-top:6px">Target: '+e(item.tgt)+'</div>':'')
+          +(item.tgt?'<div style="font-size:12px;color:var(--muted);margin-top:6px">&#127919; Target: '+e(item.tgt)+'</div>':'')+(item.tool?'<div style="font-size:12px;color:var(--gold);margin-top:4px">&#9757; Foot tool: '+e(item.tool)+'</div>':'')
           +'</div>'
         : '')
       +'</div>';
@@ -947,7 +1098,7 @@ function rBelt(){
     else if(days===0) countdown='<div style="background:rgba(232,25,60,.1);border:1px solid rgba(232,25,60,.3);border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center"><div style="font-size:16px;font-weight:900;color:var(--red)">&#129355; GRADING DAY TODAY! Good luck!</div></div>';
     else countdown='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center"><div style="font-size:14px;font-weight:700;color:var(--green)">&#10003; Grading completed!</div></div>';
   }
-  var h='<div class="stitle">BELT GRADING</div>';
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button><div class="stitle">BELT GRADING</div>';
   h+='<div class="card" style="margin-bottom:12px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">&#128100; My Profile</div><div style="margin-bottom:10px"><div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Your Name</div><input id="st-name" value="'+e(studentName)+'" placeholder="Enter your name" oninput="saveProfile()" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:14px;padding:10px 12px;border-radius:10px;outline:none;font-family:inherit"/></div><div style="margin-bottom:10px"><div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Next Grading Date</div><input id="st-date" type="date" value="'+e(gradingDate)+'" oninput="saveProfile()" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:14px;padding:10px 12px;border-radius:10px;outline:none;font-family:inherit"/></div><div><div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Personal Notes</div><textarea id="st-notes" placeholder="Add your own training notes..." oninput="saveProfile()" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:13px;padding:10px 12px;border-radius:10px;outline:none;font-family:inherit;resize:none;height:70px">'+e(notes)+'</textarea></div></div>';
   h+=countdown;
   h+='<div class="stitle" style="font-size:18px;margin-bottom:8px">GRADING REQUIREMENTS</div>';
@@ -980,7 +1131,7 @@ function saveProfile(){
 
 function rQuiz(){
   if(QL===null){
-    var h=h1('THEORY QUIZ')+'<div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">Choose your level. Each has 20 questions on patterns, theory and Korean.</div>';
+    var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>'+h1('THEORY QUIZ')+'<div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">Choose your level. Each has 20 questions on patterns, theory and Korean.</div>';
     QLEV.forEach(function(lv,i){
       h+='<div onclick="sQL('+i+')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px"><div style="width:48px;height:48px;border-radius:14px;flex-shrink:0;background:'+lv.color+'22;border:2px solid '+lv.color+'66;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--white)">'+e(lv.emoji)+'</div><div style="flex:1"><div style="font-size:18px;font-weight:900;color:var(--white)">'+e(lv.label)+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">'+e(lv.grades)+' &middot; 20 questions</div></div><span style="color:var(--muted);font-size:20px">&#8250;</span></div>';
     });
@@ -1011,7 +1162,7 @@ function rQuiz(){
 function rGloss(){
   var total=GLOSS.reduce(function(n,g){return n+g.terms.length;},0);
   var filt=GS.length>1?GLOSS.map(function(g){return {cat:g.cat,terms:g.terms.filter(function(t){return t[0].toLowerCase().indexOf(GS.toLowerCase())>=0||t[1].toLowerCase().indexOf(GS.toLowerCase())>=0;})};}).filter(function(g){return g.terms.length>0;}):GLOSS;
-  var h='<div class="stitle">KOREAN GLOSSARY</div>';
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button><div class="stitle">KOREAN GLOSSARY</div>';
   h+='<div style="font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:1px">'+total+' TERMS &middot; TAP TO EXPAND &middot; &#128264; to hear</div>';
   var vlist=window.speechSynthesis?window.speechSynthesis.getVoices():[];
   if(vlist.length>0){
@@ -1045,7 +1196,7 @@ function rAsk(){
     {label:"Korean / Theory",icon:"&#127472;&#127479;",text:"Hi Master Dutton, I have a theory question: "},
     {label:"General Question",icon:"&#128172;",text:"Hi Master Dutton, I have a question: "},
   ];
-  var h='<div style="text-align:center;padding:20px 0 16px"><div style="font-size:48px;margin-bottom:8px">&#129355;</div><div style="font-family:inherit;font-size:24px;font-weight:900;color:var(--white);letter-spacing:2px;text-transform:uppercase">Ask Master Dutton</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5">Direct access to your instructor.<br/>Tap a question type to open WhatsApp.</div></div>';
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button><div style="text-align:center;padding:20px 0 16px"><div style="font-size:48px;margin-bottom:8px">&#129355;</div><div style="font-family:inherit;font-size:24px;font-weight:900;color:var(--white);letter-spacing:2px;text-transform:uppercase">Ask Master Dutton</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5">Direct access to your instructor.<br/>Tap a question type to open WhatsApp.</div></div>';
   h+='<div style="background:linear-gradient(135deg,rgba(232,25,60,.08),rgba(232,25,60,.03));border:1px solid rgba(232,25,60,.2);border-radius:16px;padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--red),#b01230);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">&#129355;</div><div><div style="font-size:16px;font-weight:900;color:var(--white)">Master Dutton</div><div style="font-size:12px;color:var(--gold);margin-top:2px">ITF Taekwon-Do Instructor</div><div style="font-size:11px;color:var(--muted);margin-top:4px">&#128994; Usually replies within 24 hours</div></div></div>';
   h+='<div class="card" style="margin-bottom:16px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#128337; Response Times</div><div style="font-size:13px;color:var(--text);line-height:1.9"><div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:6px"><span style="color:var(--muted)">Mon - Fri</span><span>Within 24 hours</span></div><div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:6px"><span style="color:var(--muted)">Weekends</span><span>Training days - check schedule</span></div><div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Urgent</span><span>Contact during class hours</span></div></div></div>';
   h+='<div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Choose your question type:</div>';
@@ -1067,12 +1218,12 @@ function rComp(){
   return '<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>'
   +'<div class="stitle">COMPETITION RULES</div>'
   +'<div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--gold);line-height:1.6">&#9888;&#65039; These rules are based on original ITF guidelines. Rules may vary between organisations and events.</div>'
-  +rCompSection("&#129354; AREA & FORMAT",["Competition area: 9m x 9m matted surface","Competitors bow on entering and leaving the area","Matches consist of 3 rounds of 2 minutes each","1 minute rest between rounds","A referee and 2 corner judges officiate each match"])
+  +rCompSection("&#129354; AREA & FORMAT",["Competition area: 9m x 9m matted surface (may differ)","Competitors bow on entering and leaving the area","Matches consist of 1 round of 2 minutes. Finals: 2 x 2 minutes","1 minute rest between rounds (Finals)","A referee and at least 3 corner judges officiate each match"])
   +rCompSection("&#129355; PERMITTED TECHNIQUES",["Hand attacks: Punch to the body (trunk protector area only)","Foot attacks: Kicks to the body and head","No attacks to the spine, back of the head, or groin","No grabbing, holding, or wrestling","Attacks must be delivered with controlled power and correct technique"])
   +rCompSection("&#127941; SCORING",["1 point - Valid punch to the body","1 point - Valid kick to the body","2 points - Valid kick to the head","3 points - Valid jumping/flying kick to the head","Techniques must be accurate, powerful and controlled to score"])
   +rCompSection("&#128683; FOULS (KYong-go - Warning)",["Falling down without being knocked down","Deliberately avoiding combat or running away","Grabbing or holding the opponent","Attacking after Kalyo (stop) is called","Attacking the back, spine or back of the head","Head butting or using the knee","2 Kyong-go = 1 Gam-jeom (half point deduction)"])
   +rCompSection("&#10060; GAM-JEOM (Half Point Deduction)",["Knocking the opponent down","Attacking a fallen opponent","Intentional attack after Kalyo","Severe or repeated fouls","Unsportsmanlike conduct","4 Gam-jeom = disqualification"])
-  +rCompSection("&#129352; KNOCKDOWN & KO",["Knockdown: competitor falls and cannot continue within 8 count","Referee counts to 8 - if competitor cannot continue, match ends","3 knockdowns in one round = automatic win for opponent","KO: competitor is knocked unconscious - match ends immediately"])
+  +rCompSection("&#9878;&#65039; MATCH DECISIONS",["The Jury President oversees all final decisions regarding match outcomes","A competitor who is knocked down or cannot continue may be assessed by the Jury President","The decision to continue, stop the match, or disqualify a competitor is at the discretion of the Jury President","Factors considered include: injury, inability to continue, repeated fouls, conduct, and overall safety","The Jury President's decision is final and may result in: continuation of match, stoppage, disqualification, or progression to next round","3 knockdowns in one round may result in automatic win for the opponent at the Jury President's discretion"])
   +rCompSection("&#9878;&#65039; PATTERNS COMPETITION",["Competitors perform their pattern individually","Judged on accuracy, power, balance, rhythm and control","Scores given by a panel of judges","Deductions for wrong movements, loss of balance, or poor technique","Pattern must begin and end at the same spot"])
   +rCompSection("&#128084; WEIGHT CATEGORIES (Adult)",["Fin: under 50kg (female) / under 54kg (male)","Fly: 50-54kg (female) / 54-58kg (male)","Bantam: 54-59kg (female) / 58-64kg (male)","Feather: 59-65kg (female) / 64-71kg (male)","Light: 65-72kg (female) / 71-78kg (male)","Welter: 72-80kg (female) / 78-86kg (male)","Middle: over 80kg (female) / 86-95kg (male)","Heavy: over 95kg (male)"])
   +rCompSection("&#128084; PROTECTIVE EQUIPMENT",["Head guard (mandatory)","Body armour / trunk protector (mandatory)","Groin guard (mandatory for males)","Forearm guards (mandatory)","Shin guards (mandatory)","Foot protectors (mandatory)","Gum shield recommended","All equipment must be ITF approved"])
@@ -1168,38 +1319,20 @@ function aQ(i){
   setTimeout(function(){if(QA>=20){QF=true;render();}else{QI++;QS=null;render();}},1200);
 }
 
-var PWD="tkd399";
-function checkPwd(){
-  var val=document.getElementById('pwd-input').value.trim();
-  var err=document.getElementById('pwd-err');
-  if(val===PWD){
-    localStorage.setItem('tkd-auth','tkd399');
-    document.getElementById('pwd-screen').style.display='none';
-    err.textContent='';
-  } else {
-    err.textContent='Wrong code. Try again.';
-    document.getElementById('pwd-input').value='';
-    document.getElementById('pwd-input').focus();
-  }
-}
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    var ps=document.getElementById('pwd-screen');
-    if(ps&&ps.style.display!=='none')checkPwd();
-  }
-});
-// Only hide if they previously entered the CORRECT password
-// Checking against the actual password value prevents old '1' value bypassing
-if(localStorage.getItem('tkd-auth')===PWD){
-  document.getElementById('pwd-screen').style.display='none';
-}
 
-var bb=document.getElementById('belt-badge');
-if(bb)bb.textContent=BELT+' ▾';
-var bs=document.getElementById('belt-strip');
-if(bs){var cb=BELTS.find(function(b){return b.name===BELT;});if(cb)bs.style.background=cb.strip;}
-setTimeout(function(){document.getElementById('spl').classList.add('h');},2000);
-render();
+document.addEventListener('DOMContentLoaded',function(){
+  // Set belt badge
+  var bb=document.getElementById('belt-badge');
+  if(bb)bb.textContent=BELT+' ▾';
+  var bs=document.getElementById('belt-strip');
+  if(bs){var cb=BELTS.find(function(b){return b.name===BELT;});if(cb)bs.style.background=cb.strip;}
+  // Hide splash after 2 seconds
+  setTimeout(function(){
+    var spl=document.getElementById('spl');
+    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){spl.style.display='none';},600);}
+  },1500);
+  render();
+});
 
 </script>
 </body></html>
