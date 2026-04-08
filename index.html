@@ -88,8 +88,6 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 
 .belt-strip{height:4px;width:100%;flex-shrink:0;transition:background .4s ease;}
 
-/* FIX: ensure SVGs inside stance diagrams render correctly */
-.stance-svg-wrap svg{width:100%;height:auto;display:block;}
 </style></head><body>
 <div id="app">
 
@@ -107,6 +105,7 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 <button class="tb" onclick="sT('belt')" id="t-belt"><span class="ic">&#127919;</span><span class="lb">Belt</span></button>
 <button class="tb" onclick="sT('quiz')" id="t-quiz"><span class="ic">&#129504;</span><span class="lb">Quiz</span></button>
 <button class="tb" onclick="sT('competition')" id="t-competition"><span class="ic">&#127941;</span><span class="lb">Compete</span></button>
+<button class="tb" onclick="sT('stretch')" id="t-stretch"><span class="ic">&#129496;</span><span class="lb">Stretch</span></button>
 <button class="tb" onclick="sT('glossary')" id="t-glossary"><span class="ic" style="display:flex;align-items:center;justify-content:center;width:24px;height:24px"><svg width="24" height="16" viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="16" fill="white"/><circle cx="12" cy="8" r="4" fill="#CD2E3A"/><path d="M12 4 A4 4 0 0 1 12 12 Z" fill="#003478"/><circle cx="12" cy="8" r="4" fill="none"/><path d="M12,4 A4,4,0,0,1,12,12" fill="#003478"/><path d="M12,4 A4,4,0,0,0,12,12" fill="#CD2E3A"/><line x1="4" y1="3" x2="7" y2="5" stroke="#000" stroke-width="0.8"/><line x1="4" y1="5" x2="7" y2="7" stroke="#000" stroke-width="0.8"/><line x1="4" y1="4" x2="7" y2="6" stroke="#000" stroke-width="0.8"/><line x1="17" y1="9" x2="20" y2="11" stroke="#000" stroke-width="0.8"/><line x1="17" y1="11" x2="20" y2="13" stroke="#000" stroke-width="0.8"/><line x1="17" y1="10" x2="20" y2="12" stroke="#000" stroke-width="0.8"/></svg></span><span class="lb">Korean</span></button>
 </div></div>
 
@@ -920,6 +919,155 @@ function rChallengeBox(){
   h+='</div>';
   return h;
 }
+
+var STRETCHES=[
+{
+  name:"Static Stretching",
+  icon:"&#129496;",
+  color:"#2ea84a",
+  intro:"The foundation of all flexibility training. Hold a position at the point of mild tension for 30-60 seconds. Never bounce. Never force. Let the muscle relax into the stretch over time.",
+  when:"After training or as a standalone session. Never as a warm-up.",
+  techniques:[
+    {name:"Standing Hamstring Stretch",how:"Stand tall. Extend one leg forward with heel on floor, toes up. Hinge forward from the hips keeping your back flat. Feel the stretch behind the thigh.",hold:"45-60 seconds each leg",tip:"Back flat, not rounded. You are hinging at the hip not bending at the waist."},
+    {name:"Seated Hamstring Stretch",how:"Sit on the floor with both legs extended. Reach forward toward your toes keeping your back as flat as possible. Hold at the point of tension.",hold:"60 seconds",tip:"Do not worry how far you reach. Worry about keeping your back flat. That is where the stretch comes from."},
+    {name:"Butterfly Stretch",how:"Sit with the soles of your feet together, knees out to the sides. Hold your feet and gently press your elbows against your inner thighs.",hold:"60-90 seconds",tip:"Sit tall, do not hunch. The stretch should be in the inner thigh, not the lower back."},
+    {name:"Hip Flexor Lunge Stretch",how:"Kneel on one knee. Push your hips forward gently until you feel a stretch at the front of the rear hip. Keep your torso upright.",hold:"45-60 seconds each side",tip:"Tuck your pelvis under. This doubles the effectiveness of the stretch instantly."},
+    {name:"Standing Quad Stretch",how:"Stand on one foot. Pull your other heel toward your glute. Keep knees together and stand tall.",hold:"45 seconds each leg",tip:"Squeeze your glute on the stretching leg. This deepens the hip flexor stretch at the same time."},
+    {name:"Figure-4 Glute Stretch",how:"Lie on your back. Cross one ankle over the opposite knee. Pull both legs toward your chest.",hold:"45-60 seconds each side",tip:"This is essential for side kicks and L-stances. Do not skip it."},
+    {name:"Lying Hamstring Stretch",how:"Lie on your back. Pull one straight leg toward you holding behind the thigh or calf.",hold:"60 seconds each leg",tip:"Keep the other leg flat on the floor. The flatter it stays, the better the stretch."}
+  ]
+},
+{
+  name:"Dynamic Stretching",
+  icon:"&#9889;",
+  color:"#e8193c",
+  intro:"Controlled movements that take your joints through their full range of motion. This is your warm-up. It prepares the muscles for explosive activity by gradually increasing range and temperature.",
+  when:"Before training, before patterns, before sparring. Always first.",
+  techniques:[
+    {name:"Leg Swings — Front to Back",how:"Hold a wall for balance. Swing one leg forward and back in a controlled arc. Start small and gradually increase the range over 10-15 swings.",reps:"15 each leg",tip:"Control the swing. Do not just throw your leg. The muscle should be working throughout."},
+    {name:"Leg Swings — Side to Side",how:"Face the wall. Swing one leg across your body and then out to the side. Gradually increase range.",reps:"15 each leg",tip:"This is your side kick warm-up. The more you do this, the higher your side kick will be."},
+    {name:"Hip Circles",how:"Hands on hips. Draw large circles with your hips, 10 in each direction. Like a hula hoop.",reps:"10 each direction",tip:"Full range every circle. This loosens the hip capsule which limits kick height more than tight muscles."},
+    {name:"Walking Knee Raises",how:"Walk forward bringing each knee up to hip height with each step. Drive the knee up, do not just lift the foot.",reps:"10 steps each leg",tip:"This is a chamber drill. You are training the kick pattern at the same time as warming up."},
+    {name:"Walking Lunge with Twist",how:"Step into a lunge. At the bottom, rotate your torso toward the front leg. Stand up and repeat.",reps:"10 each leg",tip:"Excellent for L-stance flexibility and rotational power in punches and patterns."},
+    {name:"Ankle Circles",how:"Lift one foot slightly. Draw large circles with your foot 10 times in each direction.",reps:"10 each direction each foot",tip:"Do not laugh. Ankle mobility affects your stance depth, your kicks and your balance. Always warm them up."},
+    {name:"Dynamic Hamstring Kicks",how:"Walk forward. With each step, kick one straight leg up in front of you reaching toward it with the opposite hand.",reps:"10 each leg",tip:"This is a front kick warm-up and a hamstring activator. Keep the leg straight."}
+  ]
+},
+{
+  name:"PNF Stretching",
+  icon:"&#127775;",
+  color:"#c9a84c",
+  intro:"Proprioceptive Neuromuscular Facilitation. The most effective stretching method known. Contract the muscle, then stretch it. The nervous system allows a greater range after a contraction. Requires a partner or a wall.",
+  when:"After training when muscles are warm. Not before. Not on cold muscles.",
+  techniques:[
+    {name:"PNF Hamstring — Contract and Relax",how:"Lie on your back. Partner holds your straight leg up. Push your leg DOWN against their resistance for 6 seconds (isometric contraction). Relax completely. Partner gently pushes your leg a little further for 20-30 seconds.",reps:"3-4 cycles",tip:"The key word is RELAX completely after the contraction. If you cannot relax, the technique will not work."},
+    {name:"PNF Hip Flexor — Wall Version",how:"In a lunge position, press your rear knee into the floor as if trying to push it through. Hold 6 seconds. Relax and sink deeper into the lunge. Hold 20 seconds.",reps:"3-4 cycles",tip:"You can do this without a partner. The floor provides the resistance."},
+    {name:"PNF Adductor — Butterfly",how:"Sit in butterfly position. Press both knees DOWN toward the floor against your hands for 6 seconds. Relax and let your knees drop further.",reps:"3-4 cycles",tip:"Essential for side splits development. Do this consistently and you will see real progress within weeks."},
+    {name:"PNF Quad — Partner Version",how:"Lie face down. Partner gently brings your heel toward your glute. Push your foot DOWN against resistance for 6 seconds. Relax and allow deeper range.",reps:"3-4 cycles",tip:"Can also be done solo using a resistance band or holding your own foot."},
+    {name:"PNF Calf — Wall Version",how:"Heel on raised surface, toes up. Push toes DOWN against the floor or wall for 6 seconds. Relax and ease the toes up further.",reps:"3-4 cycles",tip:"Calf flexibility is often ignored but affects your stance stability and kick height on jumping techniques."}
+  ]
+},
+{
+  name:"Kick Flexibility Programme",
+  icon:"&#129355;",
+  color:"#a855f7",
+  intro:"A dedicated 20-minute routine specifically for improving kick height. Do this 3-4 times per week consistently and you will see measurable improvement in 4-6 weeks. This is not optional if you want head-height kicks.",
+  when:"After training or as a standalone session. Muscles must be warm first.",
+  techniques:[
+    {name:"Step 1 — Dynamic Warm-Up",how:"Leg swings front/back x15 each. Leg swings side/side x15 each. Hip circles x10 each direction. Takes about 3 minutes.",reps:"Complete before anything else",tip:"Cold stretching is dangerous and counterproductive. Warm up first. Always."},
+    {name:"Step 2 — Hamstring Focus",how:"Seated hamstring stretch 60 seconds. Lying hamstring stretch 60 seconds each leg. Standing hamstring with forward lean 45 seconds each leg.",reps:"All three, in order",tip:"The hamstrings are the number one limiter of kick height for most students. Give them time."},
+    {name:"Step 3 — Hip Flexors",how:"Hip flexor lunge stretch 60 seconds each side. Figure-4 glute stretch 45 seconds each side.",reps:"Both exercises",tip:"Tight hip flexors prevent full knee drive in the chamber. This limits all kicks, not just high ones."},
+    {name:"Step 4 — Inner Thigh",how:"Butterfly stretch 90 seconds. Wide leg seated stretch — sit with legs wide apart and lean forward.",reps:"Both exercises",tip:"Inner thigh flexibility is essential for side kicks and crescent kicks. Most students neglect this area."},
+    {name:"Step 5 — PNF Finish",how:"PNF hamstring 3 cycles each leg. PNF adductor butterfly 3 cycles. This is where the real gains happen.",reps:"Always finish with this",tip:"PNF at the end of a warm session produces the fastest flexibility gains of any method. Be consistent."},
+    {name:"Step 6 — Relaxation Hold",how:"Lie flat on your back for 2-3 minutes. Let your body relax completely. This consolidates the new range of motion.",reps:"Do not skip this step",tip:"The nervous system needs time to accept the new range. Rushing off immediately wastes the session."}
+  ]
+},
+{
+  name:"Beginner Flexibility Guide",
+  icon:"&#127775;",
+  color:"#3b82f6",
+  intro:"Starting from scratch. This is where everyone begins. Do not compare yourself to others. Flexibility is a skill that develops over time with consistent practice. Start slow, stay consistent and you will improve.",
+  when:"Daily if possible. Even 10 minutes a day beats one hour a week.",
+  techniques:[
+    {name:"Week 1-2 — Just Show Up",how:"Static stretch only. Hold each stretch for 30 seconds. Do not force anything. The goal is simply to do it every day.",reps:"30 seconds per stretch",tip:"Consistency beats intensity every single time. 10 minutes daily is worth more than 1 hour once a week."},
+    {name:"Week 3-4 — Increase Hold Time",how:"Same stretches but increase to 45 seconds each. You should notice you can reach slightly further than week one.",reps:"45 seconds per stretch",tip:"If you notice no improvement, do not panic. Some bodies take longer. Keep going."},
+    {name:"Week 5-6 — Add Dynamic Work",how:"Start each session with 5 minutes of dynamic stretching before your static holds. Leg swings and hip circles.",reps:"5 min dynamic then static holds",tip:"You are now doing what the higher belts do. This combination is the most effective approach."},
+    {name:"Week 7-8 — Introduce PNF",how:"Add one PNF technique at the end of each session. Start with the butterfly PNF as it is the easiest to do alone.",reps:"3 cycles of one PNF technique",tip:"By this point you should already have noticeably more range than week one. Trust the process."},
+    {name:"The Golden Rule",how:"Never stretch to the point of pain. Tension is fine. Pain is a signal to stop. There is a big difference between discomfort and pain.",reps:"Every single session",tip:"Forcing a stretch tears muscle fibres and makes you less flexible. Patience and consistency always win."},
+    {name:"How to Measure Progress",how:"Once a week, note how far you can reach or how low your knees go in butterfly. Write it down. Progress is slow and you will miss it if you do not track it.",reps:"Once per week check-in",tip:"Flexibility improvements happen slowly. Tracking gives you the evidence that your work is paying off."}
+  ]
+}
+];
+
+var ST_OPEN=null;
+var ST_CAT=0;
+
+function rStretch(){
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>';
+  h+='<div class="stitle">FLEXIBILITY & STRETCHING</div>';
+  h+='<div style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6">The most underrated part of Taekwon-Do training. Flexibility directly determines kick height, stance depth and injury prevention.</div>';
+  h+='<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px">';
+  h+='<span style="font-size:20px">&#127916;</span>';
+  h+='<div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Video Tutorials Coming Soon</div>';
+  h+='<div style="font-size:11px;color:var(--muted);line-height:1.4">Step-by-step stretching video guides will be added to YouTube and linked here. Subscribe to Master Dutton on YouTube to be notified.</div></div></div>';
+
+  // Category pills
+  h+='<div class="pills" style="margin-bottom:14px">';
+  STRETCHES.forEach(function(s,i){
+    h+='<span class="pill'+(ST_CAT===i?' a':'')+'" onclick="sST('+i+')" style="'+(ST_CAT===i?'border-color:'+s.color+';color:'+s.color+';background:'+s.color+'22':'')+'">';
+    h+=s.icon+' '+s.name+'</span>';
+  });
+  h+='</div>';
+
+  var cat=STRETCHES[ST_CAT];
+  
+  // Category header
+  h+='<div style="background:var(--card);border:1px solid var(--border);border-left:3px solid '+cat.color+';border-radius:12px;padding:14px 16px;margin-bottom:12px">';
+  h+='<div style="font-size:11px;color:'+cat.color+';font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">'+cat.icon+' '+cat.name+'</div>';
+  h+='<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:8px">'+cat.intro+'</div>';
+  h+='<div style="background:rgba(255,255,255,.05);border-radius:8px;padding:8px 12px">';
+  h+='<div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">When to use</div>';
+  h+='<div style="font-size:12px;color:var(--white)">'+cat.when+'</div>';
+  h+='</div></div>';
+
+  // Techniques
+  cat.techniques.forEach(function(t,i){
+    var isOpen=ST_OPEN===ST_CAT+'-'+i;
+    h+='<div class="card" style="cursor:pointer;margin-bottom:8px" onclick="sSTOpen(\''+ST_CAT+'-'+i+'\')">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between">';
+    h+='<div><div style="font-size:14px;font-weight:700;color:var(--white)">'+t.name+'</div>';
+    if(t.hold)h+='<div style="font-size:11px;color:'+cat.color+';margin-top:2px">Hold: '+t.hold+'</div>';
+    if(t.reps&&!t.hold)h+='<div style="font-size:11px;color:'+cat.color+';margin-top:2px">'+t.reps+'</div>';
+    h+='</div><span style="color:var(--muted);font-size:16px">'+(isOpen?'&#9662;':'&#9656;')+'</span></div>';
+    if(isOpen){
+      h+='<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">';
+      h+='<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px">'+t.how+'</div>';
+      if(t.hold)h+='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:8px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Hold Time</div><div style="font-size:12px;color:var(--white)">'+t.hold+'</div></div>';
+      if(t.reps)h+='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:8px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Reps</div><div style="font-size:12px;color:var(--white)">'+t.reps+'</div></div>';
+      h+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:8px 12px"><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">&#128161; Master Dutton Says</div><div style="font-size:12px;color:var(--text);line-height:1.5;font-style:italic">'+t.tip+'</div></div>';
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  return h;
+}
+
+function sST(i){ST_CAT=i;ST_OPEN=null;render();}
+function sSTOpen(k){ST_OPEN=ST_OPEN===k?null:k;render();}
+function getGradingCountdown(){
+  try{
+    var p=JSON.parse(localStorage.getItem('tkd-profile')||'{}');
+    if(p.gradingDate){
+      var d=new Date(p.gradingDate);
+      var now=new Date();
+      var days=Math.ceil((d-now)/(1000*60*60*24));
+      if(days>0)return days+'d';
+      if(days===0)return 'TODAY!';
+      return 'Done ✓';
+    }
+  }catch(e){}
+  return 'Set date';
+}
 function getBeltGrade(){
   var grades={
     'White Belt':'10th Kup','White Belt - Yellow Stripe':'9th Kup',
@@ -941,7 +1089,7 @@ function rHome(){
   var sm=st.streak===0?'Start your streak!':st.streak+' day'+(st.streak>1?'s':'')+' - keep it up!';
   var h='';
   h+='<div class="hero"><div class="htxt"><div class="hgr">Welcome back, Warrior</div><div class="hnm">MASTER <span>DUTTON</span></div><div class="streak"><span class="sn">'+st.streak+'</span><div><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px">DAY STREAK</div><div style="font-size:9px;color:var(--muted)">'+sm+'</div></div></div></div><div class="him" style=""><img src="'+PH+'" alt="Master Dutton" style="width:100%;height:100%;object-fit:cover;object-position:40% 15%;display:block;min-height:160px"/></div></div>';
-  h+='<div class="srow"><div class="sc"><div class="scn">'+st.total+'</div><div class="scl">Sessions</div></div><div class="sc"><div class="scn">'+st.week+'</div><div class="scl">This Week</div></div><div class="sc" onclick="randomChallenge()" style="cursor:pointer;touch-action:manipulation"><div class="scn" style="font-size:22px;margin-top:2px">&#9889;</div><div class="scl">Challenge</div></div></div>';
+  h+='<div class="srow"><div class="sc"><div class="scn">'+st.total+'</div><div class="scl">Sessions</div></div><div class="sc"><div class="scn">'+st.week+'</div><div class="scl">This Week</div></div><div class="sc" onclick="sT(\'stretch\')" style="cursor:pointer;touch-action:manipulation"><div class="scn" style="font-size:22px;margin-top:2px">&#129496;</div><div class="scl">Stretch</div></div></div>';
   h+='<div onclick="sT(\'ask\')" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(37,211,102,.08));border:1px solid rgba(37,211,102,.3);border-radius:14px;padding:12px 16px;margin-bottom:12px;cursor:pointer"><div style="width:38px;height:38px;border-radius:10px;background:rgba(37,211,102,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">&#129355;</div><div style="flex:1"><div style="font-size:14px;font-weight:700;color:#25d366">Ask Master Dutton</div><div style="font-size:11px;color:var(--muted);margin-top:1px">Pattern help &middot; Technique &middot; Grading &middot; Theory</div></div><span style="font-size:18px;color:#25d366">&#8250;</span></div>';
   h+='<button onclick="logSession()" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;margin-bottom:14px;text-transform:uppercase;touch-action:manipulation">&#129355; LOG TRAINING SESSION</button>';
   h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px"><div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">&#129355; Master Dutton Says...</div><div style="font-size:13px;color:var(--text);line-height:1.6;font-style:italic">&ldquo;'+getMDQuote()+'&rdquo;</div></div>';
@@ -991,7 +1139,7 @@ function rHome(){
 
 function e(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function h1(s){return '<div class="stitle">'+s+'</div>';}
-function yt(url,lbl){if(!url)return '<div style="background:var(--card);border:1px dashed var(--border);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--muted)">&#127916; Video coming soon</div>';return '<a class="ytb" href="'+e(url)+'" target="_blank"><span style="font-size:20px">&#9654;&#65039;</span><div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase">Watch on YouTube</div><div style="font-size:12px;color:var(--muted);margin-top:2px">'+e(lbl)+'</div></div><span style="margin-left:auto;font-size:16px;color:var(--muted)">&#8599;</span></a>';}
+function yt(url,lbl){if(!url)return '<div style="background:var(--card);border:1px dashed rgba(232,25,60,.3);border-radius:12px;padding:12px 14px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">&#127916; Video Coming Soon</div><div style="font-size:12px;color:var(--muted);line-height:1.5">A dedicated tutorial video for this pattern will be added shortly. Check back soon.</div></div>';return '<a class="ytb" href="'+e(url)+'" target="_blank"><span style="font-size:20px">&#9654;&#65039;</span><div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase">Watch on YouTube</div><div style="font-size:12px;color:var(--muted);margin-top:2px">'+e(lbl)+'</div></div><span style="margin-left:auto;font-size:16px;color:var(--muted)">&#8599;</span></a>';}
 
 function rPats(){
   if(SP&&MV){
@@ -1013,6 +1161,7 @@ function rPats(){
   var fs=['All','Beginner','Intermediate','Advanced'];
   var vis=PF==='All'?PATS:PATS.filter(function(p){return p.diff===PF;});
   var h=h1('ITF PATTERNS')+'<div style="font-size:11px;color:var(--muted);margin-bottom:12px;letter-spacing:1px">CHON-JI THROUGH TONG-IL &middot; '+PATS.length+' PATTERNS</div>';
+  h+='<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.6">&#127916; <strong style="color:var(--white)">Videos:</strong> Current links are temporary. Dedicated ITF tutorial videos for each pattern will be added over time. This app updates regularly with new content.</div>';
   h+='<div class="pills">'+fs.map(function(f){return '<span class="pill'+(PF===f?' a':'')+'" onclick="sPF(\''+f+'\')">'+f+'</span>';}).join('')+'</div>';
   vis.forEach(function(p,idx){
     var ri=PATS.indexOf(p);
@@ -1030,16 +1179,6 @@ function rTech(){
   if(lvls) h+='<div class="pills">'+lvls.map(function(l){return '<span class="pill'+(TL===l?' a':'')+'" onclick="sTL(\''+l+'\')">'+l+'</span>';}).join('')+'</div>';
   vis.forEach(function(item,i){
     var isOpen=TO===i;
-    var svgDiagram='';
-    if(TC==='stances'&&isOpen&&STANCE_SVGS[item.name]){
-      svgDiagram='<div class="stance-svg-wrap" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px;margin-top:12px;display:flex;align-items:flex-start;gap:12px">'
-        +'<div style="width:130px;flex-shrink:0;min-height:80px;">'+STANCE_SVGS[item.name]+'</div>'
-        +'<div><div style="font-size:10px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">FOOT DIAGRAM</div>'
-        +'<div style="font-size:11px;color:var(--muted);line-height:1.8">'
-        +'<span style="color:#e8193c">&#9646;</span> Right foot<br/>'
-        +'<span style="color:#c9a84c">&#9646;</span> Left foot'
-        +'</div></div></div>';
-    }
     var stanceInfo='';
     if(TC==='stances'&&isOpen&&item.width){
       stanceInfo='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;margin-bottom:10px">'
@@ -1064,7 +1203,6 @@ function rTech(){
       +'<span style="color:var(--muted);font-size:16px">'+(isOpen?'&#9662;':'&#9656;')+'</span></div>'
       +(isOpen
         ? '<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">'
-          +svgDiagram
           +stanceInfo
           +'<div style="font-size:13px;color:var(--text);line-height:1.6;margin-top:10px">'+e(item.desc)+'</div>'
           +(item.tgt?'<div style="font-size:12px;color:var(--muted);margin-top:6px">&#127919; Target: '+e(item.tgt)+'</div>':'')+(item.tool?'<div style="font-size:12px;color:var(--gold);margin-top:4px">&#9757; Foot tool: '+e(item.tool)+'</div>':'')
@@ -1207,6 +1345,24 @@ function rAsk(){
   h+='<a href="https://wa.me/447407030077" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);border:none;border-radius:14px;padding:14px;margin-top:4px;text-decoration:none"><span style="font-size:20px">&#128373;</span><span style="font-size:16px;font-weight:900;color:#fff;letter-spacing:1px">OPEN WHATSAPP</span></a>';
   h+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:10px 14px;margin-top:12px;margin-bottom:4px;text-align:center"><div style="font-size:12px;color:var(--gold)">&#9888;&#65039; For adult students only</div></div>';
   h+='<div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">This feature is exclusive to app members.<br/>Your question goes directly to Master Dutton.</div>';
+  h+='<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#128218; Books by Master Dutton</div>';
+  h+='<div style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">Available on Amazon. Perfect companions to your training.</div>';
+  var books=[
+    {title:"TaekwonDo: Unleash Your Potential",desc:"Complete guide from first class to black belt. ITF patterns explained step by step.",url:"https://www.amazon.co.uk/s?k=taekwondo+unleash+your+potential+dutton"},
+    {title:"ITF Colour Belt Patterns",desc:"Complete step by step guide to all ITF colour belt patterns with detailed photos.",url:"https://www.amazon.co.uk/s?k=itf+colour+belt+patterns+dutton"},
+    {title:"ITF Black Belt Patterns I-III Degree",desc:"Covering all moves from 1st to 3rd degree black belt with step by step photos.",url:"https://www.amazon.co.uk/s?k=itf+black+belt+patterns+dutton"}
+  ];
+  books.forEach(function(b){
+    h+='<a href="'+b.url+'" target="_blank" style="display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;text-decoration:none">'
+      +'<div style="font-size:28px;flex-shrink:0">&#128218;</div>'
+      +'<div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">'+b.title+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:6px">'+b.desc+'</div>'
+      +'<div style="font-size:11px;color:var(--gold);font-weight:700">View on Amazon &#8599;</div>'
+      +'</div></a>';
+  });
+  h+='<a href="https://www.amazon.co.uk/stores/author/B0BGHSH7D7" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-decoration:none;margin-bottom:4px">'
+    +'<span style="font-size:13px;color:var(--gold);font-weight:700">See all books by Master Dutton &#8599;</span></a>';
+  h+='</div>';
   return h;
 }
 
@@ -1291,6 +1447,7 @@ function render(){
   else if(CT==='glossary') c.innerHTML=rGloss();
   else if(CT==='competition') c.innerHTML=rComp();
   else if(CT==='ask') c.innerHTML=rAsk();
+  else if(CT==='stretch') c.innerHTML=rStretch();
   if(GS&&CT==='glossary'){setTimeout(function(){var el=document.getElementById('gls');if(el){el.focus();el.selectionStart=el.selectionEnd=el.value.length;}},10);}
 }
 function sT(t){CT=t;SP=null;MV=false;if(t!=='home'){};document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('a');});var el=document.getElementById('t-'+t);if(el)el.classList.add('a');render();}
