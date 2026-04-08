@@ -1173,13 +1173,11 @@ function checkPwd(){
   var val=document.getElementById('pwd-input').value.trim();
   var err=document.getElementById('pwd-err');
   if(val===PWD){
-    var ps=document.getElementById('pwd-screen');
-    ps.style.display='none';
-    ps.style.pointerEvents='none';
-    localStorage.setItem('tkd-auth','1');
+    localStorage.setItem('tkd-auth','tkd399');
+    document.getElementById('pwd-screen').style.display='none';
     err.textContent='';
   } else {
-    err.textContent='Incorrect access code. Please try again.';
+    err.textContent='Wrong code. Try again.';
     document.getElementById('pwd-input').value='';
     document.getElementById('pwd-input').focus();
   }
@@ -1187,15 +1185,13 @@ function checkPwd(){
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter'){
     var ps=document.getElementById('pwd-screen');
-    if(ps&&ps.style.display!=='none'){checkPwd();}
+    if(ps&&ps.style.display!=='none')checkPwd();
   }
 });
-function hidePwd(){
-  var ps=document.getElementById('pwd-screen');
-  if(ps){ps.style.display='none';ps.style.pointerEvents='none';}
-}
-if(localStorage.getItem('tkd-auth')==='1'){
-  hidePwd();
+// Only hide if they previously entered the CORRECT password
+// Checking against the actual password value prevents old '1' value bypassing
+if(localStorage.getItem('tkd-auth')===PWD){
+  document.getElementById('pwd-screen').style.display='none';
 }
 
 var bb=document.getElementById('belt-badge');
