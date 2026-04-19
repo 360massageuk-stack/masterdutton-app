@@ -55,65 +55,101 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 .qo{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:600;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left;margin-bottom:8px;display:block;font-family:inherit}
 .qo.cor{background:rgba(46,168,74,.15);border-color:rgba(46,168,74,.5);color:var(--green)}
 .qo.wrg{background:rgba(232,25,60,.15);border-color:rgba(232,25,60,.5);color:var(--red)}
-.spl{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s;overflow:hidden}
+/* ═══════════════════════════════════════
+   CINEMATIC SPLASH SCREEN
+═══════════════════════════════════════ */
+.spl{position:fixed;inset:0;background:#000;z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:opacity 1.2s ease}
 .spl.h{opacity:0;pointer-events:none}
-.sll{font-size:clamp(32px,10vw,52px);letter-spacing:clamp(2px,2vw,6px);color:var(--white);font-weight:900;line-height:1;text-align:center;white-space:nowrap;padding:0 16px}
-.sll span{color:var(--red)}
-.slln{width:60px;height:3px;background:var(--red);border-radius:2px;margin:20px auto}
 
-/* Letter slam animation */
-.spl-content{display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.spl-word{display:flex;justify-content:center;align-items:center;gap:0px;overflow:visible;}
+/* Mist canvas sits behind everything */
+#spl-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:mistFadeIn 1.5s ease 0.3s forwards;}
+@keyframes mistFadeIn{to{opacity:1}}
+
+/* Red screen flash on impact */
+.spl-flash{position:absolute;inset:0;background:rgba(232,25,60,0);pointer-events:none;animation:screenFlash .6s ease 1.8s forwards;}
+@keyframes screenFlash{
+  0%{background:rgba(232,25,60,0);}
+  30%{background:rgba(232,25,60,.45);}
+  100%{background:rgba(232,25,60,0);}
+}
+
+/* Shockwave rings */
+.spl-shockwave{position:absolute;border-radius:50%;border:2px solid rgba(232,25,60,.9);opacity:0;pointer-events:none;width:10px;height:10px;}
+.spl-shockwave:nth-child(1){animation:shockRing 1.2s cubic-bezier(.2,0,.8,1) 1.85s forwards;}
+.spl-shockwave:nth-child(2){animation:shockRing 1.4s cubic-bezier(.2,0,.8,1) 1.95s forwards;border-color:rgba(232,25,60,.5);}
+.spl-shockwave:nth-child(3){animation:shockRing 1.7s cubic-bezier(.2,0,.8,1) 2.05s forwards;border-color:rgba(232,25,60,.25);}
+@keyframes shockRing{
+  0%{opacity:1;width:10px;height:10px;margin-left:-5px;margin-top:-5px;}
+  100%{opacity:0;width:500px;height:500px;margin-left:-250px;margin-top:-250px;}
+}
+
+/* Main content */
+.spl-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+
+/* Kamon / crest above title */
+.spl-crest{font-size:64px;opacity:0;transform:scale(0.4);filter:drop-shadow(0 0 20px rgba(232,25,60,.8));animation:crestReveal 1.2s cubic-bezier(.34,1.56,.64,1) 0.5s forwards;}
+@keyframes crestReveal{
+  0%{opacity:0;transform:scale(0.4) rotate(-15deg);}
+  70%{opacity:1;transform:scale(1.1) rotate(2deg);}
+  100%{opacity:1;transform:scale(1) rotate(0deg);}
+}
+
+/* TAEKWON-DO word */
+.spl-word{display:flex;justify-content:center;align-items:center;overflow:visible;margin-top:14px;}
 .spl-letter{
   display:inline-block;
-  font-size:clamp(34px,11vw,58px);
+  font-size:clamp(28px,8.5vw,58px);
   font-weight:900;
-  letter-spacing:clamp(2px,1.5vw,5px);
   color:var(--red);
   opacity:0;
-  transform:scale(4) translateY(-30px);
-  animation:letterSlam .25s cubic-bezier(.15,.5,.3,1) forwards, letterGlow 1.2s ease .3s forwards;
-  text-shadow:0 0 30px rgba(232,25,60,1),0 0 60px rgba(232,25,60,.8);
-}
-@keyframes letterSlam{
-  0%{opacity:0;transform:scale(4) translateY(-30px);}
-  70%{opacity:1;transform:scale(.92) translateY(4px);}
-  85%{transform:scale(1.06) translateY(-2px);}
-  100%{opacity:1;transform:scale(1) translateY(0);}
-}
-@keyframes letterGlow{
-  0%{color:var(--red);text-shadow:0 0 40px rgba(232,25,60,1),0 0 80px rgba(232,25,60,.7);}
-  60%{color:#ff6080;text-shadow:0 0 20px rgba(232,25,60,.6);}
-  100%{color:var(--white);text-shadow:none;}
+  transform:scale(5) translateY(-20px);
+  animation:letterSlam .55s cubic-bezier(.12,.8,.2,1) 1.8s forwards, letterGlow 2.8s ease 2.35s forwards;
+  text-shadow:0 0 40px rgba(232,25,60,1),0 0 80px rgba(232,25,60,.7);
+  letter-spacing:1px;
 }
 .spl-dash{
   display:inline-block;
-  font-size:clamp(34px,11vw,58px);
+  font-size:clamp(28px,8.5vw,58px);
   font-weight:900;
   color:var(--red);
   opacity:0;
-  transform:scale(4);
-  animation:letterSlam .25s cubic-bezier(.15,.5,.3,1) forwards, letterGlow 1.2s ease .3s forwards;
-  text-shadow:0 0 30px rgba(232,25,60,1);
-  margin:0 2px;
+  transform:scale(5);
+  animation:letterSlam .55s cubic-bezier(.12,.8,.2,1) 1.8s forwards, letterGlow 2.8s ease 2.35s forwards;
+  text-shadow:0 0 40px rgba(232,25,60,1);
+  margin:0 1px;
 }
-/* Shockwave ring */
-.spl-shockwave{
-  position:absolute;
-  width:20px;height:20px;
-  border-radius:50%;
-  border:3px solid rgba(232,25,60,.9);
-  opacity:0;
-  animation:shockwave .7s ease .22s forwards;
-  pointer-events:none;
+@keyframes letterSlam{
+  0%{opacity:0;transform:scale(5) translateY(-20px);}
+  65%{opacity:1;transform:scale(.9) translateY(5px);}
+  80%{transform:scale(1.08) translateY(-2px);}
+  100%{opacity:1;transform:scale(1) translateY(0);}
 }
-@keyframes shockwave{
-  0%{opacity:1;transform:scale(1);width:20px;height:20px;border-width:3px;}
-  100%{opacity:0;transform:scale(1);width:340px;height:340px;margin-left:-160px;margin-top:-160px;border-width:1px;}
+@keyframes letterGlow{
+  0%{color:var(--red);text-shadow:0 0 50px rgba(232,25,60,1),0 0 100px rgba(232,25,60,.8),0 0 150px rgba(232,25,60,.4);}
+  50%{color:#ff4466;text-shadow:0 0 30px rgba(232,25,60,.7);}
+  100%{color:var(--white);text-shadow:0 0 8px rgba(255,255,255,.2);}
 }
-/* Sub-content fade in after slam */
-.spl-sub{opacity:0;animation:splFadeIn .5s ease 1.1s forwards;}
-@keyframes splFadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* Red divider line draws itself */
+.spl-line{width:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:18px auto;opacity:0;animation:lineGrow 0.8s ease 2.6s forwards;}
+@keyframes lineGrow{0%{width:0;opacity:0;}30%{opacity:1;}100%{width:180px;opacity:1;}}
+
+/* Sub text */
+.spl-name{font-size:18px;letter-spacing:4px;color:var(--gold);font-weight:700;opacity:0;transform:translateY(10px);animation:subRise .8s ease 3.1s forwards;}
+.spl-sub2{font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;opacity:0;transform:translateY(8px);animation:subRise .8s ease 3.4s forwards;}
+@keyframes subRise{to{opacity:1;transform:translateY(0);}}
+
+/* Bottom loading bar */
+.spl-bar-wrap{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);width:160px;opacity:0;animation:subRise .5s ease 3.6s forwards;}
+.spl-bar-track{width:100%;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.spl-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff4466);border-radius:2px;animation:barFill 3s ease 3.6s forwards;}
+@keyframes barFill{0%{width:0%;}100%{width:100%;}}
+.spl-bar-label{text-align:center;font-size:10px;color:var(--muted);letter-spacing:3px;margin-top:6px;text-transform:uppercase;}
+
+/* keep old classes that may be referenced */
+.sll{font-size:clamp(32px,10vw,52px);letter-spacing:clamp(2px,2vw,6px);color:var(--white);font-weight:900;line-height:1;text-align:center;white-space:nowrap;padding:0 16px}
+.sll span{color:var(--red)}
+.slln{width:60px;height:2px;background:var(--red);border-radius:2px;margin:16px auto}
 .bsc{display:flex;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;-ms-overflow-style:none}
 .bsc::-webkit-scrollbar{display:none}
 .bc{flex-shrink:0;padding:8px 14px;border-radius:20px;cursor:pointer;background:var(--card);border:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap;margin-right:8px}
@@ -153,7 +189,7 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 .pwd-err{color:#e8193c;font-size:13px;text-align:center;min-height:20px;margin-bottom:8px}
 </style></head><body>
 <div id="app"> 
-<div id="pwd-screen" style="position:fixed;inset:0;background:#0a0a0c;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;font-family:'Segoe UI',sans-serif">
+<div id="pwd-screen" style="position:fixed;inset:0;background:#0a0a0c;z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px;font-family:'Segoe UI',sans-serif">
   <div style="font-size:60px;margin-bottom:8px">&#129355;</div>
   <div style="font-size:28px;letter-spacing:4px;color:#f0f0f8;font-weight:900">TAEKWON<span style="color:#e8193c">-DO</span></div>
   <div style="font-size:14px;letter-spacing:2px;color:#c9a84c;font-weight:700;margin-top:4px">MASTER DUTTON</div>
@@ -174,17 +210,25 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 
 
 <div class="spl" id="spl">
+  <canvas id="spl-canvas"></canvas>
+  <div class="spl-flash"></div>
+  <div class="spl-shockwave"></div>
+  <div class="spl-shockwave"></div>
   <div class="spl-shockwave"></div>
   <div class="spl-content">
-    <div style="font-size:56px;margin-bottom:12px;opacity:0;" class="spl-sub" style="animation-delay:.05s">&#129355;</div>
+    <div class="spl-crest">🥋</div>
     <div class="spl-word">
-      <span class="spl-letter" style="animation-delay:.05s">T</span><span class="spl-letter" style="animation-delay:.05s">A</span><span class="spl-letter" style="animation-delay:.05s">E</span><span class="spl-letter" style="animation-delay:.05s">K</span><span class="spl-letter" style="animation-delay:.05s">W</span><span class="spl-letter" style="animation-delay:.05s">O</span><span class="spl-letter" style="animation-delay:.05s">N</span><span class="spl-dash" style="animation-delay:.05s">-</span><span class="spl-letter" style="animation-delay:.05s">D</span><span class="spl-letter" style="animation-delay:.05s">O</span>
+      <span class="spl-letter">T</span><span class="spl-letter">A</span><span class="spl-letter">E</span><span class="spl-letter">K</span><span class="spl-letter">W</span><span class="spl-letter">O</span><span class="spl-letter">N</span><span class="spl-dash">-</span><span class="spl-letter">D</span><span class="spl-letter">O</span>
     </div>
-    <div class="slln spl-sub"></div>
-    <div class="spl-sub" style="font-size:20px;letter-spacing:3px;color:var(--gold);margin-top:4px;font-weight:700">MASTER DUTTON</div>
-    <div class="spl-sub" style="font-size:12px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:8px">ITF &middot; Scotland</div>
+    <div class="spl-line"></div>
+    <div class="spl-name">MASTER DUTTON</div>
+    <div class="spl-sub2" style="margin-top:8px">ITF &middot; Scotland</div>
   </div>
-  <div style="position:absolute;bottom:60px;font-size:11px;color:var(--muted);letter-spacing:2px;" class="spl-sub">LOADING...</div>
+  <div class="spl-bar-wrap">
+    <div class="spl-bar-track"><div class="spl-bar-fill"></div></div>
+    <div class="spl-bar-label">Loading</div>
+    <div id="spl-tap-hint" style="text-align:center;font-size:10px;color:rgba(107,104,128,0.7);letter-spacing:2px;margin-top:10px;text-transform:uppercase">Tap for sound</div>
+  </div>
 </div>
 <div class="belt-strip" id="belt-strip"></div>
 <div class="sbar"><span id="clock"></span><span id="datebar"></span></div>
@@ -2722,6 +2766,129 @@ if(window.speechSynthesis){
   }
 }
 
+
+// ═══════════════════════════════════════
+// CINEMATIC SPLASH — MIST + BOOM SOUND
+// ═══════════════════════════════════════
+(function(){
+  // --- BOOM SOUND ---
+  // iOS/Android rule: AudioContext must be created INSIDE the touch event handler
+  var audioCtx=null;
+  var boomFired=false;
+
+  function playBoom(){
+    try{
+      if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      var c=audioCtx;
+      if(c.state==='suspended') c.resume();
+      var now=c.currentTime;
+      // Bass thud
+      var osc=c.createOscillator();
+      var gain=c.createGain();
+      osc.type='sine';
+      osc.frequency.setValueAtTime(90,now);
+      osc.frequency.exponentialRampToValueAtTime(22,now+0.5);
+      gain.gain.setValueAtTime(0,now);
+      gain.gain.linearRampToValueAtTime(1.5,now+0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001,now+1.2);
+      osc.connect(gain);gain.connect(c.destination);
+      osc.start(now);osc.stop(now+1.3);
+      // Impact crack
+      var buf=c.createBuffer(1,Math.floor(c.sampleRate*0.1),c.sampleRate);
+      var d=buf.getChannelData(0);
+      for(var j=0;j<d.length;j++) d[j]=(Math.random()*2-1)*Math.pow(1-(j/d.length),1.5);
+      var src=c.createBufferSource();
+      var g2=c.createGain();
+      g2.gain.setValueAtTime(0.9,now);
+      src.buffer=buf;src.connect(g2);g2.connect(c.destination);
+      src.start(now);
+    }catch(ex){console.log('boom err:',ex);}
+  }
+
+  function unlockAndBoom(){
+    if(boomFired) return;
+    boomFired=true;
+    var hint=document.getElementById('spl-tap-hint');
+    if(hint) hint.style.display='none';
+    // Create AudioContext HERE inside the touch handler - this is what iOS requires
+    try{ audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }catch(e){}
+    playBoom();
+  }
+
+  // --- RED MIST CANVAS ---
+  function initMist(){
+    var canvas=document.getElementById('spl-canvas');
+    if(!canvas)return;
+    var W=canvas.offsetWidth||window.innerWidth;
+    var H=canvas.offsetHeight||window.innerHeight;
+    canvas.width=W;canvas.height=H;
+    var ctx=canvas.getContext('2d');
+    var particles=[];
+    var count=55;
+    for(var i=0;i<count;i++){
+      particles.push({
+        x:W*0.1+Math.random()*W*0.8,
+        y:H*0.55+Math.random()*H*0.5,
+        r:60+Math.random()*120,
+        vx:(Math.random()-.5)*0.4,
+        vy:-(0.15+Math.random()*0.5),
+        alpha:0,
+        maxAlpha:0.04+Math.random()*0.1,
+        grow:0.0008+Math.random()*0.001,
+        phase:Math.random()*Math.PI*2,
+        hue:Math.random()<0.7?0:350
+      });
+    }
+    var frame=0;
+    var alive=true;
+    function draw(){
+      if(!alive)return;
+      ctx.clearRect(0,0,W,H);
+      // Vignette
+      var vg=ctx.createRadialGradient(W/2,H/2,H*0.1,W/2,H/2,H*0.85);
+      vg.addColorStop(0,'rgba(0,0,0,0)');
+      vg.addColorStop(1,'rgba(0,0,0,0.72)');
+      ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);
+      frame++;
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];
+        p.x+=p.vx+Math.sin(frame*0.01+p.phase)*0.3;
+        p.y+=p.vy;
+        p.r+=p.r*p.grow;
+        if(p.alpha<p.maxAlpha)p.alpha+=0.0015;
+        if(p.y+p.r<-50){
+          p.y=H*0.6+Math.random()*H*0.4;
+          p.x=W*0.05+Math.random()*W*0.9;
+          p.alpha=0;p.r=60+Math.random()*80;
+        }
+        var grad=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+        grad.addColorStop(0,'hsla('+p.hue+',90%,40%,'+p.alpha+')');
+        grad.addColorStop(0.5,'hsla('+p.hue+',70%,25%,'+(p.alpha*0.5)+')');
+        grad.addColorStop(1,'hsla('+p.hue+',60%,15%,0)');
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=grad;ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+    // Stop canvas when splash hides to save battery
+    setTimeout(function(){alive=false;},8500);
+  }
+
+  // Attach to splash and document - fires on first tap
+  var splEl2=document.getElementById('spl');
+  if(splEl2) splEl2.addEventListener('touchstart', unlockAndBoom, {once:true, passive:true});
+  document.addEventListener('touchstart', unlockAndBoom, {once:true, passive:true});
+  // Desktop fallback
+  setTimeout(function(){ if(!boomFired){ boomFired=true; playBoom(); } }, 1800);
+  // Init mist once DOM ready
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initMist);
+  } else {
+    setTimeout(initMist,50);
+  }
+})();
+
 function render(){
   var c=document.getElementById('content');
   c.scrollTop=0;
@@ -2785,21 +2952,23 @@ document.addEventListener('keydown',function(e){
 });
 
 document.addEventListener('DOMContentLoaded',function(){
-  // Check saved login
-  if(localStorage.getItem('tkd-auth')===PWD){
-    var ps=document.getElementById('pwd-screen');
-    if(ps)ps.style.display='none';
-  }
   // Set belt badge
   var bb=document.getElementById('belt-badge');
   if(bb)bb.textContent=BELT+' ▾';
   var bs=document.getElementById('belt-strip');
   if(bs){var cb=BELTS.find(function(b){return b.name===BELT;});if(cb)bs.style.background=cb.strip;}
-  // Hide splash after 3.5 seconds (dramatic)
+  // Always show splash on every open - hides after 7 seconds
   setTimeout(function(){
     var spl=document.getElementById('spl');
-    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){spl.style.display='none';},700);}
-  },3500);
+    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){
+      spl.style.display='none';
+      // Check login AFTER splash completes
+      if(localStorage.getItem('tkd-auth')!==PWD){
+        var ps=document.getElementById('pwd-screen');
+        if(ps)ps.style.display='flex';
+      }
+    },800);}
+  },7000);
   render();
 });
 
