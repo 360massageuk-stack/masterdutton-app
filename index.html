@@ -72,6 +72,7 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
   30%{background:rgba(232,25,60,.45);}
   100%{background:rgba(232,25,60,0);}
 }
+}
 
 /* Shockwave rings */
 .spl-shockwave{position:absolute;border-radius:50%;border:2px solid rgba(232,25,60,.9);opacity:0;pointer-events:none;width:10px;height:10px;}
@@ -2875,12 +2876,18 @@ if(window.speechSynthesis){
     setTimeout(function(){alive=false;},8500);
   }
 
-  // Attach to splash and document - fires on first tap
-  var splEl2=document.getElementById('spl');
-  if(splEl2) splEl2.addEventListener('touchstart', unlockAndBoom, {once:true, passive:true});
-  document.addEventListener('touchstart', unlockAndBoom, {once:true, passive:true});
-  // Desktop fallback
-  setTimeout(function(){ if(!boomFired){ boomFired=true; playBoom(); } }, 1800);
+  // Fire on ANY user interaction - click for desktop, touchstart for mobile
+  function onAnyInteraction(){
+    document.removeEventListener('click', onAnyInteraction);
+    document.removeEventListener('touchstart', onAnyInteraction);
+    unlockAndBoom();
+  }
+  document.addEventListener('click', onAnyInteraction);
+  document.addEventListener('touchstart', onAnyInteraction, {passive:true});
+  // Also fire automatically after 1.8s delay (works if page already had interaction)
+  setTimeout(function(){
+    if(!boomFired){ unlockAndBoom(); }
+  }, 1800);
   // Init mist once DOM ready
   if(document.readyState==='loading'){
     document.addEventListener('DOMContentLoaded',initMist);
