@@ -55,11 +55,65 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 .qo{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:600;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left;margin-bottom:8px;display:block;font-family:inherit}
 .qo.cor{background:rgba(46,168,74,.15);border-color:rgba(46,168,74,.5);color:var(--green)}
 .qo.wrg{background:rgba(232,25,60,.15);border-color:rgba(232,25,60,.5);color:var(--red)}
-.spl{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s}
+.spl{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s;overflow:hidden}
 .spl.h{opacity:0;pointer-events:none}
-.sll{font-size:52px;letter-spacing:6px;color:var(--white);font-weight:900;line-height:1;text-align:center}
+.sll{font-size:clamp(32px,10vw,52px);letter-spacing:clamp(2px,2vw,6px);color:var(--white);font-weight:900;line-height:1;text-align:center;white-space:nowrap;padding:0 16px}
 .sll span{color:var(--red)}
 .slln{width:60px;height:3px;background:var(--red);border-radius:2px;margin:20px auto}
+
+/* Letter slam animation */
+.spl-content{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.spl-word{display:flex;justify-content:center;align-items:center;gap:0px;overflow:visible;}
+.spl-letter{
+  display:inline-block;
+  font-size:clamp(34px,11vw,58px);
+  font-weight:900;
+  letter-spacing:clamp(2px,1.5vw,5px);
+  color:var(--red);
+  opacity:0;
+  transform:scale(4) translateY(-30px);
+  animation:letterSlam .25s cubic-bezier(.15,.5,.3,1) forwards, letterGlow 1.2s ease .3s forwards;
+  text-shadow:0 0 30px rgba(232,25,60,1),0 0 60px rgba(232,25,60,.8);
+}
+@keyframes letterSlam{
+  0%{opacity:0;transform:scale(4) translateY(-30px);}
+  70%{opacity:1;transform:scale(.92) translateY(4px);}
+  85%{transform:scale(1.06) translateY(-2px);}
+  100%{opacity:1;transform:scale(1) translateY(0);}
+}
+@keyframes letterGlow{
+  0%{color:var(--red);text-shadow:0 0 40px rgba(232,25,60,1),0 0 80px rgba(232,25,60,.7);}
+  60%{color:#ff6080;text-shadow:0 0 20px rgba(232,25,60,.6);}
+  100%{color:var(--white);text-shadow:none;}
+}
+.spl-dash{
+  display:inline-block;
+  font-size:clamp(34px,11vw,58px);
+  font-weight:900;
+  color:var(--red);
+  opacity:0;
+  transform:scale(4);
+  animation:letterSlam .25s cubic-bezier(.15,.5,.3,1) forwards, letterGlow 1.2s ease .3s forwards;
+  text-shadow:0 0 30px rgba(232,25,60,1);
+  margin:0 2px;
+}
+/* Shockwave ring */
+.spl-shockwave{
+  position:absolute;
+  width:20px;height:20px;
+  border-radius:50%;
+  border:3px solid rgba(232,25,60,.9);
+  opacity:0;
+  animation:shockwave .7s ease .22s forwards;
+  pointer-events:none;
+}
+@keyframes shockwave{
+  0%{opacity:1;transform:scale(1);width:20px;height:20px;border-width:3px;}
+  100%{opacity:0;transform:scale(1);width:340px;height:340px;margin-left:-160px;margin-top:-160px;border-width:1px;}
+}
+/* Sub-content fade in after slam */
+.spl-sub{opacity:0;animation:splFadeIn .5s ease 1.1s forwards;}
+@keyframes splFadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .bsc{display:flex;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;-ms-overflow-style:none}
 .bsc::-webkit-scrollbar{display:none}
 .bc{flex-shrink:0;padding:8px 14px;border-radius:20px;cursor:pointer;background:var(--card);border:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap;margin-right:8px}
@@ -119,7 +173,19 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 
 
 
-<div class="spl" id="spl"><div style="font-size:60px;margin-bottom:8px">&#129355;</div><div class="sll">TAEKWON<span>-DO</span></div><div class="slln"></div><div style="font-size:22px;letter-spacing:2px;color:var(--gold);margin-top:4px;font-weight:700">MASTER DUTTON</div><div style="font-size:13px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:8px">ITF &middot; Scotland</div><div style="position:absolute;bottom:60px;font-size:11px;color:var(--muted);letter-spacing:2px">LOADING...</div></div>
+<div class="spl" id="spl">
+  <div class="spl-shockwave"></div>
+  <div class="spl-content">
+    <div style="font-size:56px;margin-bottom:12px;opacity:0;" class="spl-sub" style="animation-delay:.05s">&#129355;</div>
+    <div class="spl-word">
+      <span class="spl-letter" style="animation-delay:.05s">T</span><span class="spl-letter" style="animation-delay:.05s">A</span><span class="spl-letter" style="animation-delay:.05s">E</span><span class="spl-letter" style="animation-delay:.05s">K</span><span class="spl-letter" style="animation-delay:.05s">W</span><span class="spl-letter" style="animation-delay:.05s">O</span><span class="spl-letter" style="animation-delay:.05s">N</span><span class="spl-dash" style="animation-delay:.05s">-</span><span class="spl-letter" style="animation-delay:.05s">D</span><span class="spl-letter" style="animation-delay:.05s">O</span>
+    </div>
+    <div class="slln spl-sub"></div>
+    <div class="spl-sub" style="font-size:20px;letter-spacing:3px;color:var(--gold);margin-top:4px;font-weight:700">MASTER DUTTON</div>
+    <div class="spl-sub" style="font-size:12px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:8px">ITF &middot; Scotland</div>
+  </div>
+  <div style="position:absolute;bottom:60px;font-size:11px;color:var(--muted);letter-spacing:2px;" class="spl-sub">LOADING...</div>
+</div>
 <div class="belt-strip" id="belt-strip"></div>
 <div class="sbar"><span id="clock"></span><span id="datebar"></span></div>
 <div class="hdr"><div class="logo">TAEKWON<span>-DO</span></div><div class="badge" onclick="showBeltPicker()" style="cursor:pointer;user-select:none" id="belt-badge">Red Belt &#9662;</div></div>
@@ -2729,11 +2795,11 @@ document.addEventListener('DOMContentLoaded',function(){
   if(bb)bb.textContent=BELT+' ▾';
   var bs=document.getElementById('belt-strip');
   if(bs){var cb=BELTS.find(function(b){return b.name===BELT;});if(cb)bs.style.background=cb.strip;}
-  // Hide splash after 2 seconds
+  // Hide splash after 3.5 seconds (dramatic)
   setTimeout(function(){
     var spl=document.getElementById('spl');
-    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){spl.style.display='none';},600);}
-  },1500);
+    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){spl.style.display='none';},700);}
+  },3500);
   render();
 });
 
