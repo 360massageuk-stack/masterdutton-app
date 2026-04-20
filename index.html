@@ -55,11 +55,41 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 .qo{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:600;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left;margin-bottom:8px;display:block;font-family:inherit}
 .qo.cor{background:rgba(46,168,74,.15);border-color:rgba(46,168,74,.5);color:var(--green)}
 .qo.wrg{background:rgba(232,25,60,.15);border-color:rgba(232,25,60,.5);color:var(--red)}
-.spl{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s}
+/* ═══════════════════════════════════════
+   CINEMATIC SPLASH SCREEN
+═══════════════════════════════════════ */
+.spl{position:fixed;inset:0;background:#000;z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:opacity 1.2s ease}
 .spl.h{opacity:0;pointer-events:none}
-.sll{font-size:52px;letter-spacing:6px;color:var(--white);font-weight:900;line-height:1;text-align:center}
+#spl-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:mistFadeIn 1.5s ease 0.3s forwards;}
+@keyframes mistFadeIn{to{opacity:1}}
+.spl-flash{position:absolute;inset:0;background:rgba(232,25,60,0);pointer-events:none;animation:screenFlash .6s ease 7.0s forwards;}
+@keyframes screenFlash{0%{background:rgba(232,25,60,0);}30%{background:rgba(232,25,60,.45);}100%{background:rgba(232,25,60,0);}}
+.spl-shockwave{position:absolute;border-radius:50%;border:2px solid rgba(232,25,60,.9);opacity:0;pointer-events:none;width:10px;height:10px;}
+.spl-shockwave:nth-child(3){animation:shockRing 1.2s cubic-bezier(.2,0,.8,1) 7.05s forwards;}
+.spl-shockwave:nth-child(4){animation:shockRing 1.4s cubic-bezier(.2,0,.8,1) 7.15s forwards;border-color:rgba(232,25,60,.5);}
+.spl-shockwave:nth-child(5){animation:shockRing 1.7s cubic-bezier(.2,0,.8,1) 7.25s forwards;border-color:rgba(232,25,60,.25);}
+@keyframes shockRing{0%{opacity:1;width:10px;height:10px;margin-left:-5px;margin-top:-5px;}100%{opacity:0;width:500px;height:500px;margin-left:-250px;margin-top:-250px;}}
+.spl-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.spl-crest{font-size:64px;opacity:0;transform:scale(0.4);filter:drop-shadow(0 0 20px rgba(232,25,60,.8));animation:crestReveal 1.2s cubic-bezier(.34,1.56,.64,1) 0.5s forwards;}
+@keyframes crestReveal{0%{opacity:0;transform:scale(0.4) rotate(-15deg);}70%{opacity:1;transform:scale(1.1) rotate(2deg);}100%{opacity:1;transform:scale(1) rotate(0deg);}}
+.spl-word{display:flex;justify-content:center;align-items:center;overflow:visible;margin-top:14px;}
+.spl-letter{display:inline-block;font-size:clamp(28px,8.5vw,58px);font-weight:900;color:var(--red);opacity:0;transform:scale(5) translateY(-20px);animation:letterSlam .55s cubic-bezier(.12,.8,.2,1) 7.0s forwards,letterGlow 2.8s ease 7.55s forwards;text-shadow:0 0 40px rgba(232,25,60,1),0 0 80px rgba(232,25,60,.7);letter-spacing:1px;}
+.spl-dash{display:inline-block;font-size:clamp(28px,8.5vw,58px);font-weight:900;color:var(--red);opacity:0;transform:scale(5);animation:letterSlam .55s cubic-bezier(.12,.8,.2,1) 7.0s forwards,letterGlow 2.8s ease 7.55s forwards;text-shadow:0 0 40px rgba(232,25,60,1);margin:0 1px;}
+@keyframes letterSlam{0%{opacity:0;transform:scale(5) translateY(-20px);}65%{opacity:1;transform:scale(.9) translateY(5px);}80%{transform:scale(1.08) translateY(-2px);}100%{opacity:1;transform:scale(1) translateY(0);}}
+@keyframes letterGlow{0%{color:var(--red);text-shadow:0 0 50px rgba(232,25,60,1),0 0 100px rgba(232,25,60,.8),0 0 150px rgba(232,25,60,.4);}50%{color:#ff4466;text-shadow:0 0 30px rgba(232,25,60,.7);}100%{color:var(--white);text-shadow:0 0 8px rgba(255,255,255,.2);}}
+.spl-line{width:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:18px auto;opacity:0;animation:lineGrow 0.8s ease 7.8s forwards;}
+@keyframes lineGrow{0%{width:0;opacity:0;}30%{opacity:1;}100%{width:180px;opacity:1;}}
+.spl-name{font-size:18px;letter-spacing:4px;color:var(--gold);font-weight:700;opacity:0;transform:translateY(10px);animation:subRise .8s ease 8.2s forwards;}
+.spl-sub2{font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;opacity:0;transform:translateY(8px);animation:subRise .8s ease 8.5s forwards;}
+@keyframes subRise{to{opacity:1;transform:translateY(0);}}
+.spl-bar-wrap{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);width:160px;opacity:0;animation:subRise .5s ease 1.0s forwards;}
+.spl-bar-track{width:100%;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;}
+.spl-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff4466);border-radius:2px;animation:barFill 9s ease 1.0s forwards;}
+@keyframes barFill{0%{width:0%;}100%{width:100%;}}
+.spl-bar-label{text-align:center;font-size:10px;color:var(--muted);letter-spacing:3px;margin-top:6px;text-transform:uppercase;}
+.sll{font-size:clamp(32px,10vw,52px);letter-spacing:clamp(2px,2vw,6px);color:var(--white);font-weight:900;line-height:1;text-align:center;white-space:nowrap;padding:0 16px}
 .sll span{color:var(--red)}
-.slln{width:60px;height:3px;background:var(--red);border-radius:2px;margin:20px auto}
+.slln{width:60px;height:2px;background:var(--red);border-radius:2px;margin:16px auto}
 .bsc{display:flex;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;-ms-overflow-style:none}
 .bsc::-webkit-scrollbar{display:none}
 .bc{flex-shrink:0;padding:8px 14px;border-radius:20px;cursor:pointer;background:var(--card);border:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap;margin-right:8px}
@@ -119,7 +149,7 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 
 
 
-<div class="spl" id="spl"><div style="font-size:60px;margin-bottom:8px">&#129355;</div><div class="sll">TAEKWON<span>-DO</span></div><div class="slln"></div><div style="font-size:22px;letter-spacing:2px;color:var(--gold);margin-top:4px;font-weight:700">MASTER DUTTON</div><div style="font-size:13px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:8px">ITF &middot; Scotland</div><div style="position:absolute;bottom:60px;font-size:11px;color:var(--muted);letter-spacing:2px">LOADING...</div></div>
+<div class="spl" id="spl" onclick="window._startSwell&&window._startSwell();" ontouchstart="window._startSwell&&window._startSwell();"><canvas id="spl-canvas"></canvas><div class="spl-flash"></div><div class="spl-shockwave"></div><div class="spl-shockwave"></div><div class="spl-shockwave"></div><div class="spl-content"><div class="spl-crest">&#129355;</div><div class="spl-word"><span class="spl-letter">T</span><span class="spl-letter">A</span><span class="spl-letter">E</span><span class="spl-letter">K</span><span class="spl-letter">W</span><span class="spl-letter">O</span><span class="spl-letter">N</span><span class="spl-dash">-</span><span class="spl-letter">D</span><span class="spl-letter">O</span></div><div class="spl-line"></div><div class="spl-name">MASTER DUTTON</div><div class="spl-sub2" style="margin-top:8px">ITF &middot; Scotland</div></div><div class="spl-bar-wrap"><div class="spl-bar-track"><div class="spl-bar-fill"></div></div><div class="spl-bar-label">Loading</div><div id="spl-tap-hint" style="text-align:center;font-size:10px;color:rgba(107,104,128,0.7);letter-spacing:2px;margin-top:10px;text-transform:uppercase">Tap for sound</div></div></div>
 <div class="belt-strip" id="belt-strip"></div>
 <div class="sbar"><span id="clock"></span><span id="datebar"></span></div>
 <div class="hdr"><div class="logo">TAEKWON<span>-DO</span></div><div class="badge" onclick="showBeltPicker()" style="cursor:pointer;user-select:none" id="belt-badge">Red Belt &#9662;</div></div>
@@ -2787,6 +2817,127 @@ function closeHomeMenu(){
   if(b)b.style.background='';
 }
 
+// ═══════════════════════════════════════
+// CINEMATIC SPLASH — SWELL + MIST
+// ═══════════════════════════════════════
+(function(){
+  var audioStarted=false;
+  function startSwell(){
+    if(audioStarted)return;
+    audioStarted=true;
+    var hint=document.getElementById('spl-tap-hint');
+    if(hint)hint.style.opacity='0';
+    try{
+      var AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC)return;
+      var c=new AC();
+      var now=c.currentTime;
+      var sr=c.sampleRate;
+      var dur=6.5;
+      var master=c.createGain();
+      master.connect(c.destination);
+      master.gain.setValueAtTime(0.001,now);
+      master.gain.linearRampToValueAtTime(0.10,now+1.5);
+      master.gain.linearRampToValueAtTime(0.30,now+3.0);
+      master.gain.linearRampToValueAtTime(0.60,now+5.0);
+      master.gain.linearRampToValueAtTime(0.90,now+7.0);
+      master.gain.linearRampToValueAtTime(0.70,now+8.5);
+      master.gain.linearRampToValueAtTime(0.001,now+10.5);
+      var revLen=Math.floor(sr*3.5);
+      var revBuf=c.createBuffer(2,revLen,sr);
+      for(var rc=0;rc<2;rc++){var rv=revBuf.getChannelData(rc);for(var ri=0;ri<revLen;ri++)rv[ri]=(Math.random()*2-1)*Math.pow(1-(ri/revLen),1.6);}
+      var rev=c.createConvolver();rev.buffer=revBuf;
+      var revSend=c.createGain();revSend.gain.setValueAtTime(0.5,now);
+      rev.connect(revSend);revSend.connect(master);
+      function pad(freq,t0,durT,vol,detuneCents){
+        var o=c.createOscillator(),o2=c.createOscillator(),g=c.createGain();
+        o.type='sine';o2.type='sine';
+        o.frequency.value=freq;o2.frequency.value=freq*Math.pow(2,(detuneCents||6)/1200);
+        var atk=durT*0.30,rel=durT*0.25;
+        g.gain.setValueAtTime(0.001,t0);g.gain.linearRampToValueAtTime(vol,t0+atk);
+        g.gain.setValueAtTime(vol,t0+durT-rel);g.gain.linearRampToValueAtTime(0.001,t0+durT);
+        o.connect(g);o2.connect(g);g.connect(master);g.connect(rev);
+        o.start(t0);o.stop(t0+durT+0.1);o2.start(t0);o2.stop(t0+durT+0.1);
+      }
+      function warm(freq,t0,durT,vol){
+        var o=c.createOscillator(),f=c.createBiquadFilter(),g=c.createGain();
+        o.type='sawtooth';o.frequency.value=freq;
+        f.type='lowpass';f.frequency.setValueAtTime(600,t0);f.Q.value=0.8;
+        var atk=durT*0.35;
+        g.gain.setValueAtTime(0.001,t0);g.gain.linearRampToValueAtTime(vol,t0+atk);
+        g.gain.linearRampToValueAtTime(0.001,t0+durT);
+        o.connect(f);f.connect(g);g.connect(master);g.connect(rev);
+        o.start(t0);o.stop(t0+durT+0.1);
+      }
+      pad(55,now,10,0.25);pad(55,now,10,0.15,-8);
+      pad(110,now+1.2,8.8,0.22);warm(110,now+1.2,8.8,0.10);
+      pad(165,now+2.5,7.5,0.25);warm(165,now+2.5,7.5,0.12);
+      pad(220,now+3.8,6.2,0.28);pad(262,now+3.8,6.2,0.14);warm(220,now+3.8,6.2,0.10);
+      pad(330,now+5.5,5.0,0.22);pad(440,now+5.5,5.0,0.12);warm(330,now+5.5,4.5,0.08);
+      pad(554,now+7.0,3.5,0.10);pad(659,now+7.0,3.5,0.08);
+      var impT=now+7.0;
+      var impOsc=c.createOscillator(),impG=c.createGain();
+      impOsc.type='sine';
+      impOsc.frequency.setValueAtTime(85,impT);
+      impOsc.frequency.exponentialRampToValueAtTime(22,impT+0.6);
+      impG.gain.setValueAtTime(0,impT);impG.gain.linearRampToValueAtTime(1.6,impT+0.012);
+      impG.gain.exponentialRampToValueAtTime(0.001,impT+1.5);
+      impOsc.connect(impG);impG.connect(c.destination);impG.connect(rev);
+      impOsc.start(impT);impOsc.stop(impT+1.6);
+    }catch(ex){console.log('swell err:',ex);}
+  }
+  window._startSwell=startSwell;
+  function onFirstInteraction(){
+    document.removeEventListener('click',onFirstInteraction);
+    document.removeEventListener('touchstart',onFirstInteraction);
+    startSwell();
+  }
+  document.addEventListener('click',onFirstInteraction);
+  document.addEventListener('touchstart',onFirstInteraction,{passive:true});
+  setTimeout(function(){
+    if(!audioStarted){
+      try{var t=new(window.AudioContext||window.webkitAudioContext)();var state=t.state;t.close();if(state==='running')startSwell();}catch(e){}
+    }
+  },200);
+  function initMist(){
+    var canvas=document.getElementById('spl-canvas');
+    if(!canvas)return;
+    var W=canvas.offsetWidth||window.innerWidth;
+    var H=canvas.offsetHeight||window.innerHeight;
+    canvas.width=W;canvas.height=H;
+    var ctx=canvas.getContext('2d');
+    var particles=[];
+    for(var i=0;i<55;i++){
+      particles.push({x:W*0.1+Math.random()*W*0.8,y:H*0.55+Math.random()*H*0.5,r:60+Math.random()*120,vx:(Math.random()-.5)*0.4,vy:-(0.15+Math.random()*0.5),alpha:0,maxAlpha:0.04+Math.random()*0.1,grow:0.0008+Math.random()*0.001,phase:Math.random()*Math.PI*2,hue:Math.random()<0.7?0:350});
+    }
+    var frame=0,alive=true;
+    function draw(){
+      if(!alive)return;
+      ctx.clearRect(0,0,W,H);
+      var vg=ctx.createRadialGradient(W/2,H/2,H*0.1,W/2,H/2,H*0.85);
+      vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,0.72)');
+      ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);
+      frame++;
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];
+        p.x+=p.vx+Math.sin(frame*0.01+p.phase)*0.3;p.y+=p.vy;p.r+=p.r*p.grow;
+        if(p.alpha<p.maxAlpha)p.alpha+=0.0015;
+        if(p.y+p.r<-50){p.y=H*0.6+Math.random()*H*0.4;p.x=W*0.05+Math.random()*W*0.9;p.alpha=0;p.r=60+Math.random()*80;}
+        var grad=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+        grad.addColorStop(0,'hsla('+p.hue+',90%,40%,'+p.alpha+')');
+        grad.addColorStop(0.5,'hsla('+p.hue+',70%,25%,'+(p.alpha*0.5)+')');
+        grad.addColorStop(1,'hsla('+p.hue+',60%,15%,0)');
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+    setTimeout(function(){alive=false;},11000);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initMist);}
+  else{setTimeout(initMist,50);}
+})();
+
 function render(){
   var c=document.getElementById('content');
   c.scrollTop=0;
@@ -2851,21 +3002,21 @@ document.addEventListener('keydown',function(e){
 });
 
 document.addEventListener('DOMContentLoaded',function(){
-  // Check saved login
-  if(localStorage.getItem('tkd-auth')===PWD){
-    var ps=document.getElementById('pwd-screen');
-    if(ps)ps.style.display='none';
-  }
-  // Set belt badge
   var bb=document.getElementById('belt-badge');
   if(bb)bb.textContent=BELT+' ▾';
   var bs=document.getElementById('belt-strip');
   if(bs){var cb=BELTS.find(function(b){return b.name===BELT;});if(cb)bs.style.background=cb.strip;}
-  // Hide splash after 2 seconds
+  // Always show cinematic splash — hides after 10.5 seconds
   setTimeout(function(){
     var spl=document.getElementById('spl');
-    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){spl.style.display='none';},600);}
-  },1500);
+    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){
+      spl.style.display='none';
+      if(localStorage.getItem('tkd-auth')!==PWD){
+        var ps=document.getElementById('pwd-screen');
+        if(ps)ps.style.display='flex';
+      }
+    },800);}
+  },10500);
   render();
 });
 
