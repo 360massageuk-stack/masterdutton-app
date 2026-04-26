@@ -2192,58 +2192,46 @@ var STRETCHES=[
 }
 ];
 
+var ST_ROUTINE=null;
+
 function rStretch(){
   var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>';
   h+='<div class="stitle">FLEXIBILITY & STRETCHING</div>';
   h+='<div style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6">The most underrated part of Taekwon-Do training. Flexibility directly determines kick height, stance depth and injury prevention.</div>';
-  h+='<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px">';
-  h+='<span style="font-size:20px">&#127916;</span>';
-  h+='<div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Video Tutorials Coming Soon</div>';
-  h+='<div style="font-size:11px;color:var(--muted);line-height:1.4">Step-by-step stretching video guides will be added to YouTube and linked here. Subscribe to Master Dutton on YouTube to be notified.</div></div></div>';
 
-  // Category pills
   h+='<div class="pills" style="margin-bottom:14px">';
   STRETCHES.forEach(function(s,i){
-    h+='<span class="pill'+(ST_CAT===i?' a':'')+'" onclick="sST('+i+')" style="'+(ST_CAT===i?'border-color:'+s.color+';color:'+s.color+';background:'+s.color+'22':'')+'">';
-    h+=s.icon+' '+s.name+'</span>';
+    h+='<span class="pill'+(ST_CAT===i?' a':'')+'" onclick="sST('+i+')">'+s.icon+' '+s.name+'</span>';
   });
   h+='</div>';
 
   var cat=STRETCHES[ST_CAT];
-  
-  // Category header
-  h+='<div style="background:var(--card);border:1px solid var(--border);border-left:3px solid '+cat.color+';border-radius:12px;padding:14px 16px;margin-bottom:12px">';
-  h+='<div style="font-size:11px;color:'+cat.color+';font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">'+cat.icon+' '+cat.name+'</div>';
-  h+='<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:8px">'+cat.intro+'</div>';
-  h+='<div style="background:rgba(255,255,255,.05);border-radius:8px;padding:8px 12px">';
-  h+='<div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">When to use</div>';
-  h+='<div style="font-size:12px;color:var(--white)">'+cat.when+'</div>';
-  h+='</div></div>';
 
-  // Techniques
-  cat.techniques.forEach(function(t,i){
-    var isOpen=ST_OPEN===ST_CAT+'-'+i;
-    h+='<div class="card" style="cursor:pointer;margin-bottom:8px" onclick="sSTOpen(\''+ST_CAT+'-'+i+'\')">';
-    h+='<div style="display:flex;align-items:center;justify-content:space-between">';
-    h+='<div><div style="font-size:14px;font-weight:700;color:var(--white)">'+t.name+'</div>';
-    if(t.hold)h+='<div style="font-size:11px;color:'+cat.color+';margin-top:2px">Hold: '+t.hold+'</div>';
-    if(t.reps&&!t.hold)h+='<div style="font-size:11px;color:'+cat.color+';margin-top:2px">'+t.reps+'</div>';
-    h+='</div><span style="color:var(--muted);font-size:16px">'+(isOpen?'&#9662;':'&#9656;')+'</span></div>';
-    if(isOpen){
-      h+='<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">';
-      h+='<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px">'+t.how+'</div>';
-      if(t.hold)h+='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:8px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Hold Time</div><div style="font-size:12px;color:var(--white)">'+t.hold+'</div></div>';
-      if(t.reps)h+='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:8px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Reps</div><div style="font-size:12px;color:var(--white)">'+t.reps+'</div></div>';
-      h+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:8px 12px"><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">&#128161; Master Dutton Says</div><div style="font-size:12px;color:var(--text);line-height:1.5;font-style:italic">'+t.tip+'</div></div>';
-      h+='</div>';
-    }
-    h+='</div>';
+  h+='<div style="padding:12px;margin-bottom:12px;border:1px solid var(--border);border-radius:10px">';
+  h+='<b>'+cat.name+'</b><br>'+cat.intro+'<br><br>';
+  h+='<i>'+cat.when+'</i><br><br>';
+  h+='<b>Understand This Method</b><br>'+cat.understand+'</div>';
+
+  h+='<div style="margin-bottom:10px">';
+  ['ten','fifteen','thirty'].forEach(function(t){
+    h+='<button onclick="sSTR(\''+t+'\')" style="margin-right:6px">'+t.toUpperCase()+'</button>';
   });
+  h+='</div>';
+
+  if(ST_ROUTINE){
+    var rd=cat.routines[ST_ROUTINE];
+    h+='<div>';
+    rd.forEach(function(item){
+      h+='<div style="padding:6px 0">'+item+'</div>';
+    });
+    h+='</div>';
+  }
+
   return h;
 }
 
-function sST(i){ST_CAT=i;ST_OPEN=null;render();}
-function sSTOpen(k){ST_OPEN=ST_OPEN===k?null:k;render();}
+function sST(i){ST_CAT=i;ST_ROUTINE=null;render();}
+function sSTR(r){ST_ROUTINE=r;render();}
 function getGradingCountdown(){
   try{
     var p=JSON.parse(localStorage.getItem('tkd-profile')||'{}');
