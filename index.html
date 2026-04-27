@@ -2950,28 +2950,6 @@ function aQ(i){
   setTimeout(function(){if(QA>=20){QF=true;render();}else{QI++;QS=null;render();}},1200);
 }
 
-
-
-var PWD="tkd399";
-function checkPwd(){
-  var val=document.getElementById('pwd-input').value.trim().toLowerCase();
-  if(val===PWD){
-    localStorage.setItem('tkd-auth',PWD);
-    document.getElementById('pwd-screen').style.display='none';
-    document.getElementById('pwd-err').textContent='';
-  } else {
-    document.getElementById('pwd-err').textContent='Wrong code. Try again.';
-    document.getElementById('pwd-input').value='';
-    document.getElementById('pwd-input').focus();
-  }
-}
-document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    var ps=document.getElementById('pwd-screen');
-    if(ps && ps.style.display!=='none') checkPwd();
-  }
-});
-
 document.addEventListener('DOMContentLoaded',function(){
   var bb=document.getElementById('belt-badge');
   if(bb)bb.textContent=BELT+' ▾';
