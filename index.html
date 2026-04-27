@@ -169,6 +169,21 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 
 <script>
 var PWD="tkd399";
+function checkPwd(){
+  var val=document.getElementById('pwd-input').value.trim().toLowerCase();
+  if(val===PWD){
+    localStorage.setItem('tkd-auth',PWD);
+    document.getElementById('pwd-screen').style.display='none';
+    document.getElementById('pwd-err').textContent='';
+  } else {
+    document.getElementById('pwd-err').textContent='Wrong code — try again';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('pwd-screen').style.display!=='none')checkPwd();
+});
 window.addEventListener('load',function(){
   if(localStorage.getItem('tkd-auth')===PWD){
     var ps=document.getElementById('pwd-screen');
