@@ -2365,9 +2365,9 @@ function rStretch(){
   h += '<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px">';
   h += '<span style="font-size:20px">&#127916;</span>';
   h += '<div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Video Tutorials Coming Soon</div>';
-  h += '<div style="font-size:11px;color:var(--muted);line-height:1.4">Step-by-step stretching video guides will be added to YouTube and linked here. Subscribe to Master Dutton on YouTube to be notified.</div></div></div>';
+  h += '<div style="font-size:11px;color:var(--muted);line-height:1.4">Step-by-step stretching video guides will be added to YouTube and linked here.</div></div></div>';
 
-  // Category pills
+  // Category pills (keep as is)
   h += '<div class="pills" style="margin-bottom:14px">';
   STRETCHES.forEach(function(s,i){
     h += '<span class="pill'+(ST_CAT===i?' a':'')+'" onclick="sST('+i+')" style="'+(ST_CAT===i?'border-color:'+s.color+';color:'+s.color+';background:'+s.color+'22':'')+'">';
@@ -2377,7 +2377,7 @@ function rStretch(){
 
   var cat = STRETCHES[ST_CAT];
   
-  // Category header
+  // Header + Intro + When to use (kept exactly as before)
   h += '<div style="background:var(--card);border:1px solid var(--border);border-left:3px solid '+cat.color+';border-radius:12px;padding:14px 16px;margin-bottom:12px">';
   h += '<div style="font-size:11px;color:'+cat.color+';font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">'+cat.icon+' '+cat.name+'</div>';
   h += '<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:8px">'+cat.intro+'</div>';
@@ -2386,36 +2386,20 @@ function rStretch(){
   h += '<div style="font-size:12px;color:var(--white)">'+cat.when+'</div>';
   h += '</div></div>';
 
-  // === NEW: Understand This Method ===
-  h += '<div class="card" style="margin-bottom:12px">';
+  // Understand This Method
+  h += '<div class="card" style="margin-bottom:16px">';
   h += '<div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:8px">UNDERSTAND THIS METHOD</div>';
   h += '<div style="font-size:13px;color:var(--text);line-height:1.6">'+cat.understand+'</div>';
   h += '</div>';
 
-  // === Time Routine Buttons ===
-  h += '<div style="margin-bottom:12px;display:flex;gap:8px">';
-  [10,15,30].forEach(function(mins){
-    var active = (ST_MIN === mins) ? 'background:rgba(232,25,60,.15);border-color:var(--red);color:var(--red)' : '';
-    h += `<button onclick="selectRoutine(${mins})" style="flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);font-weight:700;cursor:pointer;touch-action:manipulation;${active}">${mins} MINUTE ROUTINE</button>`;
-  });
+  // Simple "Watch the workout" + Video Placeholder
+  h += '<div class="card">';
+  h += '<div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px">Watch the workout</div>';
+  h += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:40px 20px;text-align:center">';
+  h += '<div style="font-size:42px;margin-bottom:12px">🎥</div>';
+  h += '<div style="font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px">VIDEO COMING SOON</div>';
+  h += '<div style="font-size:13px;color:var(--muted);line-height:1.5">YouTube tutorial for this stretching method will be added here.</div>';
   h += '</div>';
-
-  // === Workout Display Area ===
-  if(ST_MIN && cat.routines[ST_MIN]){
-    h += '<div class="card" style="margin-bottom:12px">';
-    h += `<div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px">${ST_MIN} MINUTE ROUTINE</div>`;
-    
-    cat.routines[ST_MIN].forEach(function(ex){
-      h += `<div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text)">• ${ex}</div>`;
-    });
-    
-    h += '</div>';
-  }
-
-  // === Master Dutton Says ===
-  h += '<div class="card" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2)">';
-  h += '<div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">&#128161; Master Dutton Says</div>';
-  h += `<div style="font-size:13px;color:var(--text);line-height:1.5;font-style:italic">${cat.advice}</div>`;
   h += '</div>';
 
   return h;
