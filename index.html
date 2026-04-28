@@ -2354,9 +2354,11 @@ var STRETCHES = [
   }
 ];
 
-var ST_OPEN=null;
-var ST_CAT=0;
-var ST_MIN = null;   // Currently selected routine time
+function sST(i){
+  ST_CAT = i;
+  ST_MIN = null;     // Reset when changing stretch type
+  render();
+}
 
 function rStretch(){
   var h = '<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>';
@@ -2386,33 +2388,40 @@ function rStretch(){
   h += '<div style="font-size:12px;color:var(--white)">'+cat.when+'</div>';
   h += '</div></div>';
 
-  // === NEW: Understand This Method ===
+  // Understand This Method
   h += '<div class="card" style="margin-bottom:12px">';
   h += '<div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:8px">UNDERSTAND THIS METHOD</div>';
   h += '<div style="font-size:13px;color:var(--text);line-height:1.6">'+cat.understand+'</div>';
   h += '</div>';
 
-  // === Time Routine Buttons ===
+  // Time Routine Buttons - CHANGED TO 10 / 20 / 30
   h += '<div style="margin-bottom:12px;display:flex;gap:8px">';
-  [10,15,30].forEach(function(mins){
+  [10,20,30].forEach(function(mins){
     var active = (ST_MIN === mins) ? 'background:rgba(232,25,60,.15);border-color:var(--red);color:var(--red)' : '';
-    h += `<button onclick="selectRoutine(${mins})" style="flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);font-weight:700;cursor:pointer;touch-action:manipulation;${active}">${mins} MINUTE ROUTINE</button>`;
+    h += `<button onclick="selectRoutine(${mins})" style="flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);font-weight:700;cursor:pointer;touch-action:manipulation;${active}">${mins} MIN ROUTINE</button>`;
   });
   h += '</div>';
 
-  // === Workout Display Area ===
+  // Workout Display Area
   if(ST_MIN && cat.routines[ST_MIN]){
     h += '<div class="card" style="margin-bottom:12px">';
-    h += `<div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px">${ST_MIN} MINUTE ROUTINE</div>`;
+    h += `<div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:12px">${ST_MIN} MIN ROUTINE</div>`;
     
     cat.routines[ST_MIN].forEach(function(ex){
       h += `<div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text)">• ${ex}</div>`;
     });
-    
+
+    // NEW: YouTube Video Placeholder
+    h += '<div style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center">';
+    h += '<div style="font-size:32px;margin-bottom:8px">🎥</div>';
+    h += '<div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">VIDEO COMING SOON</div>';
+    h += '<div style="font-size:12px;color:var(--muted);line-height:1.5">YouTube tutorial will be added here.</div>';
+    h += '</div>';
+
     h += '</div>';
   }
 
-  // === Master Dutton Says ===
+  // Master Dutton Says
   h += '<div class="card" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2)">';
   h += '<div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">&#128161; Master Dutton Says</div>';
   h += `<div style="font-size:13px;color:var(--text);line-height:1.5;font-style:italic">${cat.advice}</div>`;
