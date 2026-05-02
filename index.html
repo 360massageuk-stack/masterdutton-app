@@ -2459,7 +2459,19 @@ function rHome(){
     +'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Korean Pronunciation</div>'
     +'<div style="font-size:11px;color:var(--muted)">Listen &amp; learn Korean terms</div></div>'
     +'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
-    +'</div>';
+   +'<div style="height:1px;background:var(--border);margin:4px 0"></div>'
++'<div onclick="CT=\'clubapp\';closeHomeMenu();render()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;touch-action:manipulation">'
++'<span style="font-size:20px">&#128241;</span>'
++'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Your Club App</div>'
++'<div style="font-size:11px;color:var(--muted)">Elite TKD member features</div></div>'
++'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
++'<div style="height:1px;background:var(--border);margin:4px 0"></div>'
++'<div onclick="CT=\'books\';closeHomeMenu();render()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;touch-action:manipulation">'
++'<span style="font-size:20px">&#128218;</span>'
++'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Taekwondo Books</div>'
++'<div style="font-size:11px;color:var(--muted)">Books by Master Dutton on Amazon</div></div>'
++'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
++'</div>';
   h+='<div onclick="sT(\'ask\')" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(37,211,102,.08));border:1px solid rgba(37,211,102,.3);border-radius:14px;padding:12px 16px;margin-bottom:12px;cursor:pointer"><div style="width:38px;height:38px;border-radius:10px;background:rgba(37,211,102,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">&#129355;</div><div style="flex:1"><div style="font-size:14px;font-weight:700;color:#25d366">Ask Master Dutton</div><div style="font-size:11px;color:var(--muted);margin-top:1px">Pattern help &middot; Technique &middot; Grading &middot; Theory</div></div><span style="font-size:18px;color:#25d366">&#8250;</span></div>';
   h+='<button onclick="logSession()" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;margin-bottom:14px;text-transform:uppercase;touch-action:manipulation">&#129355; LOG TRAINING SESSION</button>';
   h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px"><div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">&#129355; Master Dutton Says...</div><div style="font-size:13px;color:var(--text);line-height:1.6;font-style:italic">&ldquo;'+getMDQuote()+'&rdquo;</div></div>';
@@ -3056,7 +3068,41 @@ function closeHomeMenu(){
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initMist);}
   else{setTimeout(initMist,50);}
 })();
+function rClubApp(){
+  var h='<button class="bk" onclick="CT=\'home\';render()">&#8592; Home</button>';
+  h+='<div class="stitle">YOUR CLUB APP</div>';
+  h+='<div style="text-align:center;padding:30px 20px 20px">';
+  h+='<div style="font-size:72px;margin-bottom:16px">&#128241;</div>';
+  h+='<div style="font-size:20px;font-weight:900;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">Coming Soon</div>';
+  h+='<div style="font-size:13px;color:var(--muted);line-height:1.7;max-width:300px;margin:0 auto">Member features, club news, grading results and more are being developed.<br/><br/>Check back soon for updates from Elite Taekwon-Do.</div>';
+  h+='</div>';
+  h+='<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:14px;padding:16px;margin-top:8px;text-align:center">';
+  h+='<div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Stay Connected</div>';
+  h+='<a href="https://elitetkd.uk" target="_blank" style="display:inline-block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 20px;text-decoration:none;color:var(--gold);font-size:13px;font-weight:700">elitetkd.uk &#8599;</a>';
+  h+='</div>';
+  return h;
+}
 
+function rBooks(){
+  var h='<button class="bk" onclick="CT=\'home\';render()">&#8592; Home</button>';
+  h+='<div class="stitle">TAEKWONDO BOOKS</div>';
+  h+='<div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6">Books by Master Dutton — available on Amazon. Perfect companions to your training at every level.</div>';
+  var books=[
+    {title:"TaekwonDo: Unleash Your Potential",desc:"Complete guide from first class to black belt. ITF patterns explained step by step.",url:"https://www.amazon.co.uk/s?k=taekwondo+unleash+your+potential+dutton"},
+    {title:"ITF Colour Belt Patterns",desc:"Complete step by step guide to all ITF colour belt patterns with detailed photos.",url:"https://www.amazon.co.uk/s?k=itf+colour+belt+patterns+dutton"},
+    {title:"ITF Black Belt Patterns I-III Degree",desc:"Covering all moves from 1st to 3rd degree black belt with step by step photos.",url:"https://www.amazon.co.uk/s?k=itf+black+belt+patterns+dutton"}
+  ];
+  books.forEach(function(b){
+    h+='<a href="'+b.url+'" target="_blank" style="display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;text-decoration:none">';
+    h+='<div style="font-size:32px;flex-shrink:0">&#128218;</div>';
+    h+='<div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px">'+b.title+'</div>';
+    h+='<div style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px">'+b.desc+'</div>';
+    h+='<div style="font-size:11px;color:var(--gold);font-weight:700">View on Amazon &#8599;</div></div></a>';
+  });
+  h+='<a href="https://www.amazon.co.uk/stores/author/B0BGHSH7D7" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:14px;text-decoration:none;margin-bottom:4px">';
+  h+='<span style="font-size:14px;color:var(--gold);font-weight:700">See all books by Master Dutton &#8599;</span></a>';
+  return h;
+}
 function render(){
   var c=document.getElementById('content');
   c.scrollTop=0;
@@ -3070,6 +3116,8 @@ function render(){
   else if(CT==='ask') c.innerHTML=rAsk();
   else if(CT==='stretch') c.innerHTML=rStretch();
   else if(CT==='timetable') c.innerHTML=rTimetable();
+ else if(CT==='clubapp') c.innerHTML=rClubApp();
+else if(CT==='books') c.innerHTML=rBooks();
   if(GS&&CT==='glossary'){setTimeout(function(){var el=document.getElementById('gls');if(el){el.focus();el.selectionStart=el.selectionEnd=el.value.length;}},10);}
 }
 function sT(t){CT=t;SP=null;MV=false;if(t!=='home'){};document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('a');});var el=document.getElementById('t-'+t);if(el)el.classList.add('a');render();}
