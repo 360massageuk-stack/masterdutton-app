@@ -2459,19 +2459,13 @@ function rHome(){
     +'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Korean Pronunciation</div>'
     +'<div style="font-size:11px;color:var(--muted)">Listen &amp; learn Korean terms</div></div>'
     +'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
-   +'<div style="height:1px;background:var(--border);margin:4px 0"></div>'
-+'<div onclick="CT=\'clubapp\';closeHomeMenu();render()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;touch-action:manipulation">'
-+'<span style="font-size:20px">&#128241;</span>'
-+'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Your Club App</div>'
-+'<div style="font-size:11px;color:var(--muted)">Elite TKD member features</div></div>'
-+'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
-+'<div style="height:1px;background:var(--border);margin:4px 0"></div>'
-+'<div onclick="CT=\'books\';closeHomeMenu();render()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;touch-action:manipulation">'
-+'<span style="font-size:20px">&#128218;</span>'
-+'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Taekwondo Books</div>'
-+'<div style="font-size:11px;color:var(--muted)">Books by Master Dutton on Amazon</div></div>'
-+'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
-+'</div>';
+    +'<div style="height:1px;background:var(--border);margin:4px 0"></div>'
+    +'<div onclick="CT=\'books\';closeHomeMenu();render()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;touch-action:manipulation">'
+    +'<span style="font-size:20px">&#128218;</span>'
+    +'<div><div style="font-size:14px;font-weight:700;color:var(--white)">Taekwon-Do Books</div>'
+    +'<div style="font-size:11px;color:var(--muted)">Books by Master Dutton on Amazon</div></div>'
+    +'<span style="color:var(--muted);font-size:18px;margin-left:auto">&#8250;</span></div>'
+    +'</div>';
   h+='<div onclick="sT(\'ask\')" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(37,211,102,.08));border:1px solid rgba(37,211,102,.3);border-radius:14px;padding:12px 16px;margin-bottom:12px;cursor:pointer"><div style="width:38px;height:38px;border-radius:10px;background:rgba(37,211,102,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">&#129355;</div><div style="flex:1"><div style="font-size:14px;font-weight:700;color:#25d366">Ask Master Dutton</div><div style="font-size:11px;color:var(--muted);margin-top:1px">Pattern help &middot; Technique &middot; Grading &middot; Theory</div></div><span style="font-size:18px;color:#25d366">&#8250;</span></div>';
   h+='<button onclick="logSession()" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;margin-bottom:14px;text-transform:uppercase;touch-action:manipulation">&#129355; LOG TRAINING SESSION</button>';
   h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px"><div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">&#129355; Master Dutton Says...</div><div style="font-size:13px;color:var(--text);line-height:1.6;font-style:italic">&ldquo;'+getMDQuote()+'&rdquo;</div></div>';
@@ -3116,6 +3110,7 @@ function render(){
   else if(CT==='ask') c.innerHTML=rAsk();
   else if(CT==='stretch') c.innerHTML=rStretch();
   else if(CT==='timetable') c.innerHTML=rTimetable();
+else if(CT==='books') c.innerHTML=rBooks();
  else if(CT==='clubapp') c.innerHTML=rClubApp();
 else if(CT==='books') c.innerHTML=rBooks();
   if(GS&&CT==='glossary'){setTimeout(function(){var el=document.getElementById('gls');if(el){el.focus();el.selectionStart=el.selectionEnd=el.value.length;}},10);}
