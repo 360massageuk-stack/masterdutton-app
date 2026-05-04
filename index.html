@@ -131,6 +131,9 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
   animation: kickMove 0.8s ease-out;
   transform-origin: center bottom;
 }
+.hero-img {
+  transform-origin: center bottom;
+}
 
 @keyframes kickMove {
   0% { transform: translateX(0) rotate(0); }
@@ -1908,16 +1911,14 @@ function logSession(){
   if(s.some(function(x){return new Date(x).toDateString()===td;})){alert('Already logged today! Great work!');return;}
   s.push(new Date().toISOString());
   localStorage.setItem('tkd-sessions',JSON.stringify(s));
- render();
-setTimeout(playKick, 100);
-}
-function playKick(){
-  var img = document.querySelector('.hero-img');
-  if(!img) return;
+render();
 
-  img.style.animation = 'none';
-  img.offsetHeight;
-  img.style.animation = 'kickMove 0.8s ease-out';
+setTimeout(function(){
+  var img = document.querySelector('.hero-img');
+  if(img){
+    img.style.animation = 'kickMove 0.8s ease-out';
+  }
+}, 100);
 }
 
 var WORKOUTS={
