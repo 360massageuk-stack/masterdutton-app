@@ -1340,63 +1340,167 @@ var PM={
 {n:56,t:"Left Walking Stance · Middle Punch",d:"Pivot and execute middle punch."}
 ],
 }
+   
 var BREQS=[
-{grade:"10th-9th Gup",from:"White",to:"White/Yellow",meaning:"Signifies innocence, as that of a beginner student who has no previous knowledge of Taekwon-Do.",reqs:["PATTERNS: Saju Jirugi, Saju Makgi","BASICS: Sitting stance middle punch x10","BASICS: Walking stance middle punch fwd/bwd x4","BASICS: Inner forearm middle block fwd/bwd x4","BASICS: Outer forearm low block fwd/bwd x4","BASICS: Front snap kick and walking stance punch","THEORY: What does Taekwon-Do mean?","THEORY: Who founded Taekwon-Do?","THEORY: Name the 5 tenets","THEORY: What does a white belt signify?"]},
-{grade:"9th-8th Gup",from:"White/Yellow",to:"Yellow",meaning:"Signifies the earth from which a plant sprouts and takes root, as the Taekwon-Do foundation is being laid.",reqs:["PATTERNS: Chon-Ji (19 moves)","BASICS: L-stance middle block fwd/bwd x4","BASICS: Walking stance rising block","BASICS: Front kick and walking stance punch","SPARRING: 1 vs 1 sparring","THEORY: What does Chon-Ji mean?","THEORY: How many moves in Chon-Ji? (19)"]},
-{grade:"8th-7th Gup",from:"Yellow",to:"Yellow/Green",meaning:"Signifies the earth from which a plant sprouts and takes root, as the Taekwon-Do foundation is being laid.",reqs:["PATTERNS: Dan-Gun (21 moves)","BASICS: L-stance knife-hand guarding block","BASICS: Walking stance high punch","BASICS: Turning kick and walking stance punch","SPARRING: 1 vs 1 sparring","THEORY: Who is Dan-Gun?","THEORY: How many moves in Dan-Gun? (21)"]},
-{grade:"7th-6th Gup",from:"Yellow/Green",to:"Green",meaning:"Signifies the plant's growth, as the Taekwon-Do skills begin to develop.",reqs:["PATTERNS: Do-San (24 moves)","BASICS: Outer forearm high side block","BASICS: Side piercing kick and punch","SPARRING: 1-step sparring - 2 attacks","THEORY: Who is Do-San?","THEORY: How many moves in Do-San? (24)"]},
-{grade:"6th-5th Gup",from:"Green",to:"Green/Blue",meaning:"Signifies the plant's growth, as the Taekwon-Do skills begin to develop.",reqs:["PATTERNS: Won-Hyo (28 moves)","BASICS: Inner forearm guarding block","BASICS: Low front snap kick and punch","SPARRING: 1 vs 1 sparring","THEORY: Who is Won-Hyo?","THEORY: How many moves in Won-Hyo? (28)"]},
-{grade:"5th-4th Gup",from:"Green/Blue",to:"Blue",meaning:"Signifies the heaven (sky), towards which the plant matures into a towering tree as training in Taekwon-Do progresses.",reqs:["PATTERNS: Yul-Gok (38 moves)","BASICS: Outer forearm guarding block","SPARRING: 1 vs 1 sparring","POWER TEST: Hand or foot","THEORY: Who is Yul-Gok?","THEORY: How many moves in Yul-Gok? (38)"]},
-{grade:"4th-3rd Gup",from:"Blue",to:"Blue/Red",meaning:"Signifies the heaven (sky), towards which the plant matures into a towering tree as training in Taekwon-Do progresses.",reqs:["PATTERNS: Joong-Gun (32 moves)","BASICS: Pressing block fwd/bwd x4","BASICS: Back kick and punch","SPARRING: 1 vs 1 sparring","POWER TEST: Hand and foot","THEORY: Who is Joong-Gun?"]},
-{grade:"3rd-2nd Gup",from:"Blue/Red",to:"Red",meaning:"Signifies danger, cautioning the student to exercise control and warning the opponent to stay away.",reqs:["PATTERNS: Toi-Gye (37 moves)","BASICS: Twin forearm block","BASICS: Reverse turning kick","SPARRING: 1 vs 1 sparring","POWER TEST: Destruction","THEORY: Who is Toi-Gye?"]},
-{grade:"2nd-1st Gup",from:"Red",to:"Red/Black",meaning:"Signifies danger, cautioning the student to exercise control and warning the opponent to stay away.",reqs:["PATTERNS: Hwa-Rang (29 moves)","BASICS: Wedging block","BASICS: Hook kick combinations","SPARRING: 1 vs 1 sparring + 2 vs 1 sparring","POWER TEST: Full destruction test","THEORY: Who is Hwa-Rang?"]},
-{grade:"1st Gup - 1st Dan",from:"Red/Black",to:"Black",meaning:"Signifies maturity and proficiency in Taekwon-Do. It also indicates the wearer's imperviousness to darkness and fear.",reqs:["PATTERNS: Choong-Moo + all previous","BASICS: Full basics examination","SPARRING: 1 vs 1 sparring + 2 vs 1 sparring","POWER TEST: Full destruction test","SELF-DEFENCE: 3 techniques","THEORY: Full theory examination"]},
-{grade:"1st Degree",from:"1st Dan",to:"2nd Dan",meaning:"Signifies maturity and proficiency in Taekwon-Do. The black belt indicates the wearer's imperviousness to darkness and fear.",reqs:[
-"PATTERNS: Kwang-Gae (39 moves)","PATTERNS: Po-Eun (36 moves)","PATTERNS: Ge-Baek (44 moves)",
-"BASICS: Line work up and down the hall using various hand and foot techniques",
-"SPARRING: 1-step sparring","SPARRING: 1 vs 1 sparring","SPARRING: 1 vs 2 sparring",
-"POWER TEST: Side kick","POWER TEST: Reverse turning kick",
-"THEORY: Meaning of Kwang-Gae","THEORY: Meaning of Po-Eun","THEORY: Meaning of Ge-Baek",
-"THEORY: Number of movements in Kwang-Gae (39)","THEORY: Number of movements in Po-Eun (36)","THEORY: Number of movements in Ge-Baek (44)"
+{grade:"White → White/Yellow",from:"White",to:"White/Yellow",meaning:"Signifies innocence, as that of a beginner student who has no previous knowledge of Taekwon-Do.",reqs:[
+"PATTERNS: Saju Jirugi, Saju Makgi",
+"BASICS: Sitting stance middle punch",
+"BASICS: Walking stance middle punch",
+"BASICS: Inner forearm middle block",
+"BASICS: Outer forearm low block",
+"BASICS: Front snap kick",
+"BASICS: Walking stance punch",
+"BASICS: Basic coordination drills",
+"THEORY: What does Taekwon-Do mean?",
+"THEORY: Who founded Taekwon-Do?",
+"THEORY: Name the 5 tenets",
+"THEORY: What does a white belt signify?"
 ]},
-{grade:"2nd Degree",from:"2nd Dan",to:"3rd Dan",meaning:"Signifies maturity and proficiency in Taekwon-Do.",reqs:[
-"PATTERNS: Eui-Am (45 moves)","PATTERNS: Choong-Jang (52 moves)","PATTERNS: Juche (45 moves)",
-"BASICS: Line work up and down the hall using various hand and foot techniques",
-"SPARRING: 1-step sparring","SPARRING: 1 vs 1 sparring","SPARRING: 1 vs 2 sparring",
-"POWER TEST: Side kick","POWER TEST: Reverse turning kick",
-"THEORY: Meaning of Eui-Am","THEORY: Meaning of Choong-Jang","THEORY: Meaning of Juche",
-"THEORY: Number of movements in Eui-Am (45)","THEORY: Number of movements in Choong-Jang (52)","THEORY: Number of movements in Juche (45)"
+
+{grade:"White/Yellow → Yellow",from:"White/Yellow",to:"Yellow",meaning:"Signifies the earth from which a plant sprouts and takes root, as the Taekwon-Do foundation is being laid.",reqs:[
+"PATTERNS: Chon-Ji (19 moves)",
+"BASICS: L-stance middle block",
+"BASICS: Walking stance rising block",
+"BASICS: Walking stance double punch",
+"BASICS: Front kick and walking stance double punch",
+"BASICS: Turning kick",
+"BASICS: Side kick",
+"BASICS: Outer forearm low block",
+"BASICS: Inner forearm middle block",
+"BASICS: Walking stance middle punch",
+"BASICS: Basic combination work",
+"SPARRING: 1 vs 1 sparring",
+"THEORY: What does Chon-Ji mean?",
+"THEORY: How many moves are in Chon-Ji?",
+"THEORY: What are the Korean terms for high, middle, and low section?",
+"THEORY: What is the Korean term for L-stance?",
+"THEORY: What does Chagi mean?"
 ]},
-{grade:"3rd Degree",from:"3rd Dan",to:"4th Dan",meaning:"Signifies maturity and proficiency in Taekwon-Do.",reqs:[
-"PATTERNS: Sam-Il (33 moves)","PATTERNS: Yoo-Sin (68 moves)","PATTERNS: Choi-Yong (46 moves)",
-"BASICS: Line work up and down the hall using various hand and foot techniques",
-"SPARRING: 1-step sparring","SPARRING: 1 vs 1 sparring","SPARRING: 1 vs 2 sparring",
-"POWER TEST: Side kick","POWER TEST: Reverse turning kick",
-"THEORY: Meaning of Sam-Il","THEORY: Meaning of Yoo-Sin","THEORY: Meaning of Choi-Yong",
-"THEORY: Number of movements in Sam-Il (33)","THEORY: Number of movements in Yoo-Sin (68)","THEORY: Number of movements in Choi-Yong (46)"
+
+{grade:"Yellow → Yellow/Green",from:"Yellow",to:"Yellow/Green",meaning:"Signifies the earth from which a plant sprouts and takes root.",reqs:[
+"PATTERNS: Dan-Gun (21 moves)",
+"BASICS: L-stance knife-hand guarding block",
+"BASICS: Walking stance high punch",
+"BASICS: Turning kick and punch",
+"BASICS: Side kick",
+"BASICS: Front kick",
+"BASICS: Walking stance double punch",
+"BASICS: Outer forearm block variations",
+"BASICS: Basic hand combinations",
+"SPARRING: 1 vs 1 sparring",
+"THEORY: Who is Dan-Gun?",
+"THEORY: How many moves are in Dan-Gun?",
+"THEORY: What is the Korean term for knife-hand?",
+"THEORY: What is the Korean term for turning kick?",
+"THEORY: What does Makgi mean?"
 ]},
-{grade:"4th Degree",from:"4th Dan",to:"5th Dan",meaning:"Signifies maturity and proficiency in Taekwon-Do.",reqs:[
-"PATTERNS: Yon-Gae (49 moves)","PATTERNS: Ul-Ji (42 moves)","PATTERNS: Moon-Moo (61 moves)",
-"BASICS: Line work up and down the hall using various hand and foot techniques",
-"SPARRING: 1-step sparring","SPARRING: 1 vs 1 sparring","SPARRING: 1 vs 2 sparring",
-"POWER TEST: Side kick","POWER TEST: Reverse turning kick",
-"THEORY: Meaning of Yon-Gae","THEORY: Meaning of Ul-Ji","THEORY: Meaning of Moon-Moo",
-"THEORY: Number of movements in Yon-Gae (49)","THEORY: Number of movements in Ul-Ji (42)","THEORY: Number of movements in Moon-Moo (61)"
+
+{grade:"Yellow/Green → Green",from:"Yellow/Green",to:"Green",meaning:"Signifies the plant’s growth, as Taekwon-Do skills begin to develop.",reqs:[
+"PATTERNS: Do-San (24 moves)",
+"BASICS: Outer forearm high block",
+"BASICS: Side piercing kick and punch",
+"BASICS: Turning kick",
+"BASICS: Front kick combinations",
+"BASICS: Walking stance hand combinations",
+"BASICS: L-stance guarding block",
+"BASICS: Basic combination work",
+"SPARRING: 1-step sparring (2 attacks)",
+"THEORY: Who is Do-San?",
+"THEORY: How many moves are in Do-San?",
+"THEORY: What is the Korean term for side kick?",
+"THEORY: What does Sogi mean?",
+"THEORY: What is the Korean term for outer forearm?"
 ]},
-{grade:"5th Degree",from:"5th Dan",to:"6th Dan",meaning:"Signifies maturity and proficiency in Taekwon-Do.",reqs:[
-"PATTERNS: So-San (72 moves)","PATTERNS: Se-Jong (24 moves)",
-"BASICS: Line work up and down the hall using various hand and foot techniques",
-"SPARRING: 1-step sparring","SPARRING: 1 vs 1 sparring","SPARRING: 1 vs 2 sparring",
-"POWER TEST: Side kick","POWER TEST: Reverse turning kick",
-"THEORY: Meaning of So-San","THEORY: Meaning of Se-Jong",
-"THEORY: Number of movements in So-San (72)","THEORY: Number of movements in Se-Jong (24)"
+
+{grade:"Green → Green/Blue",from:"Green",to:"Green/Blue",meaning:"Signifies the plant’s continued growth.",reqs:[
+"PATTERNS: Won-Hyo (28 moves)",
+"BASICS: Inner forearm guarding block",
+"BASICS: Low front snap kick and punch",
+"BASICS: Turning kick",
+"BASICS: Side kick",
+"BASICS: Walking stance combinations",
+"BASICS: L-stance middle block",
+"BASICS: Basic combination work",
+"SPARRING: 1 vs 1 sparring",
+"THEORY: Who is Won-Hyo?",
+"THEORY: How many moves are in Won-Hyo?",
+"THEORY: What is the Korean term for guarding block?",
+"THEORY: What does Ap mean?",
+"THEORY: What is the Korean term for front kick?"
 ]},
-{grade:"6th Degree",from:"6th Dan",to:"7th Dan",meaning:"Signifies maturity and proficiency in Taekwon-Do.",reqs:[
-"PATTERNS: Tong-Il (56 moves)",
-"BASICS: Line work up and down the hall using various hand and foot techniques",
-"SPARRING: 1-step sparring","SPARRING: 1 vs 1 sparring","SPARRING: 1 vs 2 sparring",
-"POWER TEST: Side kick","POWER TEST: Reverse turning kick",
-"THEORY: Meaning of Tong-Il","THEORY: Number of movements in Tong-Il (56)"
+
+{grade:"Green/Blue → Blue",from:"Green/Blue",to:"Blue",meaning:"Signifies the sky, towards which the plant matures into a tree.",reqs:[
+"PATTERNS: Yul-Gok (38 moves)",
+"BASICS: Outer forearm guarding block",
+"BASICS: Side piercing kick and punch",
+"BASICS: Turning kick",
+"BASICS: Back kick introduction",
+"BASICS: Walking stance combinations",
+"BASICS: L-stance guarding block",
+"BASICS: Advanced combination work",
+"SPARRING: 1 vs 1 sparring",
+"POWER TEST: Hand or foot",
+"THEORY: Who is Yul-Gok?",
+"THEORY: How many moves are in Yul-Gok?",
+"THEORY: What does Yul-Gok represent?",
+"THEORY: What is the Korean term for turning kick?",
+"THEORY: What does Jirugi mean?"
+]},
+
+{grade:"Blue → Blue/Red",from:"Blue",to:"Blue/Red",meaning:"Signifies the continued growth towards maturity.",reqs:[
+"PATTERNS: Joong-Gun (32 moves)",
+"BASICS: Pressing block",
+"BASICS: Back kick and punch",
+"BASICS: Turning kick",
+"BASICS: Side piercing kick",
+"BASICS: Reverse turning kick introduction",
+"BASICS: Walking stance combinations",
+"BASICS: L-stance guarding block",
+"SPARRING: 1 vs 1 sparring",
+"POWER TEST: Hand and foot",
+"THEORY: Who is Joong-Gun?",
+"THEORY: How many moves are in Joong-Gun?",
+"THEORY: What do the 32 movements represent?",
+"THEORY: What is the Korean term for back kick?",
+"THEORY: What does Bandae mean?"
+]},
+
+{grade:"Blue/Red → Red",from:"Blue/Red",to:"Red",meaning:"Signifies danger, requiring control and discipline.",reqs:[
+"PATTERNS: Toi-Gye (37 moves)",
+"BASICS: Twin forearm block",
+"BASICS: Reverse turning kick",
+"BASICS: Side piercing kick",
+"BASICS: Back kick",
+"BASICS: Turning kick combinations",
+"BASICS: L-stance guarding block",
+"BASICS: Advanced combination work",
+"SPARRING: 1 vs 1 sparring",
+"POWER TEST: Hand and foot",
+"THEORY: Who is Toi-Gye?",
+"THEORY: How many moves are in Toi-Gye?",
+"THEORY: What does Toi-Gye represent?",
+"THEORY: What is the Korean term for reverse turning kick?",
+"THEORY: What does Dwit mean?"
+]},
+
+{grade:"Red → Red/Black",from:"Red",to:"Red/Black",meaning:"Signifies danger, cautioning the student to exercise control.",reqs:[
+"PATTERNS: Hwa-Rang (29 moves)",
+"BASICS: Wedging block",
+"BASICS: Hook kick combinations",
+"BASICS: Reverse turning kick",
+"BASICS: Back kick",
+"BASICS: Side piercing kick",
+"BASICS: L-stance guarding block",
+"BASICS: Advanced combination work",
+"SPARRING: 1 vs 1 sparring",
+"SPARRING: 2 vs 1 sparring",
+"POWER TEST: Hand and foot",
+"POWER TEST: Reverse turning kick",
+"THEORY: Who is Hwa-Rang?",
+"THEORY: How many moves are in Hwa-Rang?",
+"THEORY: What do the 29 movements represent?",
+"THEORY: What is the Korean term for hook kick?",
+"THEORY: What does Dollyo mean?"
 ]}
 ];
 var QLEV=[{label:"White to Yellow/Green",grades:"10th-7th Kup",emoji:"White",color:"#aaa",qs:[
