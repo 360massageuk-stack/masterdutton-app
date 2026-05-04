@@ -127,6 +127,17 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 .pwd-input{width:100%;background:#16161c;border:1px solid #2a2a35;color:#f0f0f8;font-size:20px;padding:16px;border-radius:12px;outline:none;font-family:inherit;text-align:center;letter-spacing:3px}
 .pwd-btn{width:100%;background:linear-gradient(135deg,#e8193c,#b01230);border:none;color:#fff;font-size:18px;font-weight:900;letter-spacing:2px;padding:16px;border-radius:14px;cursor:pointer;text-transform:uppercase;touch-action:manipulation}
 .pwd-err{color:#e8193c;font-size:13px;text-align:center;min-height:20px;margin-bottom:8px}
+.hero-img {
+  animation: kickMove 0.8s ease-out;
+  transform-origin: center bottom;
+}
+
+@keyframes kickMove {
+  0% { transform: translateX(0) rotate(0); }
+  40% { transform: translateX(-5px) rotate(-8deg); }
+  70% { transform: translateX(10px) rotate(12deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
 </style></head><body>
 <div id="app"> 
 <div id="pwd-screen" style="position:fixed;inset:0;background:#0a0a0c;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;font-family:'Segoe UI',sans-serif">
@@ -1878,7 +1889,6 @@ var MD_QUOTES=[
 ];
 
 function getMDQuote(){return MD_QUOTES[Math.floor(Math.random()*MD_QUOTES.length)];}
-
 function getStats(){
   var s=JSON.parse(localStorage.getItem('tkd-sessions')||'[]');
   var now=new Date(),wk=new Date(now-604800000);
@@ -1898,7 +1908,16 @@ function logSession(){
   if(s.some(function(x){return new Date(x).toDateString()===td;})){alert('Already logged today! Great work!');return;}
   s.push(new Date().toISOString());
   localStorage.setItem('tkd-sessions',JSON.stringify(s));
-  render();
+ render();
+setTimeout(playKick, 100);
+}
+function playKick(){
+  var img = document.querySelector('.hero-img');
+  if(!img) return;
+
+  img.style.animation = 'none';
+  img.offsetHeight;
+  img.style.animation = 'kickMove 0.8s ease-out';
 }
 
 var WORKOUTS={
@@ -2605,7 +2624,7 @@ function rHome(){
   var lvl=st.total===0?'New!':st.total<10?'Beginner':st.total<50?'Student':st.total<100?'Warrior':'Master';
   var sm=st.streak===0?'Start your streak!':st.streak+' day'+(st.streak>1?'s':'')+' - keep it up!';
   var h='';
-  h+='<div class="hero"><div class="htxt"><div class="hgr">Welcome back, Warrior</div><div class="hnm">MASTER <span>DUTTON</span></div><div class="streak"><span class="sn">'+st.streak+'</span><div><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px">DAY STREAK</div><div style="font-size:9px;color:var(--muted)">'+sm+'</div></div></div></div><div class="him" style=""><img src="'+PH+'" alt="Master Dutton" style="width:100%;height:100%;object-fit:cover;object-position:40% 15%;display:block;min-height:160px"/></div></div>';
+  h+='<div class="hero"><div class="htxt"><div class="hgr">Welcome back, Warrior</div><div class="hnm">MASTER <span>DUTTON</span></div><div class="streak"><span class="sn">'+st.streak+'</span><div><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px">DAY STREAK</div><div style="font-size:9px;color:var(--muted)">'+sm+'</div></div></div></div><div class="him" style=""><img src="'+PH+'" alt="Master Dutton" class="hero-img"style="width:100%;height:100%;object-fit:cover;object-position:40% 15%;display:block;min-height:160px"/></div></div>';
   h+='<div class="srow"><div class="sc"><div class="scn">'+st.total+'</div><div class="scl">Sessions</div></div><div class="sc"><div class="scn">'+st.week+'</div><div class="scl">This Week</div></div><div class="sc" onclick="toggleHomeMenu()" id="home-menu-btn" style="cursor:pointer;touch-action:manipulation;position:relative"><div class="scn" style="font-size:22px;margin-top:2px">&#9776;</div><div class="scl">More</div></div></div>';
   h+='<div id="home-menu-dropdown" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px;margin-bottom:12px">'
     +'<div onclick="CT=\'timetable\';closeHomeMenu();render()" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;cursor:pointer;touch-action:manipulation">'
