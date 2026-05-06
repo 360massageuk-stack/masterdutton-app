@@ -58,6 +58,21 @@ body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);di
 /* ═══════════════════════════════════════
    CINEMATIC SPLASH SCREEN
 ═══════════════════════════════════════ */
+
+.hero img{
+animation:kickMove 2s ease-in-out infinite;
+transform-origin:bottom center;}
+
+
+@keyframes kickMove{
+0%{transform:translateY(0px) rotate(0deg);}
+25%{transform:translateY(-4px) rotate(-2deg);}
+50%{transform:translateY(0px) rotate(2deg);}
+75%{transform:translateY(-2px) rotate(-1deg);}
+100%{transform:translateY(0px) rotate(0deg);}
+}
+
+
 .spl{position:fixed;inset:0;background:#000;z-index:9998;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:opacity 1.2s ease}
 .spl.h{opacity:0;pointer-events:none}
 #spl-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:mistFadeIn 1.5s ease 0.3s forwards;}
