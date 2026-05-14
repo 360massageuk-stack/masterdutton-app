@@ -2760,7 +2760,7 @@ function rPats(){
   }
   if(SP){
     var dc=SP.diff==='Beginner'?'var(--gold)':SP.diff==='Intermediate'?'var(--green)':'var(--red)';
-    return '<button class="bk" onclick="bkPat()">Back to All Patterns</button>'
+    return '<button style="background:rgba(232,25,60,.15);border:1px solid rgba(232,25,60,.4);color:var(--red);font-size:13px;font-weight:700;padding:8px 16px;border-radius:10px;cursor:pointer;margin:10px 0 8px;display:block;touch-action:manipulation" onclick="bkPat()">&#8592; Back to All Patterns</button>'
       +'<div class="pd"><div style="font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Pattern '+SP.id+' of 24</div><div style="font-size:26px;font-weight:900;color:var(--white);letter-spacing:2px;margin-bottom:6px">'+e(SP.name)+'</div><div style="font-size:13px;color:var(--text);margin-bottom:14px;line-height:1.5">'+e(SP.meaning)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"><span class="tag">'+SP.moves+' moves</span><span class="tag" style="color:'+dc+';border-color:'+dc+'44">'+e(SP.diff)+'</span></div><div style="padding-top:14px;border-top:1px solid var(--border)"><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px">Required for</div><div style="font-size:14px;color:var(--text)">'+e(SP.belt)+'</div></div></div>'
       +(PM[SP.name]?'<button class="btn-p" onclick="opMv()">&#128203; VIEW STEP-BY-STEP MOVES</button>':'')
       +yt(SP.video,SP.name+' - Full Pattern');
