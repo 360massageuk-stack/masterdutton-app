@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+  <title>Master Dutton · ITF Taekwon-Do</title>
+
+</head>
+
+<body>
+  <div id="app">
+    <div id="pwd-screen" class="pwd-screen">
+      <div class="pwd-screen-icon"><img src="./images/karate-icon.png" alt="Icon" class="kt-icon"></div>
+
+      <div class="pwd-screen-title">
+        TAEKWON<span class="pwd-screen-title-highlight">-DO</span>
+      </div>
+
+      <div class="pwd-screen-subtitle">MASTER DUTTON</div>
+
+      <div class="pwd-screen-divider"></div>
+
+      <div class="pwd-screen-members">Members Only</div>
+
+      <div class="pwd-screen-input-wrap">
+        <input id="pwd-input" type="password" placeholder="Enter access code" class="pwd-screen-input" />
+
+        <button id="pwd-screen-toggle" class="pwd-screen-toggle">
+          &#128065;
+        </button>
+      </div>
+
+      <div id="pwd-err" class="pwd-screen-error"></div>
+
+      <button id="pwd-screen-btn" class="pwd-screen-btn">
+        ENTER
+      </button>
+
+      <div class="pwd-screen-help">
+        Access code provided by your instructor.
+      </div>
+
+      <div class="pwd-screen-reset-wrap">
+        <span id="pwd-screen-reset" class="pwd-screen-reset">
+          reset
+        </span>
+      </div>
+    </div>
+    <div class="spl" id="spl">
+      <canvas id="spl-canvas"></canvas>
+
+      <div class="spl-flash"></div>
+
+      <div class="spl-shockwave"></div>
+      <div class="spl-shockwave"></div>
+      <div class="spl-shockwave"></div>
+
+      <div class="spl-content">
+        <div class="spl-crest"><img src="./images/karate-icon.png" alt="Icon" class="kt-icon"></div>
+
+        <div class="spl-word">
+          <span class="spl-letter">T</span>
+          <span class="spl-letter">A</span>
+          <span class="spl-letter">E</span>
+          <span class="spl-letter">K</span>
+          <span class="spl-letter">W</span>
+          <span class="spl-letter">O</span>
+          <span class="spl-letter">N</span>
+
+          <span class="spl-dash">-</span>
+
+          <span class="spl-letter">D</span>
+          <span class="spl-letter">O</span>
+        </div>
+
+        <div class="spl-line"></div>
+
+        <div class="spl-name">MASTER DUTTON</div>
+
+        <div class="spl-sub2">
+          ITF &middot; Scotland
+        </div>
+      </div>
+
+      <div class="spl-bar-wrap">
+        <div class="spl-bar-track">
+          <div class="spl-bar-fill"></div>
+        </div>
+
+        <div class="spl-bar-label">Loading</div>
+
+        <div id="spl-tap-hint" class="spl-tap-hint">
+          Tap for sound
+        </div>
+      </div>
+    </div>
+
+    <div class="belt-strip" id="belt-strip"></div>
+
+    <div class="sbar">
+      <span id="clock"></span>
+      <span id="datebar"></span>
+    </div>
+
+    <div class="hdr">
+      <div class="logo">
+        <a href="/">TAEKWON<span>-DO</span></a>
+      </div>
+
+      <div class="badge badge-clickable" id="belt-badge">
+        Red Belt &#9662;
+      </div>
+    </div>
+
+    <div class="content" id="content"></div>
+
+    <div class="bnav">
+      <button class="tb active-menu" id="t-home">
+        <img src="./images/home-light.svg" alt="Home" class="icon-lt">
+        <img src="./images/home-active.svg" alt="Home" class="icon-active">
+        <span class="lb">Home</span>
+      </button>
+      <!-- 
+      <button class="tb" id="t-patterns">
+        <img src="./images/patterns-light.svg" alt="Patterns" class="icon-lt">
+        <img src="./images/patterns-active.svg" alt="Patterns" class="icon-active">
+        <span class="lb">Patterns</span>
+      </button> -->
+
+      <!-- <button class="tb" id="t-techniques">
+        <img src="./images/skills-light.svg" alt="Skills" class="icon-lt">
+        <img src="./images/skills-active.svg" alt="Skills" class="icon-active">
+        <span class="lb">Skills</span>
+      </button> -->
+
+      <!-- <button class="tb" id="t-belt">
+        <img src="./images/belt-light.svg" alt="Belt" class="icon-lt">
+        <img src="./images/belt-active.svg" alt="Belt" class="icon-active">
+        <span class="lb">Belt</span>
+      </button> -->
+
+      <button class="tb" id="t-quiz">
+        <img src="./images/quiz-light.svg" alt="Quiz" class="icon-lt">
+        <img src="./images/quiz-active.svg" alt="Quiz" class="icon-active">
+        <span class="lb">Quiz</span>
+      </button>
+
+      <button class="tb" id="t-competition">
+        <img src="./images/compete-light.svg" alt="Compete" class="icon-lt">
+        <img src="./images/compete-active.svg" alt="Compete" class="icon-active">
+        <span class="lb">Compete</span>
+      </button>
+
+      <button class="tb" id="t-stretch">
+        <img src="./images/stretch-light1.svg" alt="Stretch" class="icon-lt">
+        <img src="./images/stretch-active1.svg" alt="Stretch" class="icon-active">
+        <span class="lb">Stretch</span>
+      </button>
+    </div>
+    <!--  -->
+
+  </div>
+
+
+
+  <script src="./app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+
+</html>
