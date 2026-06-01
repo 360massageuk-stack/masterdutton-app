@@ -4434,6 +4434,9 @@ button.btn-p.flex-fill {
 .accordion-body > *:last-child {
 	padding-bottom: 15px !important;
 }
+.accordion-body > *:last-child.video-container{
+	padding-bottom: 56.25% !important;
+}
 .timetable-address span {
 	flex: 0 0 16px;
 	max-width: 16px;
