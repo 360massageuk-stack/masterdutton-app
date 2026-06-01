@@ -13,6 +13,8 @@ var PWD = "tkd399";
 			var AC = window.AudioContext || window.webkitAudioContext;
 			if (!AC) return;
 			var c = new AC();
+			console.log("Audio state:", c.state);
+			if (c.state === "suspended") c.resume();
 			var now = c.currentTime;
 			var sr = c.sampleRate;
 			var dur = 6.5;
@@ -117,12 +119,14 @@ var PWD = "tkd399";
 	function onFirstInteraction() {
 		document.removeEventListener("click", onFirstInteraction);
 		document.removeEventListener("touchstart", onFirstInteraction);
+		document.removeEventListener("mousedown", onFirstInteraction);
+		document.removeEventListener("pointerdown", onFirstInteraction);
 		startSwell();
 	}
 	document.addEventListener("click", onFirstInteraction);
-	document.addEventListener("touchstart", onFirstInteraction, {
-		passive: true,
-	});
+	document.addEventListener("touchstart", onFirstInteraction);
+	document.addEventListener("mousedown", onFirstInteraction);
+	document.addEventListener("pointerdown", onFirstInteraction);
 	setTimeout(function () {
 		if (!audioStarted) {
 			try {
