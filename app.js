@@ -1,4 +1,216 @@
 var PWD = "tkd399";
+
+// CINEMATIC SPLASH — SWELL + MIST
+// ═══════════════════════════════════════
+(function () {
+	var audioStarted = false;
+	function startSwell() {
+		if (audioStarted) return;
+		audioStarted = true;
+		var hint = document.getElementById("spl-tap-hint");
+		if (hint) hint.style.opacity = "0";
+		try {
+			var AC = window.AudioContext || window.webkitAudioContext;
+			if (!AC) return;
+			var c = new AC();
+			var now = c.currentTime;
+			var sr = c.sampleRate;
+			var dur = 6.5;
+			var master = c.createGain();
+			master.connect(c.destination);
+			master.gain.setValueAtTime(0.1, now);
+			master.gain.linearRampToValueAtTime(0.4, now + 0.5);
+			master.gain.linearRampToValueAtTime(0.6, now + 2.0);
+			master.gain.linearRampToValueAtTime(0.8, now + 4.0);
+			master.gain.linearRampToValueAtTime(0.9, now + 6.0);
+			master.gain.linearRampToValueAtTime(0.7, now + 8.5);
+			master.gain.linearRampToValueAtTime(0.001, now + 10.5);
+			var revLen = Math.floor(sr * 3.5);
+			var revBuf = c.createBuffer(2, revLen, sr);
+			for (var rc = 0; rc < 2; rc++) {
+				var rv = revBuf.getChannelData(rc);
+				for (var ri = 0; ri < revLen; ri++)
+					rv[ri] = (Math.random() * 2 - 1) * Math.pow(1 - ri / revLen, 1.6);
+			}
+			var rev = c.createConvolver();
+			rev.buffer = revBuf;
+			var revSend = c.createGain();
+			revSend.gain.setValueAtTime(0.5, now);
+			rev.connect(revSend);
+			revSend.connect(master);
+			function pad(freq, t0, durT, vol, detuneCents) {
+				var o = c.createOscillator(),
+					o2 = c.createOscillator(),
+					g = c.createGain();
+				o.type = "sine";
+				o2.type = "sine";
+				o.frequency.value = freq;
+				o2.frequency.value = freq * Math.pow(2, (detuneCents || 6) / 1200);
+				var atk = 0.1,
+					rel = durT * 0.25;
+				g.gain.setValueAtTime(0.001, t0);
+				g.gain.linearRampToValueAtTime(vol, t0 + atk);
+				g.gain.setValueAtTime(vol, t0 + durT - rel);
+				g.gain.linearRampToValueAtTime(0.001, t0 + durT);
+				o.connect(g);
+				o2.connect(g);
+				g.connect(master);
+				g.connect(rev);
+				o.start(t0);
+				o.stop(t0 + durT + 0.1);
+				o2.start(t0);
+				o2.stop(t0 + durT + 0.1);
+			}
+			function warm(freq, t0, durT, vol) {
+				var o = c.createOscillator(),
+					f = c.createBiquadFilter(),
+					g = c.createGain();
+				o.type = "sawtooth";
+				o.frequency.value = freq;
+				f.type = "lowpass";
+				f.frequency.setValueAtTime(600, t0);
+				f.Q.value = 0.8;
+				var atk = 0.2;
+				g.gain.setValueAtTime(0.001, t0);
+				g.gain.linearRampToValueAtTime(vol, t0 + atk);
+				g.gain.linearRampToValueAtTime(0.001, t0 + durT);
+				o.connect(f);
+				f.connect(g);
+				g.connect(master);
+				g.connect(rev);
+				o.start(t0);
+				o.stop(t0 + durT + 0.1);
+			}
+			pad(55, now, 10, 0.25);
+			pad(55, now, 10, 0.15, -8);
+			pad(110, now + 0.5, 9.5, 0.22);
+			warm(110, now + 0.5, 9.5, 0.1);
+			pad(165, now + 1.5, 8.5, 0.25);
+			warm(165, now + 1.5, 8.5, 0.12);
+			pad(220, now + 3.0, 7.0, 0.28);
+			pad(262, now + 3.0, 7.0, 0.14);
+			warm(220, now + 3.0, 7.0, 0.1);
+			pad(330, now + 5.0, 5.5, 0.22);
+			pad(440, now + 5.0, 5.5, 0.12);
+			warm(330, now + 5.0, 5.0, 0.08);
+			pad(554, now + 7.0, 3.5, 0.1);
+			pad(659, now + 7.0, 3.5, 0.08);
+			var impT = now + 7.0;
+			var impOsc = c.createOscillator(),
+				impG = c.createGain();
+			impOsc.type = "sine";
+			impOsc.frequency.setValueAtTime(85, impT);
+			impOsc.frequency.exponentialRampToValueAtTime(22, impT + 0.6);
+			impG.gain.setValueAtTime(0, impT);
+			impG.gain.linearRampToValueAtTime(1.6, impT + 0.012);
+			impG.gain.exponentialRampToValueAtTime(0.001, impT + 1.5);
+			impOsc.connect(impG);
+			impG.connect(c.destination);
+			impG.connect(rev);
+			impOsc.start(impT);
+			impOsc.stop(impT + 1.6);
+		} catch (ex) {
+			console.log("swell err:", ex);
+		}
+	}
+	window._startSwell = startSwell;
+	function onFirstInteraction() {
+		document.removeEventListener("click", onFirstInteraction);
+		document.removeEventListener("touchstart", onFirstInteraction);
+		startSwell();
+	}
+	document.addEventListener("click", onFirstInteraction);
+	document.addEventListener("touchstart", onFirstInteraction, {
+		passive: true,
+	});
+	setTimeout(function () {
+		if (!audioStarted) {
+			try {
+				var t = new (window.AudioContext || window.webkitAudioContext)();
+				var state = t.state;
+				t.close();
+				if (state === "running") startSwell();
+			} catch (e) {}
+		}
+	}, 10);
+	function initMist() {
+		var canvas = document.getElementById("spl-canvas");
+		if (!canvas) return;
+		var W = canvas.offsetWidth || window.innerWidth;
+		var H = canvas.offsetHeight || window.innerHeight;
+		canvas.width = W;
+		canvas.height = H;
+		var ctx = canvas.getContext("2d");
+		var particles = [];
+		for (var i = 0; i < 55; i++) {
+			particles.push({
+				x: W * 0.1 + Math.random() * W * 0.8,
+				y: H * 0.55 + Math.random() * H * 0.5,
+				r: 60 + Math.random() * 120,
+				vx: (Math.random() - 0.5) * 0.4,
+				vy: -(0.15 + Math.random() * 0.5),
+				alpha: 0,
+				maxAlpha: 0.04 + Math.random() * 0.1,
+				grow: 0.0008 + Math.random() * 0.001,
+				phase: Math.random() * Math.PI * 2,
+				hue: Math.random() < 0.7 ? 43 : 38,
+			});
+		}
+		var frame = 0,
+			alive = true;
+		function draw() {
+			if (!alive) return;
+			ctx.clearRect(0, 0, W, H);
+			var vg = ctx.createRadialGradient(
+				W / 2,
+				H / 2,
+				H * 0.1,
+				W / 2,
+				H / 2,
+				H * 0.85,
+			);
+			vg.addColorStop(0, "rgba(0,0,0,0)");
+			vg.addColorStop(1, "rgba(0,0,0,0.72)");
+			ctx.fillStyle = vg;
+			ctx.fillRect(0, 0, W, H);
+			frame++;
+			for (var i = 0; i < particles.length; i++) {
+				var p = particles[i];
+				p.x += p.vx + Math.sin(frame * 0.01 + p.phase) * 0.3;
+				p.y += p.vy;
+				p.r += p.r * p.grow;
+				if (p.alpha < p.maxAlpha) p.alpha += 0.0015;
+				if (p.y + p.r < -50) {
+					p.y = H * 0.6 + Math.random() * H * 0.4;
+					p.x = W * 0.05 + Math.random() * W * 0.9;
+					p.alpha = 0;
+					p.r = 60 + Math.random() * 80;
+				}
+				var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+				grad.addColorStop(0, "hsla(" + p.hue + ",80%,55%," + p.alpha + ")");
+				grad.addColorStop(
+					0.5,
+					"hsla(" + p.hue + ",60%,35%," + p.alpha * 0.5 + ")",
+				);
+				grad.addColorStop(1, "hsla(" + p.hue + ",50%,20%,0)");
+				ctx.beginPath();
+				ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+				ctx.fillStyle = grad;
+				ctx.fill();
+			}
+			requestAnimationFrame(draw);
+		}
+		draw();
+		setTimeout(function () {
+			alive = false;
+		}, 11000);
+	}
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initMist);
+	} else {
+		setTimeout(initMist, 50);
+	}
+})();
 window.addEventListener("load", function () {
 	if (localStorage.getItem("tkd-auth") === PWD) {
 		var ps = document.getElementById("pwd-screen");
@@ -11447,217 +11659,7 @@ function closeHomeMenu() {
 }
 
 // ═══════════════════════════════════════
-// CINEMATIC SPLASH — SWELL + MIST
-// ═══════════════════════════════════════
-(function () {
-	var audioStarted = false;
-	function startSwell() {
-		if (audioStarted) return;
-		audioStarted = true;
-		var hint = document.getElementById("spl-tap-hint");
-		if (hint) hint.style.opacity = "0";
-		try {
-			var AC = window.AudioContext || window.webkitAudioContext;
-			if (!AC) return;
-			var c = new AC();
-			var now = c.currentTime;
-			var sr = c.sampleRate;
-			var dur = 6.5;
-			var master = c.createGain();
-			master.connect(c.destination);
-			master.gain.setValueAtTime(0.001, now);
-			master.gain.linearRampToValueAtTime(0.1, now + 1.5);
-			master.gain.linearRampToValueAtTime(0.3, now + 3.0);
-			master.gain.linearRampToValueAtTime(0.6, now + 5.0);
-			master.gain.linearRampToValueAtTime(0.9, now + 7.0);
-			master.gain.linearRampToValueAtTime(0.7, now + 8.5);
-			master.gain.linearRampToValueAtTime(0.001, now + 10.5);
-			var revLen = Math.floor(sr * 3.5);
-			var revBuf = c.createBuffer(2, revLen, sr);
-			for (var rc = 0; rc < 2; rc++) {
-				var rv = revBuf.getChannelData(rc);
-				for (var ri = 0; ri < revLen; ri++)
-					rv[ri] = (Math.random() * 2 - 1) * Math.pow(1 - ri / revLen, 1.6);
-			}
-			var rev = c.createConvolver();
-			rev.buffer = revBuf;
-			var revSend = c.createGain();
-			revSend.gain.setValueAtTime(0.5, now);
-			rev.connect(revSend);
-			revSend.connect(master);
-			function pad(freq, t0, durT, vol, detuneCents) {
-				var o = c.createOscillator(),
-					o2 = c.createOscillator(),
-					g = c.createGain();
-				o.type = "sine";
-				o2.type = "sine";
-				o.frequency.value = freq;
-				o2.frequency.value = freq * Math.pow(2, (detuneCents || 6) / 1200);
-				var atk = durT * 0.3,
-					rel = durT * 0.25;
-				g.gain.setValueAtTime(0.001, t0);
-				g.gain.linearRampToValueAtTime(vol, t0 + atk);
-				g.gain.setValueAtTime(vol, t0 + durT - rel);
-				g.gain.linearRampToValueAtTime(0.001, t0 + durT);
-				o.connect(g);
-				o2.connect(g);
-				g.connect(master);
-				g.connect(rev);
-				o.start(t0);
-				o.stop(t0 + durT + 0.1);
-				o2.start(t0);
-				o2.stop(t0 + durT + 0.1);
-			}
-			function warm(freq, t0, durT, vol) {
-				var o = c.createOscillator(),
-					f = c.createBiquadFilter(),
-					g = c.createGain();
-				o.type = "sawtooth";
-				o.frequency.value = freq;
-				f.type = "lowpass";
-				f.frequency.setValueAtTime(600, t0);
-				f.Q.value = 0.8;
-				var atk = durT * 0.35;
-				g.gain.setValueAtTime(0.001, t0);
-				g.gain.linearRampToValueAtTime(vol, t0 + atk);
-				g.gain.linearRampToValueAtTime(0.001, t0 + durT);
-				o.connect(f);
-				f.connect(g);
-				g.connect(master);
-				g.connect(rev);
-				o.start(t0);
-				o.stop(t0 + durT + 0.1);
-			}
-			pad(55, now, 10, 0.25);
-			pad(55, now, 10, 0.15, -8);
-			pad(110, now + 1.2, 8.8, 0.22);
-			warm(110, now + 1.2, 8.8, 0.1);
-			pad(165, now + 2.5, 7.5, 0.25);
-			warm(165, now + 2.5, 7.5, 0.12);
-			pad(220, now + 3.8, 6.2, 0.28);
-			pad(262, now + 3.8, 6.2, 0.14);
-			warm(220, now + 3.8, 6.2, 0.1);
-			pad(330, now + 5.5, 5.0, 0.22);
-			pad(440, now + 5.5, 5.0, 0.12);
-			warm(330, now + 5.5, 4.5, 0.08);
-			pad(554, now + 7.0, 3.5, 0.1);
-			pad(659, now + 7.0, 3.5, 0.08);
-			var impT = now + 7.0;
-			var impOsc = c.createOscillator(),
-				impG = c.createGain();
-			impOsc.type = "sine";
-			impOsc.frequency.setValueAtTime(85, impT);
-			impOsc.frequency.exponentialRampToValueAtTime(22, impT + 0.6);
-			impG.gain.setValueAtTime(0, impT);
-			impG.gain.linearRampToValueAtTime(1.6, impT + 0.012);
-			impG.gain.exponentialRampToValueAtTime(0.001, impT + 1.5);
-			impOsc.connect(impG);
-			impG.connect(c.destination);
-			impG.connect(rev);
-			impOsc.start(impT);
-			impOsc.stop(impT + 1.6);
-		} catch (ex) {
-			console.log("swell err:", ex);
-		}
-	}
-	window._startSwell = startSwell;
-	function onFirstInteraction() {
-		document.removeEventListener("click", onFirstInteraction);
-		document.removeEventListener("touchstart", onFirstInteraction);
-		startSwell();
-	}
-	document.addEventListener("click", onFirstInteraction);
-	document.addEventListener("touchstart", onFirstInteraction, {
-		passive: true,
-	});
-	setTimeout(function () {
-		if (!audioStarted) {
-			try {
-				var t = new (window.AudioContext || window.webkitAudioContext)();
-				var state = t.state;
-				t.close();
-				if (state === "running") startSwell();
-			} catch (e) {}
-		}
-	}, 200);
-	function initMist() {
-		var canvas = document.getElementById("spl-canvas");
-		if (!canvas) return;
-		var W = canvas.offsetWidth || window.innerWidth;
-		var H = canvas.offsetHeight || window.innerHeight;
-		canvas.width = W;
-		canvas.height = H;
-		var ctx = canvas.getContext("2d");
-		var particles = [];
-		for (var i = 0; i < 55; i++) {
-			particles.push({
-				x: W * 0.1 + Math.random() * W * 0.8,
-				y: H * 0.55 + Math.random() * H * 0.5,
-				r: 60 + Math.random() * 120,
-				vx: (Math.random() - 0.5) * 0.4,
-				vy: -(0.15 + Math.random() * 0.5),
-				alpha: 0,
-				maxAlpha: 0.04 + Math.random() * 0.1,
-				grow: 0.0008 + Math.random() * 0.001,
-				phase: Math.random() * Math.PI * 2,
-				hue: Math.random() < 0.7 ? 43 : 38,
-			});
-		}
-		var frame = 0,
-			alive = true;
-		function draw() {
-			if (!alive) return;
-			ctx.clearRect(0, 0, W, H);
-			var vg = ctx.createRadialGradient(
-				W / 2,
-				H / 2,
-				H * 0.1,
-				W / 2,
-				H / 2,
-				H * 0.85,
-			);
-			vg.addColorStop(0, "rgba(0,0,0,0)");
-			vg.addColorStop(1, "rgba(0,0,0,0.72)");
-			ctx.fillStyle = vg;
-			ctx.fillRect(0, 0, W, H);
-			frame++;
-			for (var i = 0; i < particles.length; i++) {
-				var p = particles[i];
-				p.x += p.vx + Math.sin(frame * 0.01 + p.phase) * 0.3;
-				p.y += p.vy;
-				p.r += p.r * p.grow;
-				if (p.alpha < p.maxAlpha) p.alpha += 0.0015;
-				if (p.y + p.r < -50) {
-					p.y = H * 0.6 + Math.random() * H * 0.4;
-					p.x = W * 0.05 + Math.random() * W * 0.9;
-					p.alpha = 0;
-					p.r = 60 + Math.random() * 80;
-				}
-				var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-				grad.addColorStop(0, "hsla(" + p.hue + ",80%,55%," + p.alpha + ")");
-				grad.addColorStop(
-					0.5,
-					"hsla(" + p.hue + ",60%,35%," + p.alpha * 0.5 + ")",
-				);
-				grad.addColorStop(1, "hsla(" + p.hue + ",50%,20%,0)");
-				ctx.beginPath();
-				ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-				ctx.fillStyle = grad;
-				ctx.fill();
-			}
-			requestAnimationFrame(draw);
-		}
-		draw();
-		setTimeout(function () {
-			alive = false;
-		}, 11000);
-	}
-	if (document.readyState === "loading") {
-		document.addEventListener("DOMContentLoaded", initMist);
-	} else {
-		setTimeout(initMist, 50);
-	}
-})();
+
 function rClubApp() {
 	var h =
 		'<button class="bk" onclick="CT=\'home\';render()"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home</button>';
