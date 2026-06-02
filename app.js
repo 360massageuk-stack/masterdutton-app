@@ -309,9 +309,7 @@ var PATS = [
 		moves: 24,
 		belt: "8th Gup (Yellow)",
 		diff: "Beginner",
-		meaning:
-			"Pseudonym of Ahn Chang-Ho (1876-1938). 24 movements represent his life devoted to the education of Korea.",
-		video: "https://www.youtube.com/embed/n0m66agoaow",
+		meaning: "Do-San was the pseudonym of the patriot Ahn Chang-Ho (1876–1938). The 24 movements represent his entire life, which he devoted to furthering the education of Korea and its independence movement.",
 	},
 	{
 		id: 4,
@@ -319,7 +317,7 @@ var PATS = [
 		moves: 28,
 		belt: "7th Gup (Yellow/Green)",
 		diff: "Beginner",
-		meaning: "Won-Hyo introduced Buddhism to the Silla Dynasty in 686 AD.",
+		meaning: "Won-Hyo was the noted monk who introduced Buddhism to the Silla Dynasty in the year 686 AD.",
 		video: "https://www.youtube.com/embed/TAamYbDneXU",
 	},
 	{
@@ -328,8 +326,7 @@ var PATS = [
 		moves: 38,
 		belt: "6th Gup (Green)",
 		diff: "Intermediate",
-		meaning:
-			"Pseudonym of philosopher Yi I (1536-1584), the Confucius of Korea. 38 = 38th latitude.",
+		meaning: "Yul-Gok was the pseudonym of the great philosopher and scholar Yi I (1536-1584), nicknamed the Confucius of Korea. The 38 movements of this pattern refer to his birthplace on the 38th degree latitude and the diagram represents a scholar.",
 		video: "https://www.youtube.com/embed/iRrvJBYqvh0",
 	},
 	{
@@ -338,8 +335,7 @@ var PATS = [
 		moves: 32,
 		belt: "5th Gup (Green/Blue)",
 		diff: "Intermediate",
-		meaning:
-			"Named after Ahn Joong-Gun who assassinated Ito Hirobumi in 1909. 32 = his age at execution.",
+		meaning: "Joong-Gun is named after the patriot Ahn Joong-Gun, who assassinated Hirobumi Ito, the first Japanese Governor-General of Korea, known as the man who played the leading part in the Korea-Japan merger. The 32 movements represent Mr. Ahn's age when he was executed at Lui-Shung Prison in 1910.",
 		video: "https://www.youtube.com/embed/C0wbvHc_odU",
 	},
 	{
@@ -348,7 +344,7 @@ var PATS = [
 		moves: 37,
 		belt: "4th Gup (Blue)",
 		diff: "Intermediate",
-		meaning: "Pen name of scholar Yi Hwang (16th century). 37 = 37th latitude.",
+		meaning: "Toi-Gye was the pen name of the noted scholar Yi Hwang (16th century), an authority on Neo-Confucianism. The 37 movements refer to his birthplace on the 37th degree latitude and the diagram represents a scholar.",
 		video: "https://www.youtube.com/embed/lLfLNbrb6jk",
 	},
 	{
@@ -357,8 +353,7 @@ var PATS = [
 		moves: 29,
 		belt: "3rd Gup (Blue/Red)",
 		diff: "Intermediate",
-		meaning:
-			"Named after the Hwa-Rang youth group of the Silla Dynasty. 29 = 29th Infantry Division.",
+		meaning: "Hwa-Rang is named after the Hwa-Rang youth group which originated in the Silla Dynasty about 1,350 years ago. The 29 movements refer to the 29th Infantry Division, where Taekwon-Do developed into maturity.",
 		video: "https://www.youtube.com/embed/hb5wMTcvPXY",
 	},
 	{
@@ -367,8 +362,7 @@ var PATS = [
 		moves: 30,
 		belt: "2nd Gup (Red)",
 		diff: "Intermediate",
-		meaning:
-			"Named after Admiral Yi Soon-Sin. Ends with a left hand attack to symbolise his regrettable death.",
+		meaning: "Choong-Moo was the given name of the great Admiral Yi Soon-Sin of the Yi Dynasty. He was reputed to have invented the first armoured battleship, known as the Turtle Ship, in 1592, which is said to be the precursor of the present-day submarine. The reason this pattern ends with a left-hand attack is to symbolise his regrettable death, having no chance to show his unrestrained potential checked by the forced reservation of his loyalty to the King.",
 		video: "https://www.youtube.com/embed/VYq1B9ETdbQ",
 	},
 	{
@@ -377,8 +371,7 @@ var PATS = [
 		moves: 39,
 		belt: "1st Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after King Kwang-Gae-Toh. 39 = first two figures of 391 AD.",
+		meaning: "Kwang-Gae is named after the famous Kwang-Gae-Toh-Wang, the 19th King of the Koguryo Dynasty, who regained all the lost territories including the greater part of Manchuria. The diagram represents the expansion and recovery of lost territory. The 39 movements refer to the first two figures of 391 AD, the year he came to the throne.",
 		video: "https://www.youtube.com/embed/Jr-yMMaL7cg",
 	},
 	{
@@ -387,8 +380,7 @@ var PATS = [
 		moves: 36,
 		belt: "1st Dan",
 		diff: "Advanced",
-		meaning:
-			"Pseudonym of loyal subject Chong Mong-Chu (1400). 36 = his unerring loyalty.",
+		meaning: "Po-Eun was the pseudonym of the loyal subject Chong Mong-Chu (1400), who was a famous poet and whose poem 'I would not serve a second master though I might be crucified a hundred times' is known to every Korean. The diagram represents his unerring loyalty to the king and country towards the end of the Koryo Dynasty.",
 		video: "https://www.youtube.com/embed/yE2ed-mf-6k",
 	},
 	{
@@ -397,8 +389,7 @@ var PATS = [
 		moves: 44,
 		belt: "1st Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after general Ge-Baek (660 AD). 44 = his strict military discipline.",
+		meaning: "Ge-Baek is named after General Ge-Baek of the Baek Je Dynasty (660 AD). The diagram represents his severe and strict military discipline.",
 		video: "https://www.youtube.com/embed/m8h3AmL_v58",
 	},
 	{
@@ -407,8 +398,7 @@ var PATS = [
 		moves: 45,
 		belt: "2nd Dan",
 		diff: "Advanced",
-		meaning:
-			"Pseudonym of Son Byong Hi, leader of Korean independence movement, March 1919.",
+		meaning: "Eui-Am was the pseudonym of Son Byong Hi, leader of the Korean independence movement on March 1st, 1919. The 45 movements refer to his age when he changed the name of Dong Hak (Eastern Learning) to Chondo Kyo (Heavenly Way Religion) in 1905.",
 		video: "https://www.youtube.com/embed/zdAQNNOKZY4",
 	},
 	{
@@ -417,8 +407,7 @@ var PATS = [
 		moves: 52,
 		belt: "2nd Dan",
 		diff: "Advanced",
-		meaning:
-			"Pseudonym of General Kim Duk Ryang, condemned to death at 27 in 1596.",
+		meaning: "Choong-Jang is the pseudonym given to General Kim Duk Ryang, who lived during the Yi Dynasty in the 14th century. This pattern ends with a left-hand attack to symbolise the tragedy of his death at the age of 27 in prison before he was able to reach full maturity.",
 		video: "",
 	},
 	{
@@ -427,7 +416,7 @@ var PATS = [
 		moves: 45,
 		belt: "3rd Dan",
 		diff: "Advanced",
-		meaning: "Philosophical idea that man is the master of everything.",
+		meaning: "Juche is a philosophical idea that man is the master of everything and decides everything. In other words, the idea that man is the master of the world and of his own destiny. It is said that this idea was rooted on Baekdu Mountain, which symbolises the spirit of the Korean people. The diagram represents Baekdu Mountain.",
 		video: "",
 	},
 	{
@@ -436,8 +425,7 @@ var PATS = [
 		moves: 33,
 		belt: "3rd Dan",
 		diff: "Advanced",
-		meaning:
-			"Commemorates March 1, 1919 independence movement. 33 = the 33 patriots.",
+	meaning: "Sam-Il denotes the historical date of the Korean independence movement which began throughout Korea on March 1st, 1919. The 33 movements represent the 33 patriots who planned the movement.",
 		video: "https://www.youtube.com/embed/hxtaIBf6CMQ",
 	},
 	{
@@ -446,8 +434,7 @@ var PATS = [
 		moves: 68,
 		belt: "4th Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after general Kim Yoo-Sin. 68 = last two figures of 668 AD.",
+		meaning: "Yoo-Sin is named after General Kim Yoo-Sin, the commanding general during the Silla Dynasty who unified the three kingdoms of Korea. The 68 movements refer to the last two figures of 668 AD, the year Korea was unified.",
 		video: "https://www.youtube.com/embed/Jm6qw45R1ho",
 	},
 	{
@@ -456,8 +443,7 @@ var PATS = [
 		moves: 46,
 		belt: "4th Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after General Choi Yong, premier during the 14th century Koryo Dynasty.",
+		meaning: "Choi-Yong is named after General Choi Yong, Premier and Commander-in-Chief of the Armed Forces during the 14th century Koryo Dynasty. He was greatly respected for his loyalty, patriotism and humility. The pattern has 46 movements representing the last two figures of 1046 AD, the year he was born.",
 		video: "https://www.youtube.com/embed/hxtaIBf6CMQ",
 	},
 	{
@@ -466,7 +452,7 @@ var PATS = [
 		moves: 49,
 		belt: "4th Dan",
 		diff: "Advanced",
-		meaning: "Named after Yon Gae Somoon. 49 = last two figures of 649 AD.",
+		meaning: "Yon-Gae is named after the famous general Yon Gae Somoon during the Koguryo Dynasty. The 49 movements refer to the last two figures of 649 AD, the year he forced the Tang Dynasty to quit Korea after destroying nearly 300,000 Chinese troops at Ansi Sung.",
 		video: "",
 	},
 	{
@@ -475,7 +461,7 @@ var PATS = [
 		moves: 42,
 		belt: "5th Dan",
 		diff: "Advanced",
-		meaning: "Named after general Ul-Ji Moon Dok who defended Korea in 612 AD.",
+		meaning: "Ul-Ji is named after General Ul-Ji Moon Dok, who successfully defended Korea against a Tang invasion force of nearly one million soldiers led by Yang Je in 612 AD. The pattern has 42 movements representing the author's age when he designed it.",
 		video: "",
 	},
 	{
@@ -484,8 +470,7 @@ var PATS = [
 		moves: 61,
 		belt: "5th Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after the 30th king of the Silla Dynasty. 61 = last two figures of 661 AD.",
+		meaning: "Moon-Moo was the name of the 30th king of the Silla Dynasty. His body was buried near Dae Wang Am (Great King's Rock). According to his will, the body was placed in the sea where 'my soul shall forever defend my land against the Japanese'. The 61 movements in this pattern symbolise the last two figures of 661 AD when Moon-Moo came to the throne.",
 		video: "https://www.youtube.com/embed/eTw7Gf92Dac",
 	},
 	{
@@ -494,8 +479,7 @@ var PATS = [
 		moves: 72,
 		belt: "6th Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after monk So-San (1520-1604). 72 = his age entering the priesthood.",
+		meaning: "So-San was the pseudonym of the great monk Choi Hyong Ung (1520-1604) during the Yi Dynasty. The 72 movements refer to his age when he organised a corps of monk soldiers with the assistance of his pupil Sa Myung Dang. The monk soldiers helped repel the Japanese pirates who overran most of the Korean peninsula in 1592.",
 		video: "",
 	},
 	{
@@ -504,8 +488,7 @@ var PATS = [
 		moves: 24,
 		belt: "6th Dan",
 		diff: "Advanced",
-		meaning:
-			"Named after King Se-Jong who invented the Korean alphabet in 1443.",
+		meaning: "Se-Jong is named after the greatest Korean king, Se-Jong, who invented the Korean alphabet in 1443 and was also a noted meteorologist. The diagram represents the King, while the 24 movements refer to the 24 letters of the Korean alphabet.",
 		video: "",
 	},
 	{
@@ -514,7 +497,7 @@ var PATS = [
 		moves: 56,
 		belt: "7th Dan",
 		diff: "Advanced",
-		meaning: "Represents the unification of Korea divided since 1945.",
+		meaning: "Tong-Il denotes the resolution of the unification of Korea which has been divided since 1945. The diagram symbolises the homogeneous race.",
 		video: "",
 	},
 ];
