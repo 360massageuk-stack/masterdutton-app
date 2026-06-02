@@ -290,7 +290,7 @@ var PATS = [
 		belt: "10th Gup (White)",
 		diff: "Beginner",
 		meaning:
-			"Heaven and Earth. Two parts, one represents Heaven, the other Earth.",
+			"Chon-Ji means literally Heaven and Earth. It is interpreted in the Orient as the creation of the world or the beginning of human history. Therefore, it is the initial pattern performed by the beginner. This pattern consists of two similar parts; one represents Heaven and the other Earth.",
 		video: "https://www.youtube.com/embed/jXTZthuWIPA",
 	},
 	{
