@@ -291,7 +291,7 @@ var PATS = [
 		diff: "Beginner",
 		meaning:
 			"Chon-Ji means literally Heaven and Earth. It is interpreted in the Orient as the creation of the world or the beginning of human history. Therefore, it is the initial pattern performed by the beginner. This pattern consists of two similar parts; one represents Heaven and the other Earth.",
-		video: "https://www.youtube.com/embed/jXTZthuWIPA",
+		video: "https://www.youtube.com/embed/ZZSeWxi-fU0",
 	},
 	{
 		id: 2,
