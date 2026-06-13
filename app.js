@@ -11864,6 +11864,7 @@ function aQ(i) {
 	}, 1200);
 }
 
+var PWD = "tkd399" ;
 function checkPwd() {
 	var val = document.getElementById("pwd-input").value.trim().toLowerCase();
 	if (val === PWD) {
