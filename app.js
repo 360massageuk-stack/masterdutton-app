@@ -272,7 +272,7 @@ var PATS = [
 		belt: "10th Kup (White)",
 		diff: "Beginner",
 		meaning: "4-Direction Punch. The first exercise taught to all beginners.",
-		video: "https://www.youtube.com/embed/MqcDfQKnTOA",
+		video: "https://youtu.be/VC6Dg0-ykTg",
 	},
 	{
 		id: "",
