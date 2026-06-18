@@ -281,7 +281,7 @@ var PATS = [
 		belt: "10th Kup (White)",
 		diff: "Beginner",
 		meaning: "4-Direction Block. Foundational blocking exercise for beginners.",
-		video: "https://www.youtube.com/embed/5FpcP2Jqu0E",
+		video:"https://www.youtube.com/embed/SkpZZhiNAMI",
 	},
 	{
 		id: 1,
