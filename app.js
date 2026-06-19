@@ -301,7 +301,7 @@ var PATS = [
 		diff: "Beginner",
 		meaning:
 			"Named after the holy Dan-Gun, legendary founder of Korea in 2,333 BC.",
-		video: "https://www.youtube.com/embed/jXTZthuWIPA",
+		video: "https://www.youtube.com/embed/CTgd1FYPQN8",
 	},
 	{
 		id: 3,
