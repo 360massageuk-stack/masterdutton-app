@@ -318,7 +318,7 @@ var PATS = [
 		belt: "7th Kup (Yellow/Green)",
 		diff: "Beginner",
 		meaning: "Won-Hyo was the noted monk who introduced Buddhism to the Silla Dynasty in the year 686 AD.",
-		video: "https://www.youtube.com/embed/TAamYbDneXU",
+		video: "https://www.youtube.com/embed/6bz-7xXnxJk",
 	},
 	{
 		id: 5,
