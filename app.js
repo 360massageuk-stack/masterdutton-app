@@ -310,6 +310,7 @@ var PATS = [
 		belt: "8th Kup (Yellow)",
 		diff: "Beginner",
 		meaning: "Do-San was the pseudonym of the patriot Ahn Chang-Ho (1876–1938). The 24 movements represent his entire life, which he devoted to furthering the education of Korea and its independence movement.",
+	video: "https://www.youtube.com/embed/rBB9vaPT4rI",
 	},
 	{
 		id: 4,
