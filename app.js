@@ -319,7 +319,7 @@ var PATS = [
 		belt: "7th Kup (Yellow/Green)",
 		diff: "Beginner",
 		meaning: "Won-Hyo was the noted monk who introduced Buddhism to the Silla Dynasty in the year 686 AD.",
-		video: "https://www.youtube.com/embed/VB1nXWXg91w,
+		video: "https://www.youtube.com/embed/VB1nXWXg91w",
 	},
 	{
 		id: 5,
@@ -328,7 +328,7 @@ var PATS = [
 		belt: "6th Kup (Green)",
 		diff: "Intermediate",
 		meaning: "Yul-Gok was the pseudonym of the great philosopher and scholar Yi I (1536-1584), nicknamed the Confucius of Korea. The 38 movements of this pattern refer to his birthplace on the 38th degree latitude and the diagram represents a scholar.",
-		video: "https://www.youtube.com/embed/iEy4NGfGx3k,
+		video: "https://www.youtube.com/embed/iEy4NGfGx3k",
 	},
 	{
 		id: 6,
