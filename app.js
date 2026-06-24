@@ -9478,6 +9478,14 @@ var ST_OPEN = null;
 var ST_CAT = 0;
 var ST_MIN = null; // Currently selected routine time
 
+function rSpar() {
+  var h = '<div class="top-image-section">' +
+    '<button class="bk" onclick="sT(\'home\')"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home</button>' +
+    '</div>';
+  h += '<div class="stitle">SPARRING</div>';
+  h += '<div class="stretch-intro">Sparring drills, combinations and strategies — coming soon. Content is being added by Master Dutton.</div>';
+  return h;
+}
 function rStretch() {
 	var h =
 		'<div class="top-image-section stretch-page">' +
@@ -11730,6 +11738,7 @@ function render() {
 	else if (CT === "quiz") c.innerHTML = rQuiz();
 	else if (CT === "glossary") c.innerHTML = rGloss();
 	else if (CT === "competition") c.innerHTML = rComp();
+	else if (CT === "sparring") c.innerHTML = rSpar();
 	else if (CT === "ask") c.innerHTML = rAsk();
 	else if (CT === "stretch") c.innerHTML = rStretch();
 	else if (CT === "timetable") c.innerHTML = rTimetable();
