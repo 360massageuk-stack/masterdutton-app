@@ -9158,7 +9158,7 @@ function rHomeMenu() {
 			id: "sparring",
 			title: "SPARRING",
 			desc: "Drills, strategies & sparring skills",
-			action: "sT('competition')",
+			action: "sT('sparring')",
 			icon: '<img src="./images/sparring-active.svg" alt="Sparring" />',
 		},
 		{
