@@ -11772,7 +11772,7 @@ function render() {
 	else if (CT === "glossary") c.innerHTML = rGloss();
 	else if (CT === "competition") c.innerHTML = rComp();
 	else if (CT === "sparring") c.innerHTML = rSpar();
-	else if (CT === "leaderboard") c.innerHTML = rLeaderboard();	
+	else if (CT === "leaderboard") rLeaderboard().then(function(h){ c.innerHTML = h; });	
 	else if (CT === "ask") c.innerHTML = rAsk();
 	else if (CT === "stretch") c.innerHTML = rStretch();
 	else if (CT === "timetable") c.innerHTML = rTimetable();
