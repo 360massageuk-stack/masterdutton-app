@@ -168,7 +168,34 @@
 
   </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyChhBlJoJfmX3cL6t4f9bsqiAt-btR9XZU",
+    authDomain: "master-dutton-app.firebaseapp.com",
+    projectId: "master-dutton-app",
+    storageBucket: "master-dutton-app.firebasestorage.app",
+    messagingSenderId: "1030203894648",
+    appId: "1:1030203894648:web:760a227cc70a7bc42c768d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.saveScore = async function(name, score, belt) {
+    await addDoc(collection(db, "quiz_scores"), {
+      name, score, belt, date: new Date().toISOString()
+    });
+  };
+
+  window.getLeaderboard = async function() {
+    const q = query(collection(db, "quiz_scores"), orderBy("score", "desc"), limit(20));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => d.data());
+  };
+</script>
 
   <script src="./app.js"></script>
   <script>
