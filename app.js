@@ -9084,7 +9084,7 @@ function rChallengeBox() {
 		}
 
 		h +=
-			'<button onclick="submitScore(CC_SCORE)" class="challenge-save-btn">SAVE SCORE</button>' +
+			'<button onclick="submitScore(document.getElementById(\'score-input\').value)" class="challenge-save-btn">SAVE SCORE</button>' +
 			"</div></div>";
 	} else {
 		// Challenge active - show timer
