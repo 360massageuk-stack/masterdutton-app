@@ -9484,20 +9484,33 @@ async function rLeaderboard() {
     '<button class="bk" onclick="sT(\'home\')"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home</button>' +
     '</div>';
   h += '<div class="stitle">🏆 QUIZ LEADERBOARD</div>';
-  h += '<div id="lb-loading" class="stretch-intro">Loading scores...</div>';
-  h += '<div id="lb-table"></div>';
+  h += '<div class="stretch-intro" style="text-align:center;margin-bottom:16px;">Master Dutton\'s Elite Rankings</div>';
+  h += '<div id="lb-loading" class="stretch-intro" style="text-align:center;">Loading scores...</div>';
+  h += '<div id="lb-table" style="padding:0 12px 24px"></div>';
   setTimeout(async function() {
     if (window.getLeaderboard) {
       var scores = await window.getLeaderboard();
+      var medals = ["🥇","🥈","🥉"];
       var t = '';
       scores.forEach(function(s, i) {
-        t += '<div class="card" style="margin:6px 16px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">' +
-          '<span style="color:var(--gold);font-weight:700;">' + (i+1) + '. ' + s.name + '</span>' +
-          '<span style="color:var(--white);">' + s.score + '/20 &middot; ' + s.belt + '</span>' +
-          '</div>';
+        var rank = i < 3 ? medals[i] : (i+1)+'.';
+        var isTop = i === 0;
+        t += '<div style="margin:8px 0;padding:14px 16px;border-radius:10px;background:' +
+          (isTop ? 'linear-gradient(135deg,#2a1f00,#3d2e00)' : 'var(--card)') + ';' +
+          'border:1px solid ' + (isTop ? '#c9a84c' : 'var(--border)') + ';' +
+          'display:flex;align-items:center;gap:12px;">' +
+          '<span style="font-size:' + (isTop?'26px':'20px') + ';min-width:32px;text-align:center">' + rank + '</span>' +
+          '<div style="flex:1">' +
+          '<div style="font-weight:700;color:' + (isTop?'#c9a84c':'var(--white)') + ';font-size:' + (isTop?'16px':'14px') + '">' + s.name + '</div>' +
+          '<div style="font-size:11px;color:var(--muted);margin-top:2px">' + s.belt + '</div>' +
+          '</div>' +
+          '<div style="text-align:right">' +
+          '<div style="font-size:20px;font-weight:700;color:' + (isTop?'#c9a84c':'var(--white)') + '">' + s.score + '</div>' +
+          '<div style="font-size:10px;color:var(--muted)">/ 20</div>' +
+          '</div></div>';
       });
       document.getElementById('lb-loading').style.display = 'none';
-      document.getElementById('lb-table').innerHTML = t || '<div class="stretch-intro">No scores yet!</div>';
+      document.getElementById('lb-table').innerHTML = t || '<div class="stretch-intro" style="text-align:center">No scores yet — be the first! 🥋</div>';
     }
   }, 500);
   return h;
