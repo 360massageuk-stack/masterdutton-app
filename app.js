@@ -9477,7 +9477,31 @@ var STRETCHES = [
 var ST_OPEN = null;
 var ST_CAT = 0;
 var ST_MIN = null; // Currently selected routine time
+function showLeaderboard() { sT('leaderboard'); }
 
+async function rLeaderboard() {
+  var h = '<div class="top-image-section">' +
+    '<button class="bk" onclick="sT(\'home\')"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home</button>' +
+    '</div>';
+  h += '<div class="stitle">🏆 QUIZ LEADERBOARD</div>';
+  h += '<div id="lb-loading" class="stretch-intro">Loading scores...</div>';
+  h += '<div id="lb-table"></div>';
+  setTimeout(async function() {
+    if (window.getLeaderboard) {
+      var scores = await window.getLeaderboard();
+      var t = '';
+      scores.forEach(function(s, i) {
+        t += '<div class="card" style="margin:6px 16px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;">' +
+          '<span style="color:var(--gold);font-weight:700;">' + (i+1) + '. ' + s.name + '</span>' +
+          '<span style="color:var(--white);">' + s.score + '/20 &middot; ' + s.belt + '</span>' +
+          '</div>';
+      });
+      document.getElementById('lb-loading').style.display = 'none';
+      document.getElementById('lb-table').innerHTML = t || '<div class="stretch-intro">No scores yet!</div>';
+    }
+  }, 500);
+  return h;
+}
 function rSpar() {
   var h = '<div class="top-image-section">' +
     '<button class="bk" onclick="sT(\'home\')"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home</button>' +
@@ -10756,6 +10780,15 @@ function rQuiz() {
 		});
 		h +=
 			'<div class="flex-gap10-mt8"><button class="btn-p flex-fill" onclick="rsQ()">TRY AGAIN</button><button onclick="bkQ()" class="btn-card-fill">ALL LEVELS</button></div>';
+		h += '<div class="flex-gap10-mt8"><button class="btn-p flex-fill" onclick="showLeaderboard()">🏆 LEADERBOARD</button></div>';
+if (window.saveScore) {
+  var sName = localStorage.getItem("tkd-name") || "";
+  if (!sName) {
+    sName = prompt("Enter your name for the leaderboard:") || "Anonymous";
+    localStorage.setItem("tkd-name", sName);
+  }
+  window.saveScore(sName, QSC, BELT);
+}
 		return h;
 	}
 	var lv = QLEV[QL],
@@ -11739,6 +11772,7 @@ function render() {
 	else if (CT === "glossary") c.innerHTML = rGloss();
 	else if (CT === "competition") c.innerHTML = rComp();
 	else if (CT === "sparring") c.innerHTML = rSpar();
+	else if (CT === "leaderboard") c.innerHTML = rLeaderboard();	
 	else if (CT === "ask") c.innerHTML = rAsk();
 	else if (CT === "stretch") c.innerHTML = rStretch();
 	else if (CT === "timetable") c.innerHTML = rTimetable();
