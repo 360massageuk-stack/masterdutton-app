@@ -8978,6 +8978,14 @@ function submitScore(score) {
 	var s = parseInt(score);
 	if (isNaN(s) || s < 0) return;
 	saveChallengePB(CC.id, s);
+	var cName = localStorage.getItem("tkd-name") || "";
+if (!cName) {
+  cName = prompt("Enter your name for the leaderboard:") || "Anonymous";
+  localStorage.setItem("tkd-name", cName);
+}
+if (window.saveScore) {
+  window.saveScore(cName, s, CC.id);
+}
 	CC = null;
 	CT_RUNNING = false;
 	CT_TIME = 0;
