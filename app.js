@@ -8946,10 +8946,6 @@ function startChallenge(idx) {
 	CC_SCORE = 0;
 	if (CT_INTERVAL) clearInterval(CT_INTERVAL);
 	render();
-	setTimeout(function () {
-		var el = document.getElementById("challenge-box");
-		if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-	}, 100);
 }
 function startTimer() {
 	if (CT_RUNNING) return;
@@ -8967,10 +8963,6 @@ function startTimer() {
 			CT_INTERVAL = null;
 			CT_RUNNING = false;
 			render();
-			setTimeout(function () {
-				var el = document.getElementById("challenge-box");
-				if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-			}, 100);
 		}
 	}, 1000);
 }
@@ -8991,13 +8983,7 @@ if (window.saveScore) {
 	CT_TIME = 0;
 	if (CT_INTERVAL) {
 		clearInterval(CT_INTERVAL);
-		CT_INTERVAL = null;
-	}
-	render();
-	setTimeout(function () {
-		var el = document.getElementById("challenge-box");
-		if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-	}, 100);
+		CT_INTERVAL = null;}
 }
 function clearChallenge() {
 	CC = null;
