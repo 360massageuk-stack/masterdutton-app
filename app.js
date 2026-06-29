@@ -11762,7 +11762,7 @@ function rBooks() {
 }
 function render() {
 	var c = document.getElementById("content");
-	c.scrollTop = 0;
+	if (!CT_RUNNING && !(CC && CT_TIME > 0)) c.scrollTop = 0;
 	var hdr = document.querySelector(".hdr");
 	if (hdr) {
 		if (CT === "home") {
