@@ -11261,7 +11261,7 @@ function rQuiz() {
 			"</button>" +
 			h1("THEORY QUIZ") +
 			'<div class="text-sm-muted-mb16">' +
-			"Choose your level. Each has 20 questions on patterns, theory and Korean." +
+			"Choose your level. Each has 30 questions on patterns, theory and Korean." +
 			"</div>" +
 			"</div>";
 		QLEV.forEach(function (lv, i) {
@@ -11278,7 +11278,7 @@ function rQuiz() {
 				e(lv.label) +
 				'</div><div class="text-xs-muted-mt2">' +
 				e(lv.grades) +
-				' &middot; 20 questions</div></div><span class="icon-muted-lg"><img src="./images/chevron.svg" alt="Chevron" class="icon-lt"></span></div>';
+				' &middot; 30 questions</div></div><span class="icon-muted-lg"><img src="./images/chevron.svg" alt="Chevron" class="icon-lt"></span></div>';
 		});
 		return h;
 	}
