@@ -10619,7 +10619,7 @@ if (window.saveScore) {
 		return h;
 	}
 	var lv = QLEV[QL],
-		q = lv._qslv._qs,
+		q = lv.qslv.qs,
 		pct2 = (QA / 30) * 100;
 	var h =
 		'<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
@@ -11724,7 +11724,7 @@ function sQL(i) {
 		var el = document.getElementById("q-timer");
 		if (el) el.textContent = qFmtTime(Q_SECONDS);
 	}, 1000);
-	QLEV[QL]._qs = shuffleQs(QLEV[QL].qs);
+	QLEV[QL].qs = shuffleQs(QLEV[QL].qs);
 	render();
 }
 function qFmtTime(s) {
@@ -11745,7 +11745,7 @@ function aQ(i) {
 	if (QS !== null) return;
 	QS = i;
 	var lv = QLEV[QL],
-		q = lv._qslv._qs,
+		q = lv.qslv.qs,
 		ok = i === q.a;
 	if (ok) QSC++;
 	QA++;
