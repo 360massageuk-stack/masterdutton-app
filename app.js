@@ -10618,11 +10618,26 @@ if (window.saveScore) {
 }
 		return h;
 	}
+	if (!window.QT_STARTED) {
+  window.QT_STARTED = true;
+  window.QT_LEFT = 90;
+  window.QT_INTERVAL = setInterval(function() {
+    window.QT_LEFT--;
+    var el = document.getElementById('quiz-timer');
+    if (el) el.textContent = window.QT_LEFT + 's';
+    if (window.QT_LEFT <= 0) {
+      clearInterval(window.QT_INTERVAL);
+      window.QT_STARTED = false;
+      QF = true;
+      render();
+    }
+  }, 1000);
+}
 	var lv = QLEV[QL],
 		q = lv.qs[QI],
 		pct2 = (QA / 30) * 100;
 	var h =
-		'<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
+		'<div id="quiz-timer" style="text-align:center;font-size:28px;font-weight:700;color:var(--gold);margin:8px 0">' + (window.QT_LEFT || 90) + 's</div>' + 		'<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
 		e(lv.label) +
 		"</button> <span>Question " +
 		Math.min(QA + 1, 30) +
