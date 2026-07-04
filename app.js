@@ -11696,18 +11696,6 @@ function tReq(i) {
 
 	box.scrollTop = top;
 }
-var Q_TIMER = null;
-var Q_SECONDS = 0;
-
-function shuffleQs(arr) {
-	var a = arr.slice();
-	for (var i = a.length - 1; i > 0; i--) {
-		var j = Math.floor(Math.random() * (i + 1));
-		var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
-	}
-	return a.slice(0, 30);
-}
-
 function sQL(i) {
 	QL = i;
 	QI = 0;
@@ -11716,35 +11704,20 @@ function sQL(i) {
 	QA = 0;
 	QF = false;
 	QH = [];
-	Q_SECONDS = 0;
-	if (Q_TIMER) clearInterval(Q_TIMER);
-	Q_TIMER = setInterval(function () {
-		Q_SECONDS++;
-		var el = document.getElementById("q-timer");
-		if (el) el.textContent = qFmtTime(Q_SECONDS);
-	}, 1000);
-	QLEV[QL]._qs = shuffleQs(QLEV[QL].qs);
 	render();
-}
-function qFmtTime(s) {
-	var m = Math.floor(s / 60);
-	var sec = s % 60;
-	return (m < 10 ? "0" : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
 }
 function bkQ() {
 	QL = null;
-	if (Q_TIMER) { clearInterval(Q_TIMER); Q_TIMER = null; }
 	render();
 }
 function rsQ() {
-	if (Q_TIMER) { clearInterval(Q_TIMER); Q_TIMER = null; }
 	sQL(QL);
 }
 function aQ(i) {
 	if (QS !== null) return;
 	QS = i;
 	var lv = QLEV[QL],
-		q = lv._qs[QI],
+		q = lv.qs[QI],
 		ok = i === q.a;
 	if (ok) QSC++;
 	QA++;
@@ -11753,7 +11726,6 @@ function aQ(i) {
 	setTimeout(function () {
 		if (QA >= 30) {
 			QF = true;
-			if (Q_TIMER) { clearInterval(Q_TIMER); Q_TIMER = null; }
 			render();
 		} else {
 			QI++;
@@ -11762,6 +11734,7 @@ function aQ(i) {
 		}
 	}, 1200);
 }
+
 var PWD = "tkd399";
 function checkPwd() {
 	var val = document.getElementById("pwd-input").value.trim().toLowerCase();
