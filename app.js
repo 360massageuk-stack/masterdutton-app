@@ -11349,13 +11349,13 @@ if (window.saveScore) {
 	}
 	var lv = QLEV[QL],
 		q = lv.qs[QI],
-		pct2 = (QA / 20) * 100;
+		pct2 = (QA / 30) * 100;
 	var h =
 		'<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
 		e(lv.label) +
 		"</button> <span>Question " +
-		Math.min(QA + 1, 20) +
-		' of 20</span><span class="text-gold-bold"><img src="./images/star.svg" alt="Star Icon"> Score: ' +
+		Math.min(QA + 1, 30) +
+		' of 30</span><span class="text-gold-bold"><img src="./images/star.svg" alt="Star Icon"> Score: ' +
 		QSC +
 		'</span></div><div class="progress-bar-sm-bg"><div class="progress-bar-inner" style="width:' +
 		pct2 +
@@ -12453,7 +12453,7 @@ function aQ(i) {
 	QH.push({ q: q.q, c: ok, ans: q.o[q.a] });
 	render();
 	setTimeout(function () {
-		if (QA >= 20) {
+		if (QA >= 30) {
 			QF = true;
 			render();
 		} else {
