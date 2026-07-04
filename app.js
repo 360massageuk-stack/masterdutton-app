@@ -10619,7 +10619,7 @@ if (window.saveScore) {
 		return h;
 	}
 	var lv = QLEV[QL],
-		q = lv.qs[QI],
+		q = lv._qslv._qs,
 		pct2 = (QA / 30) * 100;
 	var h =
 		'<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
@@ -10633,6 +10633,7 @@ if (window.saveScore) {
 		"%;height:100%;background:" +
 		lv.color +
 		';border-radius:2px"></div></div>';
+	h += '<div id="q-timer" style="color:var(--gold);font-weight:700;font-size:14px;text-align:right;padding:4px 0 8px">00:00</div>';
 	h +=
 		'<div class="card-box-mb10"><div class="title-md-white-mb14">' +
 		e(q.q) +
@@ -11744,7 +11745,7 @@ function aQ(i) {
 	if (QS !== null) return;
 	QS = i;
 	var lv = QLEV[QL],
-		q = lv._qs[QI],
+		q = lv._qslv._qs,
 		ok = i === q.a;
 	if (ok) QSC++;
 	QA++;
