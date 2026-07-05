@@ -10620,21 +10620,6 @@ if (window.saveScore) {
 }
 		return h;
 	}
-	if (!window.QT_STARTED) {
-  window.QT_STARTED = true;
-  window.QT_LEFT = 90;
-  window.QT_INTERVAL = setInterval(function() {
-    window.QT_LEFT--;
-    var el = document.getElementById('quiz-timer');
-    if (el) el.textContent = window.QT_LEFT + 's';
-    if (window.QT_LEFT <= 0) {
-      clearInterval(window.QT_INTERVAL);
-      window.QT_STARTED = false;
-      QF = true;
-      render();
-    }
-  }, 1000);
-}
 	var lv = QLEV[QL],
 		q = lv.qs[QI],
 		pct2 = (QA / 30) * 100;
@@ -11748,6 +11733,7 @@ function stopQuizTimer() {
 	}
 }
 function bkQ() {
+	stopQuizTimer();
 	QL = null;
 	render();
 }
@@ -11765,16 +11751,16 @@ function aQ(i) {
 	QH.push({ q: q.q, c: ok, ans: q.o[q.a] });
 	render();
 	setTimeout(function () {
-		if (QA >= 30) {
-			QF = true;
-			render();
-		} else {
-			QI++;
-			QS = null;
-			render();
-		}
-	}, 1200);
-}
+	if (QA >= 30) {
+		stopQuizTimer();
+		QF = true;
+		render();
+	} else {
+		QI++;
+		QS = null;
+		render();
+	}
+}, 1200);
 
 var PWD = "tkd399";
 function checkPwd() {
