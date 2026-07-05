@@ -257,12 +257,14 @@ var CT = "home",
 	QSC = 0,
 	QA = 0,
 	QF = false,
-	QH = [],
-	GS = "",
-	GO = "Commands",
-	TC = "menu",
-	TL = "All",
-	TO = null;
+QH = [],
+QT_LEFT = 90,
+QT_INTERVAL = null,
+GS = "",
+GO = "Commands",
+TC = "menu",
+TL = "All",
+TO = null;
 
 var PATS = [
 	{
@@ -10637,7 +10639,7 @@ if (window.saveScore) {
 		q = lv.qs[QI],
 		pct2 = (QA / 30) * 100;
 	var h =
-		'<div id="quiz-timer" style="text-align:center;font-size:28px;font-weight:700;color:var(--gold);margin:8px 0">' + (window.QT_LEFT || 90) + 's</div>' + 		'<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
+		'<div id="quiz-timer" style="text-align:center;font-size:28px;font-weight:700;color:var(--gold);margin:8px 0">' + QT_LEFT + 's</div>' + '<div class="flex-between-sm-muted"><button class="bk new" onclick="bkQ()"><img class="back-icon" src="./images/chevron.svg" alt="Back Icon"> Back to ' +
 		e(lv.label) +
 		"</button> <span>Question " +
 		Math.min(QA + 1, 30) +
@@ -11719,7 +11721,31 @@ function sQL(i) {
 	QA = 0;
 	QF = false;
 	QH = [];
+
+	startQuizTimer();
+
 	render();
+}
+function startQuizTimer() {
+	stopQuizTimer();
+	QT_LEFT = 90;
+	QT_INTERVAL = setInterval(function () {
+		QT_LEFT--;
+		var el = document.getElementById("quiz-timer");
+		if (el) el.textContent = QT_LEFT + "s";
+		if (QT_LEFT <= 0) {
+			stopQuizTimer();
+			QF = true;
+			render();
+		}
+	}, 1000);
+}
+
+function stopQuizTimer() {
+	if (QT_INTERVAL) {
+		clearInterval(QT_INTERVAL);
+		QT_INTERVAL = null;
+	}
 }
 function bkQ() {
 	QL = null;
