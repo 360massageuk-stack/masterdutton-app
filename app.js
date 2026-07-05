@@ -11760,7 +11760,8 @@ function aQ(i) {
 		QS = null;
 		render();
 	}
-}, 1200); }
+}, 1200);
+}
 
 var PWD = "tkd399";
 function checkPwd() {
