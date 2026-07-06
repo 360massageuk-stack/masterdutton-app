@@ -339,7 +339,7 @@ var PATS = [
 		belt: "5th Kup (Green/Blue)",
 		diff: "Intermediate",
 		meaning: "Joong-Gun is named after the patriot Ahn Joong-Gun, who assassinated Hirobumi Ito, the first Japanese Governor-General of Korea, known as the man who played the leading part in the Korea-Japan merger. The 32 movements represent Mr. Ahn's age when he was executed at Lui-Shung Prison in 1910.",
-		video: "https://www.youtube.com/embed/C0wbvHc_odU",
+		video: "https://www.youtube.com/embed/sGUk019DJZA",
 	},
 	{
 		id: 7,
