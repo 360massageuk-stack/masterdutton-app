@@ -11713,7 +11713,7 @@ function sQL(i) {
 }
 function startQuizTimer() {
 	stopQuizTimer();
-	QT_LEFT = 120;
+	QT_LEFT = 180;
 	QT_INTERVAL = setInterval(function () {
 		QT_LEFT--;
 		var el = document.getElementById("quiz-timer");
