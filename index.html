@@ -1,1117 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+  <link rel="manifest" href="manifest.json">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TKD APP – Train Anywhere. Learn Anytime.</title>
-  <meta name="description" content="The complete ITF Taekwon-Do training companion for patterns, theory, terminology, sparring and grading preparation. By Master Dutton, 7th Dan." />
-  <meta property="og:title" content="TKD APP – Train Anywhere. Learn Anytime." />
-  <meta property="og:description" content="The complete ITF Taekwon-Do training companion. Patterns, grading, theory and more." />
-  <meta property="og:url" content="https://tkdapp.uk" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+  <title>Master Dutton · ITF Taekwon-Do</title>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ─── TOKENS ─────────────────────────────────────── */
-    :root {
-      --black:       #0A0A0A;
-      --card-bg:     #111111;
-      --navy:        #0D1B3E;
-      --gold:        #C9A84C;
-      --gold-light:  #E2C06A;
-      --gold-dim:    rgba(201,168,76,0.15);
-      --white:       #FFFFFF;
-      --grey:        #A0A0A0;
-      --border:      rgba(201,168,76,0.2);
-
-      --font-display: 'Bebas Neue', sans-serif;
-      --font-body:    'Inter', sans-serif;
-    }
-
-    /* ─── RESET ──────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-
-    /* ─── UTILITY ────────────────────────────────────── */
-    .gold { color: var(--gold); }
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .section-label {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      border-radius: 4px;
-      padding: 15px 32px;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-      text-decoration: none;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .btn-gold {
-      background: var(--gold);
-      color: var(--black);
-    }
-    .btn-gold:hover {
-      background: var(--gold-light);
-      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(255,255,255,0.3);
-    }
-    .btn-outline:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* ─── NAV ────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .nav-brand {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .nav-brand .brand-main {
-      font-family: var(--font-display);
-      font-size: 22px;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-    }
-    .nav-brand .brand-sub {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-top: 1px;
-    }
-    .nav-cta {
-      font-size: 13px;
-      padding: 10px 22px;
-    }
-
-    /* ─── HERO ───────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Gold stripe — the signature element */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      left: 50%;
-      width: 1px;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        var(--gold) 20%,
-        var(--gold) 80%,
-        transparent 100%
-      );
-      opacity: 0.18;
-      pointer-events: none;
-    }
-
-    /* Radial glow behind hero content */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -10%; left: -20%;
-      width: 70%; height: 80%;
-      background: radial-gradient(ellipse, rgba(13,27,62,0.6) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      width: 100%;
-    }
-
-    .hero-copy {}
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-    .hero-eyebrow-line {
-      width: 36px;
-      height: 1.5px;
-      background: var(--gold);
-    }
-    .hero-eyebrow-text {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(56px, 7vw, 92px);
-      line-height: 0.95;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .hero h1 em {
-      font-style: normal;
-      color: var(--gold);
-      display: block;
-    }
-
-    .hero-sub {
-      font-size: clamp(15px, 1.8vw, 18px);
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.7;
-      max-width: 480px;
-      margin-bottom: 40px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .hero-pricing {
-      font-size: 13px;
-      color: var(--grey);
-    }
-    .hero-pricing span {
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    /* Phone mockup */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-    .phone-glow {
-      position: absolute;
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .phone-mockup {
-      position: relative;
-      width: 260px;
-      background: #181818;
-      border-radius: 36px;
-      border: 1.5px solid rgba(201,168,76,0.35);
-      box-shadow:
-        0 0 0 8px rgba(201,168,76,0.04),
-        0 32px 80px rgba(0,0,0,0.7),
-        inset 0 1px 0 rgba(255,255,255,0.06);
-      overflow: hidden;
-    }
-    .phone-notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 28px;
-      background: #0A0A0A;
-      border-radius: 0 0 18px 18px;
-      z-index: 2;
-    }
-    .phone-screen {
-      padding: 44px 16px 24px;
-      min-height: 520px;
-      background: #0D1B3E;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
-    /* ── PLACEHOLDER — swap this for a real screenshot ── */
-    .screen-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding: 16px;
-    }
-    .screen-placeholder-icon {
-      width: 56px;
-      height: 56px;
-      border: 1.5px dashed rgba(201,168,76,0.5);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .screen-placeholder-icon svg {
-      width: 24px;
-      height: 24px;
-      opacity: 0.5;
-      fill: var(--gold);
-    }
-    .screen-placeholder-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(201,168,76,0.5);
-      line-height: 1.5;
-    }
-    .screen-mini-ui {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    .screen-mini-row {
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.12);
-      border-radius: 8px;
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .screen-mini-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: 0.7;
-      flex-shrink: 0;
-    }
-    .screen-mini-text {
-      font-size: 11px;
-      color: rgba(255,255,255,0.7);
-      font-weight: 500;
-    }
-    .phone-home-bar {
-      height: 28px;
-      background: #181818;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .phone-home-indicator {
-      width: 80px; height: 4px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 2px;
-    }
-
-    /* ─── CREDIBILITY BAND ───────────────────────────── */
-    .cred-band {
-      background: var(--navy);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 28px 24px;
-    }
-    .cred-inner {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      justify-content: center;
-      text-align: center;
-      flex-wrap: wrap;
-    }
-    .cred-badge {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--gold-dim);
-      border: 1.5px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .cred-badge svg {
-      width: 20px; height: 20px;
-      fill: var(--gold);
-    }
-    .cred-text {
-      font-size: 15px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.5;
-    }
-    .cred-text strong {
-      color: var(--gold);
-    }
-    .cred-divider {
-      width: 1px; height: 36px;
-      background: var(--border);
-    }
-    .cred-stat {
-      text-align: center;
-    }
-    .cred-stat-number {
-      font-family: var(--font-display);
-      font-size: 28px;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .cred-stat-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-top: 2px;
-    }
-
-    /* ─── FEATURES ───────────────────────────────────── */
-    .features {
-      padding: 100px 24px;
-    }
-    .features-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .features-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 5vw, 56px);
-      letter-spacing: 0.05em;
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
-    .features-header p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.6);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 24px;
-      transition: border-color 0.2s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .feature-card:hover {
-      border-color: rgba(201,168,76,0.4);
-      transform: translateY(-3px);
-    }
-    .feature-card:hover::before { opacity: 1; }
-
-    .feature-icon {
-      width: 44px; height: 44px;
-      background: var(--gold-dim);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-    .feature-icon svg {
-      width: 22px; height: 22px;
-      fill: var(--gold);
-    }
-    .feature-card h3 {
-      font-family: var(--font-display);
-      font-size: 20px;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
-      color: var(--white);
-    }
-    .feature-card p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.65;
-    }
-
-    /* ─── FOR EVERYONE ───────────────────────────────── */
-    .for-everyone {
-      padding: 80px 24px;
-      background: var(--navy);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .for-everyone-header {
-      text-align: center;
-      margin-bottom: 52px;
-    }
-    .for-everyone-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 4.5vw, 50px);
-      letter-spacing: 0.05em;
-    }
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .audience-card {
-      text-align: center;
-      padding: 32px 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .audience-card .audience-icon {
-      font-size: 32px;
-      margin-bottom: 14px;
-      display: block;
-    }
-    .audience-card h3 {
-      font-family: var(--font-display);
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    .audience-card p {
-      font-size: 13px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.6;
-    }
-
-    /* ─── PRICING ────────────────────────────────────── */
-    .pricing {
-      padding: 100px 24px;
-      text-align: center;
-    }
-    .pricing h2 {
-      font-family: var(--font-display);
-      font-size: clamp(36px, 5vw, 54px);
-      letter-spacing: 0.05em;
-      margin-bottom: 16px;
-    }
-    .pricing-intro {
-      font-size: 16px;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 52px;
-      max-width: 440px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .pricing-card {
-      max-width: 420px;
-      margin: 0 auto;
-      background: var(--card-bg);
-      border: 1.5px solid var(--gold);
-      border-radius: 16px;
-      padding: 48px 40px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(201,168,76,0.08);
-    }
-    .pricing-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--gold);
-      color: var(--black);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 5px 20px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-    .pricing-trial {
-      font-family: var(--font-display);
-      font-size: 42px;
-      letter-spacing: 0.05em;
-      color: var(--gold);
-      margin-bottom: 4px;
-    }
-    .pricing-trial-label {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 20px;
-    }
-    .pricing-divider {
-      width: 40px; height: 1px;
-      background: var(--border);
-      margin: 20px auto;
-    }
-    .pricing-amount {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-    .pricing-amount span {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--grey);
-    }
-    .pricing-note {
-      font-size: 13px;
-      color: var(--grey);
-      margin-bottom: 32px;
-    }
-    .pricing-features-list {
-      list-style: none;
-      margin-bottom: 36px;
-      text-align: left;
-    }
-    .pricing-features-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.75);
-      padding: 6px 0;
-    }
-    .pricing-features-list li::before {
-      content: '';
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: var(--gold-dim);
-      border: 1px solid var(--gold);
-      flex-shrink: 0;
-      margin-top: 2px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23C9A84C'%3E%3Cpath d='M6.5 11.5L3 8l1-1 2.5 2.5 5-5 1 1z'/%3E%3C/svg%3E");
-      background-size: cover;
-    }
-    .pricing-card .btn {
-      width: 100%;
-      font-size: 15px;
-      padding: 16px;
-    }
-    .pricing-cancel {
-      font-size: 12px;
-      color: var(--grey);
-      margin-top: 14px;
-    }
-
-    /* ─── CTA BANNER ─────────────────────────────────── */
-    .cta-banner {
-      padding: 100px 24px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-banner::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 600px; height: 300px;
-      background: radial-gradient(ellipse, rgba(13,27,62,0.7) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-banner h2 {
-      font-family: var(--font-display);
-      font-size: clamp(38px, 6vw, 70px);
-      letter-spacing: 0.04em;
-      line-height: 1.0;
-      margin-bottom: 20px;
-      position: relative;
-    }
-    .cta-banner p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 40px;
-      position: relative;
-    }
-    .cta-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
-      position: relative;
-    }
-
-    /* ─── FOOTER ─────────────────────────────────────── */
-    footer {
-      background: #080808;
-      border-top: 1px solid rgba(201,168,76,0.1);
-      padding: 40px 24px;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .footer-brand .brand-main {
-      font-family: var(--font-display);
-      font-size: 20px;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-    }
-    .footer-brand .brand-sub {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-top: 2px;
-    }
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .footer-links a {
-      font-size: 13px;
-      color: var(--grey);
-      transition: color 0.15s;
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-copy {
-      font-size: 12px;
-      color: rgba(160,160,160,0.5);
-      width: 100%;
-      margin-top: 12px;
-    }
-
-
-    /* ─── APP PREVIEW GALLERY ───────────────────────── */
-    .app-preview { padding: 100px 24px; background: var(--navy); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .app-preview-header { text-align: center; margin-bottom: 54px; }
-    .app-preview-header h2 { font-family: var(--font-display); font-size: clamp(36px,5vw,56px); letter-spacing: .05em; line-height: 1.05; margin-bottom: 16px; }
-    .app-preview-header p { max-width: 620px; margin: 0 auto; color: rgba(255,255,255,.65); line-height: 1.7; }
-    .preview-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 18px; align-items: start; }
-    .preview-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 12px; box-shadow: 0 18px 45px rgba(0,0,0,.35); }
-    .preview-card img { width: 100%; aspect-ratio: 9/19.5; object-fit: cover; border-radius: 10px; border: 1px solid rgba(201,168,76,.16); }
-    .preview-card h3 { font-family: var(--font-display); font-size: 18px; letter-spacing: .06em; color: var(--gold); margin: 16px 4px 6px; }
-    .preview-card p { font-size: 13px; line-height: 1.55; color: rgba(255,255,255,.58); margin: 0 4px 8px; }
-    @media (max-width:980px){ .preview-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
-    @media (max-width:640px){ .preview-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;} .preview-card{padding:8px;} .preview-card h3{font-size:16px;} .preview-card p{font-size:12px;} }
-
-    /* ─── RESPONSIVE ─────────────────────────────────── */
-    @media (max-width: 768px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-      .hero-visual { order: -1; }
-      .phone-mockup { width: 220px; }
-      .phone-screen { min-height: 420px; }
-      .hero-buttons { flex-direction: column; align-items: flex-start; }
-      .hero-buttons .btn { width: 100%; text-align: center; }
-
-      .cred-divider { display: none; }
-      .cred-inner { flex-direction: column; gap: 12px; }
-
-      .pricing-card { padding: 48px 24px 32px; }
-
-      .footer-inner { flex-direction: column; align-items: flex-start; }
-      .footer-links { gap: 16px; }
-    }
-
-    /* ─── REDUCED MOTION ─────────────────────────────── */
-    @media (prefers-reduced-motion: reduce) {
-      .feature-card, .btn { transition: none; }
-    }
-  </style>
 </head>
+
 <body>
+  <div id="app">
+    <div id="pwd-screen" class="pwd-screen">
+      <div class="pwd-screen-icon"><img src="./images/karate-icon.png" alt="Icon" class="kt-icon"></div>
 
-  <!-- ─── NAV ──────────────────────────────────────── -->
-  <nav>
-    <div class="nav-brand">
-      <span class="brand-main">TKD APP</span>
-      <span class="brand-sub">By Master Dutton</span>
-    </div>
-    <a href="https://elitetkdscotland.wixsite.com/elitetkdnew/pricing-plans/plans-pricing" class="btn btn-gold nav-cta">
-      Start Free Trial
-    </a>
-  </nav>
+      <div class="pwd-screen-title">
+        TAEKWON<span class="pwd-screen-title-highlight">-DO</span>
+      </div>
 
+      <div class="pwd-screen-subtitle">MASTER DUTTON</div>
 
-  <!-- ─── HERO ──────────────────────────────────────── -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-inner">
+      <div class="pwd-screen-divider"></div>
 
-        <div class="hero-copy">
-          <div class="hero-eyebrow">
-            <span class="hero-eyebrow-line"></span>
-            <span class="hero-eyebrow-text">ITF Taekwon-Do Training App</span>
-          </div>
+      <div class="pwd-screen-members">Members Only</div>
 
-          <h1>
-            Train<br>Anywhere.<br>
-            <em>Learn Anytime.</em>
-          </h1>
+      <div class="pwd-screen-input-wrap">
+        <input id="pwd-input" type="password" placeholder="Enter access code" class="pwd-screen-input" />
 
-          <p class="hero-sub">
-            The complete ITF Taekwon-Do training companion for patterns, theory, terminology, sparring and grading preparation.
-          </p>
+        <button id="pwd-screen-toggle" class="pwd-screen-toggle">
+          &#128065;
+        </button>
+      </div>
 
-          <div class="hero-buttons">
-            <a href="https://elitetkdscotland.wixsite.com/elitetkdnew/pricing-plans/plans-pricing" class="btn btn-gold">
-              Start 7-Day Free Trial
-            </a>
-            <a href="https://app.elitetkd.uk" class="btn btn-outline">
-              Open The App
-            </a>
-          </div>
+      <div id="pwd-err" class="pwd-screen-error"></div>
 
-          <p class="hero-pricing">
-            <span>£3.99/month</span> after your free trial. Cancel anytime.
-          </p>
-        </div>
+      <button id="pwd-screen-btn" class="pwd-screen-btn">
+        ENTER
+      </button>
 
-        <!-- Phone mockup -->
-        <div class="hero-visual">
-          <div class="phone-glow"></div>
-          <div class="phone-mockup">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <!-- ╔══════════════════════════════════╗
-                   ║  REPLACE THIS BLOCK WITH YOUR    ║
-                   ║  APP SCREENSHOT                  ║
-                   ║                                  ║
-                   ║  Recommended: 520×920px image    ║
-                   ║  Add as: <img src="screenshot.png" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;" alt="TKD App Screen">
-                   ╚══════════════════════════════════╝ -->
- <img src="assets/app-patterns.jpg" alt="TKD App patterns library" style="width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;">
-            <div class="phone-home-bar">
-              <div class="phone-home-indicator"></div>
-            </div>
-          </div>
-        </div>
+      <div class="pwd-screen-help">
+        Access code provided by your instructor.
+      </div>
 
+      <div class="pwd-screen-reset-wrap">
+        <span id="pwd-screen-reset" class="pwd-screen-reset">
+          reset
+        </span>
       </div>
     </div>
-  </section>
+    <div class="spl" id="spl">
+      <canvas id="spl-canvas"></canvas>
 
+      <div class="spl-flash"></div>
 
-  <!-- ─── CREDIBILITY ───────────────────────────────── -->
-  <div class="cred-band">
-    <div class="container">
-      <div class="cred-inner">
-        <div class="cred-badge">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
+      <div class="spl-shockwave"></div>
+      <div class="spl-shockwave"></div>
+      <div class="spl-shockwave"></div>
+
+      <div class="spl-content">
+        <div class="spl-crest"><img src="./images/karate-icon.png" alt="Icon" class="kt-icon"></div>
+
+        <div class="spl-word">
+          <span class="spl-letter">T</span>
+          <span class="spl-letter">A</span>
+          <span class="spl-letter">E</span>
+          <span class="spl-letter">K</span>
+          <span class="spl-letter">W</span>
+          <span class="spl-letter">O</span>
+          <span class="spl-letter">N</span>
+
+          <span class="spl-dash">-</span>
+
+          <span class="spl-letter">D</span>
+          <span class="spl-letter">O</span>
         </div>
-        <p class="cred-text">
-          Built by <strong>Master Dutton, 7th Dan</strong><br>with over 30 years of Taekwon-Do experience.
-        </p>
-        <div class="cred-divider"></div>
-        <div class="cred-stat">
-          <div class="cred-stat-number">24</div>
-          <div class="cred-stat-label">ITF Patterns</div>
+
+        <div class="spl-line"></div>
+
+        <div class="spl-name">MASTER DUTTON</div>
+
+        <div class="spl-sub2">
+          ITF &middot; Scotland
         </div>
-        <div class="cred-divider"></div>
-        <div class="cred-stat">
-          <div class="cred-stat-number">7th</div>
-          <div class="cred-stat-label">Dan Black Belt</div>
+      </div>
+
+      <div class="spl-bar-wrap">
+        <div class="spl-bar-track">
+          <div class="spl-bar-fill"></div>
         </div>
-        <div class="cred-divider"></div>
-        <div class="cred-stat">
-          <div class="cred-stat-number">30+</div>
-          <div class="cred-stat-label">Years Experience</div>
+
+        <div class="spl-bar-label">Loading</div>
+
+        <div id="spl-tap-hint" class="spl-tap-hint">
+          Tap for sound
         </div>
       </div>
     </div>
+
+    <div class="belt-strip" id="belt-strip"></div>
+
+    <div class="sbar">
+      <span id="clock"></span>
+      <span id="datebar"></span>
+    </div>
+
+    <div class="hdr">
+      <div class="logo">
+        <a href="/">TAEKWON<span>-DO</span></a>
+      </div>
+
+      <div class="badge badge-clickable" id="belt-badge">
+        Red Belt &#9662;
+      </div>
+    </div>
+
+    <div class="content" id="content"></div>
+
+    <div class="bnav">
+      <button class="tb active-menu" id="t-home">
+        <img src="./images/home-light.svg" alt="Home" class="icon-lt">
+        <img src="./images/home-active.svg" alt="Home" class="icon-active">
+        <span class="lb">Home</span>
+      </button>
+      <!-- 
+      <button class="tb" id="t-patterns">
+        <img src="./images/patterns-light.svg" alt="Patterns" class="icon-lt">
+        <img src="./images/patterns-active.svg" alt="Patterns" class="icon-active">
+        <span class="lb">Patterns</span>
+      </button> -->
+
+      <!-- <button class="tb" id="t-techniques">
+        <img src="./images/skills-light.svg" alt="Skills" class="icon-lt">
+        <img src="./images/skills-active.svg" alt="Skills" class="icon-active">
+        <span class="lb">Skills</span>
+      </button> -->
+
+      <!-- <button class="tb" id="t-belt">
+        <img src="./images/belt-light.svg" alt="Belt" class="icon-lt">
+        <img src="./images/belt-active.svg" alt="Belt" class="icon-active">
+        <span class="lb">Belt</span>
+      </button> -->
+
+      <button class="tb" id="t-quiz">
+        <img src="./images/quiz-light.svg" alt="Quiz" class="icon-lt">
+        <img src="./images/quiz-active.svg" alt="Quiz" class="icon-active">
+        <span class="lb">Quiz</span>
+      </button>
+
+      <button class="tb" id="t-competition">
+        <img src="./images/compete-light.svg" alt="Compete" class="icon-lt">
+        <img src="./images/compete-active.svg" alt="Compete" class="icon-active">
+        <span class="lb">Compete</span>
+      </button>
+
+      <button class="tb" id="t-stretch">
+        <img src="./images/stretch-light1.svg" alt="Stretch" class="icon-lt">
+        <img src="./images/stretch-active1.svg" alt="Stretch" class="icon-active">
+        <span class="lb">Stretch</span>
+      </button>
+    </div>
+    <!--  -->
+
   </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyChhBlJoJfmX3cL6t4f9bsqiAt-btR9XZU",
+    authDomain: "master-dutton-app.firebaseapp.com",
+    projectId: "master-dutton-app",
+    storageBucket: "master-dutton-app.firebasestorage.app",
+    messagingSenderId: "1030203894648",
+    appId: "1:1030203894648:web:760a227cc70a7bc42c768d"
+  };
 
-  <!-- ─── INSIDE THE APP ─────────────────────────────── -->
-  <section class="app-preview">
-    <div class="container">
-      <div class="app-preview-header">
-        <span class="section-label">Inside The App</span>
-        <h2>See Your Training<br><span class="gold">Come To Life</span></h2>
-        <p>Real screens from the TKD App — built to help students learn patterns, prepare for gradings, test their knowledge and train between classes.</p>
-      </div>
-      <div class="preview-grid">
-        <article class="preview-card"><img src="assets/app-patterns.jpg" alt="ITF Taekwon-Do patterns library"><h3>Patterns Library</h3><p>Browse patterns by grade, movement count and progression level.</p></article>
-        <article class="preview-card"><img src="assets/app-chonji.jpg" alt="Chon-Ji pattern lesson and video"><h3>Pattern Lessons</h3><p>Meanings, movement counts, step-by-step guidance and video support.</p></article>
-        <article class="preview-card"><img src="assets/app-quiz.jpg" alt="Taekwon-Do belt level quiz selection"><h3>Belt-Level Quizzes</h3><p>Thirty-question challenges covering colour belt, black belt and instructor theory.</p></article>
-        <article class="preview-card"><img src="assets/app-skills.jpg" alt="Taekwon-Do skills and technique library"><h3>Skills & Techniques</h3><p>Kicks, blocks, stances, terminology and technical reference in one place.</p></article>
-        <article class="preview-card"><img src="assets/app-workouts.jpg" alt="Taekwon-Do workout generator"><h3>Training Workouts</h3><p>Fresh bodyweight sessions for beginner, intermediate and advanced students.</p></article>
-      </div>
-    </div>
-  </section>
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-  <!-- ─── FEATURES ──────────────────────────────────── -->
-  <section class="features">
-    <div class="container">
-      <div class="features-header">
-        <span class="section-label">What's Inside</span>
-        <h2>Everything You Need<br>to <span class="gold">Train Properly</span></h2>
-        <p>From white belt to black belt — every resource, guide and tool in one place, built by someone who has lived Taekwon-Do for decades.</p>
-      </div>
+  window.saveScore = async function(name, score, belt) {
+    await addDoc(collection(db, "quiz_scores"), {
+      name, score, belt, date: new Date().toISOString()
+    });
+  };
 
-      <div class="features-grid">
+  window.getLeaderboard = async function() {
+    const q = query(collection(db, "quiz_scores"), orderBy("score", "desc"), limit(20));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => d.data());
+  };
+</script>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
-            </svg>
-          </div>
-          <h3>Patterns Library</h3>
-          <p>All 24 ITF patterns from Chon-Ji to Tong-Il. Step-by-step breakdowns, movement counts and directional guides.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
-            </svg>
-          </div>
-          <h3>Theory &amp; Grading Guides</h3>
-          <p>Comprehensive theory content for every belt level. Know what you need before you step in front of the examiners.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/>
-            </svg>
-          </div>
-          <h3>Korean Terminology</h3>
-          <p>Full glossary of Korean terms used in ITF Taekwon-Do. Learn the language of the art, not just the movements.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-            </svg>
-          </div>
-          <h3>Quizzes</h3>
-          <p>Test your knowledge with interactive quizzes. Build confidence before every grading and keep your theory sharp.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/>
-            </svg>
-          </div>
-          <h3>Flexibility &amp; Stretching</h3>
-          <p>Guided flexibility work built for martial artists. Improve your kicks, reduce injury risk and train smarter.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.5 5H11L7 9l4 4-3.5 3.5L9 18l3.5-3.5 3.5 3.5 1.5-1.5L14 13l4-4-2.5-4zM6 3H4v18h2V3z"/>
-            </svg>
-          </div>
-          <h3>Sparring Support</h3>
-          <p>Tactics, rules and footwork principles for ITF sparring. Build your game with structured guidance.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
-            </svg>
-          </div>
-          <h3>Competition Preparation</h3>
-          <p>Everything you need to prepare for patterns and sparring competition — from rule knowledge to performance mindset.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
-            </svg>
-          </div>
-          <h3>Tools for Instructors</h3>
-          <p>Class planning, grading checklists and reference material. A resource as useful for teaching as it is for training.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─── FOR EVERYONE ──────────────────────────────── -->
-  <section class="for-everyone">
-    <div class="container">
-      <div class="for-everyone-header">
-        <span class="section-label">Built for the whole dojang</span>
-        <h2>One App. <span class="gold">Every Level.</span></h2>
-      </div>
-      <div class="audience-grid">
-        <div class="audience-card">
-          <span class="audience-icon">🥋</span>
-          <h3>Students</h3>
-          <p>Track your progress, learn at your own pace and arrive at every class more prepared.</p>
-        </div>
-        <div class="audience-card">
-          <span class="audience-icon">👪</span>
-          <h3>Parents</h3>
-          <p>Understand what your child is learning and support their training at home.</p>
-        </div>
-        <div class="audience-card">
-          <span class="audience-icon">🏅</span>
-          <h3>Competitors</h3>
-          <p>Sharpen your patterns, prepare your theory and build the mental edge for competition day.</p>
-        </div>
-        <div class="audience-card">
-          <span class="audience-icon">🎓</span>
-          <h3>Instructors</h3>
-          <p>A trusted reference and class-planning resource grounded in authentic ITF knowledge.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─── PRICING ───────────────────────────────────── -->
-  <section class="pricing">
-    <div class="container">
-      <span class="section-label">Simple Pricing</span>
-      <h2>Try It Free. <span class="gold">Stay Because It Works.</span></h2>
-      <p class="pricing-intro">Full access from day one. No gimmicks, no locked content.</p>
-
-      <div class="pricing-card">
-        <div class="pricing-badge">Most Popular</div>
-        <div class="pricing-trial">FREE</div>
-        <div class="pricing-trial-label">7-Day Trial</div>
-        <div class="pricing-divider"></div>
-        <div class="pricing-amount">£3.99 <span>/ month</span></div>
-        <p class="pricing-note">after your free trial</p>
-
-        <ul class="pricing-features-list">
-          <li>All 24 ITF patterns with step-by-step guides</li>
-          <li>Full Korean terminology glossary</li>
-          <li>Theory and grading preparation for every belt</li>
-          <li>Interactive quizzes and self-testing</li>
-          <li>Flexibility, stretching and fitness content</li>
-          <li>Sparring support and competition prep</li>
-          <li>Instructor tools and class reference</li>
-        </ul>
-
-        <a href="https://elitetkdscotland.wixsite.com/elitetkdnew/pricing-plans/plans-pricing" class="btn btn-gold">
-          Start 7-Day Free Trial
-        </a>
-        <p class="pricing-cancel">Cancel anytime. No commitment.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─── CTA BANNER ────────────────────────────────── -->
-  <section class="cta-banner">
-    <div class="container">
-      <h2>Your Training.<br><span class="gold">Upgraded.</span></h2>
-      <p>Join students and instructors training smarter with TKD APP.</p>
-      <div class="cta-buttons">
-        <a href="https://elitetkdscotland.wixsite.com/elitetkdnew/pricing-plans/plans-pricing" class="btn btn-gold">
-          Start 7-Day Free Trial
-        </a>
-        <a href="https://app.elitetkd.uk" class="btn btn-outline">
-          Open The App
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ─── FOOTER ────────────────────────────────────── -->
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <div class="brand-main">TKD APP</div>
-          <div class="brand-sub">By Master Dutton</div>
-        </div>
-        <div class="footer-links">
-          <a href="https://app.elitetkd.uk">Open App</a>
-          <a href="https://elitetkdscotland.wixsite.com/elitetkdnew/pricing-plans/plans-pricing">Start Free Trial</a>
-          <a href="https://elitetkd.uk">Elite TKD School</a>
-        </div>
-      </div>
-      <p class="footer-copy">© 2026 TKD APP by Master Dutton. All rights reserved. &nbsp;|&nbsp; tkdapp.uk</p>
-    </div>
-  </footer>
-
+  <script src="./app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </body>
+
 </html>
