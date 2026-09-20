@@ -411,7 +411,7 @@ var PATS = [
 		belt: "2nd Dan",
 		diff: "Advanced",
 		meaning: "Choong-Jang is the pseudonym given to General Kim Duk Ryang, who lived during the Yi Dynasty in the 14th century. This pattern ends with a left-hand attack to symbolise the tragedy of his death at the age of 27 in prison before he was able to reach full maturity.",
-		video: "",
+		video: "https://www.youtube.com/embed/lRg4pNW6e5w",
 	},
 	{
 		id: 15,
