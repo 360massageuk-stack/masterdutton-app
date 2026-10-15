@@ -10556,7 +10556,7 @@ function rQuiz() {
 		return h;
 	}
 	if (QF) {
-		var pct = Math.round((QSC / 20) * 100);
+		var pct = Math.round((QSC / 30) * 100);
 		var gr =
 			pct >= 90
 				? "&#129351; Excellent!"
@@ -10578,7 +10578,7 @@ function rQuiz() {
 				: "<img src='./images/book.svg' alt='Book Icon'>") +
 			'</div><div class="score-huge-gold">' +
 			QSC +
-			'/20</div><div class="text-md-mt4">' +
+			'/30</div><div class="text-md-mt4">' +
 			gr +
 			'</div><div class="progress-bar-bg"><div style="width:' +
 			pct +
