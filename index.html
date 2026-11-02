@@ -1,171 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./style.css">
+  <title>Master Dutton · ITF Taekwon-Do</title>
 
-  <title>ITF Taekwon-Do Training App | Train Anywhere. Learn Anytime.</title>
-
-  <meta name="description" content="ITF Taekwon-Do training at your fingertips. Learn patterns, theory, techniques, stretching, competition skills and test yourself with belt-level quizzes.">
-
-  <meta name="theme-color" content="#0a0a0c">
-
-  <link rel="icon" href="./favicon.ico">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, #20232a 0%, #0a0a0c 48%, #050506 100%);
-      color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
-
-    .icon {
-      width: 92px;
-      height: 92px;
-      object-fit: contain;
-      margin-bottom: 25px;
-    }
-
-    .eyebrow {
-      color: #e53935;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 14px;
-    }
-
-    h1 {
-      font-size: clamp(38px, 8vw, 72px);
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 18px;
-    }
-
-    h1 span {
-      color: #e53935;
-    }
-
-    .tagline {
-      font-size: clamp(19px, 4vw, 28px);
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .intro {
-      max-width: 650px;
-      color: #b9bbc2;
-      font-size: 16px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      max-width: 700px;
-      margin-bottom: 36px;
-    }
-
-    .feature {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50px;
-      padding: 10px 17px;
-      color: #e6e6e8;
-      font-size: 14px;
-    }
-
-    .coming {
-      color: #e53935;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .play {
-      display: inline-block;
-      background: #ffffff;
-      color: #080809;
-      text-decoration: none;
-      font-weight: 800;
-      padding: 16px 28px;
-      border-radius: 12px;
-      margin-bottom: 32px;
-    }
-
-    .footer {
-      color: #666970;
-      font-size: 12px;
-    }
-  </style>
 </head>
 
 <body>
+  <div id="app">
+    <div id="pwd-screen" class="pwd-screen">
+      <div class="pwd-screen-icon"><img src="./images/karate-icon.png" alt="Icon" class="kt-icon"></div>
 
-  <main class="page">
+      <div class="pwd-screen-title">
+        TAEKWON<span class="pwd-screen-title-highlight">-DO</span>
+      </div>
 
-    <img
-      class="icon"
-      src="./images/karate-icon.png"
-      alt="ITF Taekwon-Do"
-    >
+      <div class="pwd-screen-subtitle">MASTER DUTTON</div>
 
-    <div class="eyebrow">ITF TAEKWON-DO TRAINING</div>
+      <div class="pwd-screen-divider"></div>
 
-    <h1>TAEKWON<span>-DO</span></h1>
+      <div class="pwd-screen-members">Members Only</div>
 
-    <div class="tagline">
-      Train Anywhere. Learn Anytime.
+      <div class="pwd-screen-input-wrap">
+        <input id="pwd-input" type="password" placeholder="Enter access code" class="pwd-screen-input" />
+
+        <button id="pwd-screen-toggle" class="pwd-screen-toggle">
+          &#128065;
+        </button>
+      </div>
+
+      <div id="pwd-err" class="pwd-screen-error"></div>
+
+      <button id="pwd-screen-btn" class="pwd-screen-btn">
+        ENTER
+      </button>
+
+      <div class="pwd-screen-help">
+        Access code provided by your instructor.
+      </div>
+
+      <div class="pwd-screen-reset-wrap">
+        <span id="pwd-screen-reset" class="pwd-screen-reset">
+          reset
+        </span>
+      </div>
+    </div>
+    <div class="spl" id="spl">
+      <canvas id="spl-canvas"></canvas>
+
+      <div class="spl-flash"></div>
+
+      <div class="spl-shockwave"></div>
+      <div class="spl-shockwave"></div>
+      <div class="spl-shockwave"></div>
+
+      <div class="spl-content">
+        <div class="spl-crest"><img src="./images/karate-icon.png" alt="Icon" class="kt-icon"></div>
+
+        <div class="spl-word">
+          <span class="spl-letter">T</span>
+          <span class="spl-letter">A</span>
+          <span class="spl-letter">E</span>
+          <span class="spl-letter">K</span>
+          <span class="spl-letter">W</span>
+          <span class="spl-letter">O</span>
+          <span class="spl-letter">N</span>
+
+          <span class="spl-dash">-</span>
+
+          <span class="spl-letter">D</span>
+          <span class="spl-letter">O</span>
+        </div>
+
+        <div class="spl-line"></div>
+
+        <div class="spl-name">MASTER DUTTON</div>
+
+        <div class="spl-sub2">
+          ITF &middot; Scotland
+        </div>
+      </div>
+
+      <div class="spl-bar-wrap">
+        <div class="spl-bar-track">
+          <div class="spl-bar-fill"></div>
+        </div>
+
+        <div class="spl-bar-label">Loading</div>
+
+        <div id="spl-tap-hint" class="spl-tap-hint">
+          Tap for sound
+        </div>
+      </div>
     </div>
 
-    <p class="intro">
-      Your ITF Taekwon-Do training companion. Study patterns,
-      improve your theory, test yourself with belt-level quizzes,
-      work on flexibility and develop your skills wherever you train.
-    </p>
+    <div class="belt-strip" id="belt-strip"></div>
 
-    <div class="features">
-      <div class="feature">Patterns</div>
-      <div class="feature">30 Question Quizzes</div>
-      <div class="feature">Theory & Grading</div>
-      <div class="feature">Skills & Techniques</div>
-      <div class="feature">Stretching</div>
-      <div class="feature">Competition</div>
-      <div class="feature">Workouts</div>
+    <div class="sbar">
+      <span id="clock"></span>
+      <span id="datebar"></span>
     </div>
 
-    <div class="coming">COMING SOON</div>
+    <div class="hdr">
+      <div class="logo">
+        <a href="/">TAEKWON<span>-DO</span></a>
+      </div>
 
-    <div class="play">
-      GET IT ON GOOGLE PLAY
+      <div class="badge badge-clickable" id="belt-badge">
+        Red Belt &#9662;
+      </div>
     </div>
 
-    <div class="footer">
-      ITF Taekwon-Do Training App
+    <div class="content" id="content"></div>
+
+    <div class="bnav">
+      <button class="tb active-menu" id="t-home">
+        <img src="./images/home-light.svg" alt="Home" class="icon-lt">
+        <img src="./images/home-active.svg" alt="Home" class="icon-active">
+        <span class="lb">Home</span>
+      </button>
+      <!-- 
+      <button class="tb" id="t-patterns">
+        <img src="./images/patterns-light.svg" alt="Patterns" class="icon-lt">
+        <img src="./images/patterns-active.svg" alt="Patterns" class="icon-active">
+        <span class="lb">Patterns</span>
+      </button> -->
+
+      <!-- <button class="tb" id="t-techniques">
+        <img src="./images/skills-light.svg" alt="Skills" class="icon-lt">
+        <img src="./images/skills-active.svg" alt="Skills" class="icon-active">
+        <span class="lb">Skills</span>
+      </button> -->
+
+      <!-- <button class="tb" id="t-belt">
+        <img src="./images/belt-light.svg" alt="Belt" class="icon-lt">
+        <img src="./images/belt-active.svg" alt="Belt" class="icon-active">
+        <span class="lb">Belt</span>
+      </button> -->
+
+      <button class="tb" id="t-quiz">
+        <img src="./images/quiz-light.svg" alt="Quiz" class="icon-lt">
+        <img src="./images/quiz-active.svg" alt="Quiz" class="icon-active">
+        <span class="lb">Quiz</span>
+      </button>
+
+      <button class="tb" id="t-competition">
+        <img src="./images/compete-light.svg" alt="Compete" class="icon-lt">
+        <img src="./images/compete-active.svg" alt="Compete" class="icon-active">
+        <span class="lb">Compete</span>
+      </button>
+
+      <button class="tb" id="t-stretch">
+        <img src="./images/stretch-light1.svg" alt="Stretch" class="icon-lt">
+        <img src="./images/stretch-active1.svg" alt="Stretch" class="icon-active">
+        <span class="lb">Stretch</span>
+      </button>
     </div>
+    <!--  -->
 
-  </main>
+  </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyChhBlJoJfmX3cL6t4f9bsqiAt-btR9XZU",
+    authDomain: "master-dutton-app.firebaseapp.com",
+    projectId: "master-dutton-app",
+    storageBucket: "master-dutton-app.firebasestorage.app",
+    messagingSenderId: "1030203894648",
+    appId: "1:1030203894648:web:760a227cc70a7bc42c768d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.saveScore = async function(name, score, belt) {
+    await addDoc(collection(db, "quiz_scores"), {
+      name, score, belt, date: new Date().toISOString()
+    });
+  };
+
+  window.getLeaderboard = async function() {
+    const q = query(collection(db, "quiz_scores"), orderBy("score", "desc"), limit(20));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => d.data());
+  };
+</script>
+
+  <script src="./app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </body>
+
 </html>
