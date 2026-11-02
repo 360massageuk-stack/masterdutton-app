@@ -221,25 +221,6 @@ window.addEventListener("load", function () {
 		if (ps) ps.style.display = "none";
 	}
 });
-function checkPwd() {
-	var val = document.getElementById("pwd-input").value.trim().toLowerCase();
-	if (val === PWD) {
-		localStorage.setItem("tkd-auth", PWD);
-		document.getElementById("pwd-screen").style.display = "none";
-	} else {
-		document.getElementById("pwd-err").textContent = "Wrong code — try again";
-		document.getElementById("pwd-input").value = "";
-		document.getElementById("pwd-input").focus();
-	}
-}
-document.addEventListener("keydown", function (e) {
-	if (
-		e.key === "Enter" &&
-		document.getElementById("pwd-screen").style.display !== "none"
-	)
-		checkPwd();
-});
-
 var PH = "./images/dutton-hero.png";
 var TB = "./images/top-banner.png";
 
@@ -9551,10 +9532,10 @@ function rHome() {
 
 	h +=
 		'<div id="home-menu-dropdown" class="home-menu-dropdown">' +
-		'<div onclick="CT=\'timetable\';closeHomeMenu();render()" class="home-menu-item">' +
-		'<span class="home-menu-item-icon"><svg width="427" height="427" viewBox="0 0 427 427" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M362.667 64H341.333V21.3333C341.333 15.6754 339.086 10.2492 335.085 6.24839C331.084 2.24761 325.658 0 320 0C314.342 0 308.916 2.24761 304.915 6.24839C300.914 10.2492 298.667 15.6754 298.667 21.3333V64H128V21.3333C128 15.6754 125.752 10.2492 121.752 6.24839C117.751 2.24761 112.325 0 106.667 0C101.009 0 95.5825 2.24761 91.5817 6.24839C87.5809 10.2492 85.3333 15.6754 85.3333 21.3333V64H64C47.0261 64 30.7475 70.7428 18.7452 82.7452C6.74284 94.7475 0 111.026 0 128V149.333H426.667V128C426.667 111.026 419.924 94.7475 407.922 82.7452C395.919 70.7428 379.641 64 362.667 64Z" fill="url(#paint0_linear_4238_58)"/><path d="M0 362.667C0 379.641 6.74284 395.919 18.7452 407.922C30.7475 419.924 47.0261 426.667 64 426.667H362.667C379.641 426.667 395.919 419.924 407.922 407.922C419.924 395.919 426.667 379.641 426.667 362.667V192H0V362.667Z" fill="url(#paint1_linear_4238_58)"/><defs><linearGradient id="paint0_linear_4238_58" x1="213.333" y1="0" x2="213.333" y2="426.667" gradientUnits="userSpaceOnUse"><stop stop-color="#F4CD79"/><stop offset="1" stop-color="#C7983F"/></linearGradient><linearGradient id="paint1_linear_4238_58" x1="213.333" y1="0" x2="213.333" y2="426.667" gradientUnits="userSpaceOnUse"><stop stop-color="#F4CD79"/><stop offset="1" stop-color="#C7983F"/></linearGradient></defs></svg></span>' +
-		'<div class="home-menu-item-content"><div class="home-menu-item-title">Class Timetable</div>' +
-		'<div class="home-menu-item-subtitle">All locations &amp; times</div></div>' +
+		'<div onclick="CT=\'clubapp\';closeHomeMenu();render()" class="home-menu-item">' +
+		'<span class="home-menu-item-icon">&#127760;</span>' +
+		'<div class="home-menu-item-content"><div class="home-menu-item-title">Visit Our Website</div>' +
+		'<div class="home-menu-item-subtitle">tkdapp.uk</div></div>' +
 		'<span class="home-menu-arrow"><img src="./images/chevron.svg" alt="arrow-icon"></span></div>' +
 		'<div class="home-menu-divider"></div>' +
 		"<div onclick=\"sT('techniques');sTC('korean');closeHomeMenu()\" class=\"home-menu-item\">" +
@@ -10020,14 +10001,6 @@ function rPats() {
 
 	return h;
 }
-function rTechKorean() {
-	var raw = rGloss();
-	var backBtn =
-		'<button class="bk" onclick="sTC(\'menu\')"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Back to Skills sefawer</button>';
-	raw = raw.replace(/<button[^>]*class="bk"[^>]*>[\s\S]*?<\/button>/, "");
-	return backBtn + raw;
-}
-
 function rTechKorean() {
 	var raw = rGloss();
 
@@ -10748,217 +10721,6 @@ function rGloss() {
 	return h;
 }
 
-function rAsk() {
-	var waBase = "https://wa.me/447407030077?text=";
-
-	var policies = [
-		{
-			title: "Mon - Fri",
-			desc: "Standard queries",
-			badge: "WITHIN 24H",
-			icon: "./images/calendar.svg",
-		},
-		{
-			title: "Weekends",
-			desc: "Training days",
-			badge: "CHECK SCHEDULE",
-			icon: "./images/calendar.svg",
-		},
-		{
-			title: "Urgent",
-			desc: "Immediate matters",
-			badge: "CLASS HOURS ONLY",
-			icon: "./images/warning.svg",
-			isUrgent: true,
-		},
-	];
-
-	var categories = [
-		{
-			title: "Pattern Question",
-			desc: "Theory, movement, and philosophy of your current grade forms.",
-			icon: "./images/patterns-active.svg",
-			text: "Hi Master Dutton, I have a question about a pattern: ",
-		},
-		{
-			title: "Technique Help",
-			desc: "Blocks, strikes, and sparring tips to refine your physical mastery.",
-			icon: "./images/technique.svg",
-			text: "Hi Master Dutton, I need help with my technique: ",
-		},
-		{
-			title: "Grading Inquiry",
-			desc: "Requirements and readiness check for your next promotional exam.",
-			icon: "./images/grading-active.svg",
-			text: "Hi Master Dutton, I have a question about grading: ",
-		},
-		{
-			title: "Korean / Theory",
-			desc: "Questions about terminology or history.",
-			icon: "<span class='kr-tech'>&#127472;&#127479;</span>",
-			text: "Hi Master Dutton, I have a theory question: ",
-		},
-		{
-			title: "General Question",
-			desc: "Any other questions for Master Dutton.",
-			icon: '<span><img src="./images/quiz-active.svg"></span>',
-			text: "Hi Master Dutton, I have a question: ",
-		},
-	];
-
-	var h = "";
-
-	// Hero Section
-	h +=
-		'<div class="top-image-section ask-hero">' +
-		'<button class="bk" onclick="sT(\'home\')">' +
-		'<img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home' +
-		"</button>" +
-		'<div class="ask-hero-content">' +
-		'<div class="stitle">Ask Master Dutton</div>' +
-		'<div class="ask-hero-subtitle">Direct access to your instructor.</div>' +
-		'<div class="ask-hero-desc">Tap a question type to open WhatsApp.</div>' +
-		"</div>" +
-		"</div>";
-
-	// Master Card
-	h +=
-		'<div class="ask-master-card">' +
-		'<div class="ask-master-avatar-wrap">' +
-		'<img src="./images/1master-dutton.jpg" class="ask-master-avatar">' +
-		'<div class="avatar-status-dot"></div>' +
-		"</div>" +
-		'<div class="ask-master-info">' +
-		'<div class="ask-master-header">' +
-		'<div class="ask-master-name">Master Dutton</div>' +
-		'<div class="badge-online">ONLINE</div>' +
-		"</div>" +
-		'<div class="ask-master-role">ITF Taekwon-Do Instructor</div>' +
-		'<div class="ask-master-replies">' +
-		'<span><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_4241_6)"><path d="M25 0C11.2152 0 0 11.2152 0 25C0 38.7848 11.2152 50 25 50C38.7848 50 50 38.7848 50 25C50 11.2152 38.7848 0 25 0ZM25 46.875C12.9379 46.875 3.12501 37.0621 3.12501 25C3.12501 12.9379 12.9379 3.12501 25 3.12501C37.0621 3.12501 46.875 12.9379 46.875 25C46.875 37.0621 37.0621 46.875 25 46.875Z" fill="#F4CD79"/><path d="M26.5625 9.375H23.4375V25.6469L33.2703 35.4797L35.4797 33.2702L26.5625 24.353V9.375Z" fill="#F4CD79"/></g><defs><clipPath id="clip0_4241_6"><rect width="50" height="50" fill="white"/></clipPath></defs></svg></span> Usually replies within 24 hours' +
-		"</div>" +
-		"</div>" +
-		"</div>";
-	// Response Policy Section
-	h +=
-		'<div class="section-divider"><span class="section-divider-text">RESPONSE POLICY</span></div>';
-	h += '<div class="policy-list">';
-	policies.forEach(function (p) {
-		h +=
-			'<div class="policy-item">' +
-			'<div class="policy-icon-wrap"><img src="' +
-			p.icon +
-			'"></div>' +
-			'<div class="policy-content">' +
-			'<div class="policy-title">' +
-			p.title +
-			"</div>" +
-			'<div class="policy-desc">' +
-			p.desc +
-			"</div>" +
-			"</div>" +
-			'<div class="policy-badge' +
-			(p.isUrgent ? " urgent" : "") +
-			'">' +
-			p.badge +
-			"</div>" +
-			"</div>";
-	});
-	h += "</div>";
-
-	// Select Category Section
-	h +=
-		'<div class="section-divider"><span class="section-divider-text">Choose your question type:</span></div>';
-	h += '<div class="category-list">';
-	categories.forEach(function (cat) {
-		var url = waBase + encodeURIComponent(cat.text);
-		h +=
-			'<a href="' +
-			url +
-			'" target="_blank" class="category-card">' +
-			'<div class="category-card-icon">' +
-			(cat.icon.indexOf("<") === 0
-				? cat.icon
-				: '<img src="' + cat.icon + '">') +
-			"</div>" +
-			'<div class="category-card-content">' +
-			'<div class="category-card-title">' +
-			cat.title +
-			"</div>" +
-			'<div class="category-card-desc">' +
-			cat.desc +
-			"</div>" +
-			"</div>" +
-			'<span class="home-ask-arrow"><img src="./images/chevron.svg" alt="Chevron" class="icon-lt"></span>' +
-			"</a>";
-	});
-
-	h += "</div>";
-
-	// Action Buttons & Support Info
-	h +=
-		'<div class="ask-action-section">' +
-		'<a href="' +
-		waBase +
-		encodeURIComponent("Hi Master Dutton, I have a general question: ") +
-		'" target="_blank" class="whatsapp-btn-premium">' +
-		'<svg id="fi_4701537" enable-background="new 0 0 32 32" height="512" viewBox="0 0 32 32" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m9.22754 28.24744c2.01074 1.11395 4.32019 1.75256 6.77923 1.75256 7.73022 0 13.99329-6.27655 13.99329-14.00684 0-7.73022-6.26306-13.99316-13.99329-13.99316s-14.00683 6.26294-14.00683 13.99316c0 2.48621.65216 4.79572 1.77972 6.82007l-1.77972 7.18677zm.77441-18.43573c.32599-.3125.80157-.43475 1.23633-.3396l.44824.09509c.44836.09503.81519.39398.99182.80151l.883 1.95636c.21741.47546.13593 1.04608-.21735 1.44006l-.54346.63855c-.17657.20374-.21729.51617-.08148.7608 1.60309 2.88013 3.70886 3.81757 4.64624 4.10278.27173.09515.58429-.0271.7337-.27173l.39398-.61127c.38043-.58417 1.12762-.78802 1.9563-.38043l1.63031.81519c.62494.29883.91022 1.03241.67926 1.68457-.82867 2.4046-2.94806 2.10577-2.94806 2.10577-4.70062-.12231-8.38239-4.45612-9.97186-6.68408-.73364-1.04614-1.18195-2.30957-1.04614-3.60022.13593-1.27709.73371-2.0786 1.20917-2.51335z"></path></g></svg>OPEN WHATSAPP' +
-		"</a>" +
-		'<div class="notice-box-gold">' +
-		"<img src='./images/warning.svg' alt='Warning Icon'> For adult students only" +
-		"</div>" +
-		'<div class="ask-footer-info">' +
-		"This feature is exclusive to app members.<br>Your question goes directly to Master Dutton." +
-		"</div>" +
-		"</div>";
-
-	// Books Section Header (Redesigned)
-	h +=
-		'<div class="section-divider"><span class="section-divider-text">BOOKS BY MASTER DUTTON</span></div>' +
-		'<div class="text-center-muted-mb16">Available on Amazon. Perfect companions to your training.</div>';
-
-	var books = [
-		{
-			title: "TaekwonDo: Unleash Your Potential",
-			desc: "Complete guide from first class to black belt. ITF patterns explained step by step.",
-			url: "https://www.amazon.co.uk/s?k=taekwondo+unleash+your+potential+dutton",
-		},
-		{
-			title: "ITF Colour Belt Patterns",
-			desc: "Complete step by step guide to all ITF colour belt patterns with detailed photos.",
-			url: "https://www.amazon.co.uk/s?k=itf+colour+belt+patterns+dutton",
-		},
-		{
-			title: "ITF Black Belt Patterns I-III Degree",
-			desc: "Covering all moves from 1st to 3rd degree black belt with step by step photos.",
-			url: "https://www.amazon.co.uk/s?k=itf+black+belt+patterns+dutton",
-		},
-	];
-
-	books.forEach(function (b) {
-		h +=
-			'<a href="' +
-			b.url +
-			'" target="_blank" class="card-link-box">' +
-			'<div class="icon-xl-shrink"><svg width="81" height="95" viewBox="0 0 81 95" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M78.4053 14.3009C77.2891 14.3009 76.3841 15.206 76.3841 16.3222V90.9574H9.17662C6.34616 90.9574 4.0428 88.6541 4.04255 85.8236V85.8236C4.04255 84.4492 4.57816 83.1654 5.54839 82.1952C6.50852 81.2351 7.8021 80.6994 9.17655 80.6994H68.6122C69.7239 80.6994 70.6335 79.7899 70.6335 78.6782V2.02128C70.6335 0.909538 69.7239 0 68.6122 0H9.17655C4.11331 0 0 4.11331 0 9.17655V85.8227V85.8227C0 90.8828 4.11651 95 9.17662 95H78.4053C79.5216 95 80.4266 94.095 80.4266 92.9787V16.3222C80.4266 15.206 79.5216 14.3009 78.4053 14.3009Z" fill="url(#paint0_linear_4238_63)"/><path d="M68.6148 83.807H12.326C11.2097 83.807 10.3047 84.712 10.3047 85.8283C10.3047 86.9445 11.2097 87.8495 12.326 87.8495H68.6148C69.731 87.8495 70.636 86.9445 70.636 85.8283C70.636 84.712 69.731 83.807 68.6148 83.807Z" fill="url(#paint1_linear_4238_63)"/><defs><linearGradient id="paint0_linear_4238_63" x1="40.2133" y1="0" x2="40.2133" y2="95" gradientUnits="userSpaceOnUse"><stop stop-color="#F4CD79"/><stop offset="1" stop-color="#C7983F"/></linearGradient><linearGradient id="paint1_linear_4238_63" x1="40.2133" y1="0" x2="40.2133" y2="95" gradientUnits="userSpaceOnUse"><stop stop-color="#F4CD79"/><stop offset="1" stop-color="#C7983F"/></linearGradient></defs></svg></div>' +
-			'<div class="flex-fill"><div class="title-sm-white-mb4">' +
-			b.title +
-			"</div>" +
-			'<div class="text-sm-muted-mb6">' +
-			b.desc +
-			"</div>" +
-			'<div class="text-xs-gold-bold">View on Amazon</div>' +
-			"</div></a>";
-	});
-	h +=
-		'<a href="https://www.amazon.co.uk/stores/author/B0BGHSH7D7" target="_blank" class="card-center-link">' +
-		'<span class="book-store-link">See all books by Master Dutton</span></a>';
-
-	h += "</div>";
-
-	return h;
-}
-
 function sGS(v) {
 	GS = v;
 	render();
@@ -11235,252 +10997,6 @@ if (window.speechSynthesis) {
 	}
 }
 
-function rTimetable() {
-	var h =
-		'<div class="top-image-section timetable-page">' +
-		'<button class="bk" onclick="closeHomeMenu();CT=\'home\';render()">' +
-		'<img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home' +
-		"</button>" +
-		'<div class="stitle">CLASS TIMETABLE</div>' +
-		'<div class="text-sm-muted-mb14">' +
-		"All Elite Taekwon-Do classes across Scotland. Tap a location for directions." +
-		"</div>" +
-		"</div>";
-
-	var days = [
-		{
-			day: "Monday",
-			icon: "&#128337;",
-			classes: [
-				{
-					area: "East Lothian",
-					venue: "The Hollies",
-					addr: "183 High St, Musselburgh EH21 7DE",
-					times: [{ t: "7.30 - 8.30pm", who: "8yrs+" }],
-					maps: "https://maps.google.com/?q=183+High+St+Musselburgh+EH21+7DE",
-				},
-			],
-		},
-		{
-			day: "Tuesday",
-			icon: "&#128337;",
-			classes: [
-				{
-					area: "Midlothian",
-					venue: "Danderhall Community Hub",
-					addr: "9A Edmonstone Road, Danderhall EH22 1QL",
-					times: [
-						{ t: "5.30 - 6.30pm", who: "Ninja Kickers 3-7yrs" },
-						{ t: "6.30 - 7.30pm", who: "8yrs+ & Adults" },
-					],
-					maps: "https://maps.google.com/?q=9A+Edmonstone+Road+Danderhall+EH22+1QL",
-				},
-				{
-					area: "Midlothian",
-					venue: "Lasswade High School",
-					addr: "9A Eskdale Dr, Bonnyrigg EH19 2LA",
-					times: [
-						{ t: "6.30 - 7.30pm", who: "5-11yrs" },
-						{ t: "7.30 - 8.30pm", who: "12yrs+" },
-					],
-					maps: "https://maps.google.com/?q=9A+Eskdale+Dr+Bonnyrigg+EH19+2LA",
-				},
-			],
-		},
-		{
-			day: "Wednesday",
-			icon: "&#128337;",
-			classes: [
-				{
-					area: "Edinburgh",
-					venue: "Broughton Primary School",
-					addr: "132 Broughton Rd, Edinburgh EH7 4LD",
-					times: [{ t: "6.30 - 7.30pm", who: "Kids & Adults" }],
-					maps: "https://maps.google.com/?q=132+Broughton+Rd+Edinburgh+EH7+4LD",
-				},
-				{
-					area: "Edinburgh",
-					venue: "Craigmount High School",
-					addr: "Craigs Road, Edinburgh EH12 8NH",
-					times: [{ t: "6.00 - 7.00pm", who: "8yrs to Adult" }],
-					maps: "https://maps.google.com/?q=Craigs+Road+Edinburgh+EH12+8NH",
-				},
-				{
-					area: "East Lothian",
-					venue: "Gullane Recreation Hall",
-					addr: "Hamilton Road, Gullane EH31 2HP",
-					times: [{ t: "6.00 - 7.00pm", who: "5yrs+ & Adults" }],
-					maps: "https://maps.google.com/?q=Hamilton+Road+Gullane+EH31+2HP",
-				},
-			],
-		},
-		{
-			day: "Thursday",
-			icon: "&#128337;",
-			classes: [
-				{
-					area: "Midlothian",
-					venue: "Dalkeith Community Campus",
-					addr: "2 Cousland Road, Dalkeith EH22 2PS",
-					times: [
-						{ t: "6.00 - 7.00pm", who: "5-11yrs" },
-						{ t: "7.00 - 8.00pm", who: "12yrs+" },
-					],
-					maps: "https://maps.google.com/?q=2+Cousland+Road+Dalkeith+EH22+2PS",
-				},
-			],
-		},
-		{
-			day: "Friday",
-			icon: "&#128337;",
-			classes: [
-				{
-					area: "Midlothian",
-					venue: "Millerhill Community Hub",
-					addr: "6 Cocklerow Loan, Millerhill EH22 1RY",
-					times: [
-						{ t: "5.30 - 6.30pm", who: "Ninja Kickers 3-7yrs" },
-						{ t: "6.30 - 7.30pm", who: "8yrs+ & Adults" },
-					],
-					maps: "https://maps.google.com/?q=6+Cocklerow+Loan+Millerhill+EH22+1RY",
-				},
-			],
-		},
-		{
-			day: "Saturday",
-			icon: "&#128337;",
-			classes: [
-				{
-					area: "Edinburgh",
-					venue: "Juniper Green Scout Hall",
-					addr: "45 Lanark Road West, Currie EH14 5JX",
-					times: [{ t: "9.30 - 10.30am", who: "Ninja Kickers 5+" }],
-					maps: "https://maps.google.com/?q=45+Lanark+Road+West+Currie+EH14+5JX",
-				},
-				{
-					area: "Edinburgh",
-					venue: "Davidson Mains Scout Hall",
-					addr: "Quality Street Lane, Edinburgh EH4 5BU",
-					times: [
-						{ t: "9.30 - 10.30am", who: "5-11yrs" },
-						{ t: "10.30 - 11.30am", who: "12yrs+" },
-					],
-					maps: "https://maps.google.com/?q=Quality+Street+Lane+Edinburgh+EH4+5BU",
-				},
-			],
-		},
-	];
-
-	var areaColors = {
-		Edinburgh: "var(--red)",
-		Midlothian: "#a9caff",
-		"East Lothian": "#2ea84a",
-	};
-
-	days.forEach(function (d) {
-		h += '<div class="mb-20">';
-		h += '<div class="day-header-gold">' + d.day + "</div>";
-		d.classes.forEach(function (cls) {
-			var col = areaColors[cls.area] || "var(--muted)";
-			h +=
-				'<a href="' +
-				cls.maps +
-				'" target="_blank" class="timetable-card" style="--area-color:' +
-				col +
-				'">';
-
-			// Header with Area and Map Icon
-			h += '<div class="timetable-area-label">' + cls.area + "</div>";
-
-			h += '<div class="timetable-venue">' + cls.venue + "</div>";
-			h +=
-				'<div class="timetable-address"><span><svg width="30" height="40" viewBox="0 0 30 40" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_4238_84)"><path d="M15 0C11.0234 0.00527509 7.21113 1.58732 4.39922 4.39922C1.58732 7.21112 0.00527509 11.0234 0 15C0 25.7687 13.975 39.2562 14.5687 39.825C14.6842 39.9372 14.8389 40 15 40C15.1611 40 15.3158 39.9372 15.4312 39.825C16.025 39.2562 30 25.7687 30 15C29.9947 11.0234 28.4127 7.21112 25.6008 4.39922C22.7889 1.58732 18.9766 0.00527509 15 0ZM15 21.875C13.6403 21.875 12.311 21.4718 11.1805 20.7163C10.0499 19.9609 9.16868 18.8872 8.64833 17.6309C8.12798 16.3747 7.99183 14.9924 8.2571 13.6587C8.52238 12.3251 9.17715 11.1001 10.1386 10.1386C11.1001 9.17714 12.3251 8.52237 13.6588 8.25709C14.9924 7.99182 16.3747 8.12797 17.6309 8.64832C18.8872 9.16867 19.9609 10.0499 20.7164 11.1804C21.4718 12.311 21.875 13.6402 21.875 15C21.8739 16.823 21.1492 18.5711 19.8602 19.8601C18.5711 21.1492 16.823 21.8739 15 21.875Z" fill="url(#paint0_linear_4238_84)"/></g><defs><linearGradient id="paint0_linear_4238_84" x1="15" y1="0" x2="15" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#F4CD79"/><stop offset="1" stop-color="#C7983F"/></linearGradient><clipPath id="clip0_4238_84"><rect width="30" height="40" fill="white"/></clipPath></defs></svg></span> ' +
-				cls.addr +
-				"</div>";
-
-			// Sessions Box
-			h += '<div class="timetable-sessions-box">';
-			h += '<div class="timetable-sessions-label">Today\'s Sessions</div>';
-			h += '<div class="timetable-time-grid">';
-			cls.times.forEach(function (tm) {
-				h += '<div class="timetable-time-badge">';
-				h += '<div class="timetable-time-text">' + tm.t + "</div>";
-				h += '<div class="timetable-who-text">' + tm.who + "</div>";
-				h += "</div>";
-			});
-			h += "</div>"; // end time-grid
-			h += "</div>"; // end sessions-box
-
-			h += "</a>";
-		});
-		h += "</div>";
-	});
-
-	h += `
-<div class="contact-wrapper">
-
-    <div class="contact-card-box">
-        
-
-        <div class="contact-row">
-            <span class="contact-icon"><svg width="512" height="402" viewBox="0 0 512 402" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M49.106 123.909C55.578 128.476 75.087 142.04 107.634 164.594C140.182 187.148 165.116 204.514 182.437 216.693C184.34 218.028 188.383 220.93 194.568 225.403C200.754 229.879 205.894 233.496 209.984 236.255C214.077 239.013 219.025 242.107 224.833 245.532C230.639 248.954 236.112 251.528 241.251 253.232C246.391 254.95 251.149 255.801 255.526 255.801H256.101C260.478 255.801 265.238 254.949 270.378 253.232C275.515 251.528 280.993 248.951 286.794 245.532C292.598 242.103 297.546 239.012 301.639 236.255C305.732 233.496 310.868 229.879 317.056 225.403C323.24 220.926 327.288 218.028 329.191 216.693C346.699 204.514 391.242 173.583 462.806 123.903C476.7 114.2 488.308 102.492 497.633 88.787C506.965 75.088 511.626 60.717 511.626 45.682C511.626 33.118 507.103 22.363 498.061 13.418C489.02 4.471 478.312 0 465.944 0H45.679C31.024 0 19.746 4.948 11.847 14.844C3.949 24.742 0 37.114 0 51.959C0 63.95 5.236 76.944 15.703 90.933C26.169 104.923 37.307 115.916 49.106 123.909Z" fill="url(#paint0_linear_4238_73)"/>
-<path d="M483.072 154.455C420.648 196.706 373.248 229.542 340.895 252.956C330.046 260.947 321.245 267.185 314.486 271.655C307.727 276.128 298.738 280.696 287.506 285.357C276.278 290.025 265.814 292.352 256.105 292.352H255.527C245.82 292.352 235.35 290.025 224.122 285.357C212.894 280.696 203.899 276.128 197.142 271.655C190.387 267.185 181.583 260.947 170.735 252.956C145.038 234.114 97.74 201.276 28.839 154.455C17.987 147.227 8.375 138.942 0 129.617V356.302C0 368.872 4.471 379.621 13.418 388.567C22.363 397.516 33.119 401.989 45.682 401.989H465.948C478.508 401.989 489.263 397.516 498.209 388.567C507.158 379.618 511.627 368.873 511.627 356.302V129.617C503.441 138.749 493.927 147.034 483.072 154.455Z" fill="url(#paint1_linear_4238_73)"/>
-<defs>
-<linearGradient id="paint0_linear_4238_73" x1="255.814" y1="129.617" x2="255.814" y2="401.989" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F4CD79"/>
-<stop offset="1" stop-color="#C7983F"/>
-</linearGradient>
-<linearGradient id="paint1_linear_4238_73" x1="255.814" y1="129.617" x2="255.814" y2="401.989" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F4CD79"/>
-<stop offset="1" stop-color="#C7983F"/>
-</linearGradient>
-</defs>
-</svg>
-</span>		<div><div class="label-muted-mb8">GENERAL INQUIRIES</div>
-            <div class="text-md-mb4">elitetkdscot@gmail.com</div>
-			</div>
-        </div>
-
-        <a class="contact-btn" href="mailto:elitetkdscot@gmail.com">
-            SEND EMAIL
-        </a>
-    </div>
-
-    <div class="contact-card-box">
-        
-
-        <div class="contact-row">
-            <span class="contact-icon"><svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_4238_74)">
-<path d="M92.7282 72.3057C88.5767 68.1543 84.4363 64.0027 80.2848 59.8624C76.9927 56.4028 72.6738 56.4028 69.2142 59.8624C66.6251 62.4516 64.0249 65.0406 61.4358 67.6409C60.7438 68.3328 60.2193 68.3328 59.3599 67.9868C57.7977 66.949 55.9004 66.2571 54.338 65.2192C46.9056 60.5544 40.511 54.4945 34.9755 47.5754C32.2079 44.1157 29.7861 40.4888 28.0563 36.3373C27.7104 35.478 27.7104 34.9535 28.4023 34.2616C31.17 31.8398 33.5917 29.2508 36.1808 26.9964C39.8189 23.3695 39.8189 19.2179 36.1808 15.591C33.9376 13.3367 32.0293 11.4395 29.9647 9.36378C27.7104 7.12062 25.6347 5.04489 23.5589 2.96909C20.2779 -0.323031 15.9479 -0.323031 12.4994 2.96909C9.89921 5.5582 7.31016 8.14732 4.70981 10.7476C2.2882 13.1693 1.08284 16.1043 0.736815 19.3965C0.390928 24.7533 1.59615 29.9427 3.50446 34.9535C7.31016 45.4996 13.1913 54.4945 20.2779 62.9649C29.7861 74.3815 41.3702 83.5438 54.684 89.9496C60.7438 92.7173 66.9711 95.139 73.533 95.4849C78.3765 95.6523 82.3607 94.4471 85.6416 90.8089C87.8848 88.3872 90.485 86.1441 92.7282 83.7224C96.1877 80.0842 96.1877 75.7653 92.7282 72.3057Z" fill="url(#paint0_linear_4238_74)"/>
-</g>
-<defs>
-<linearGradient id="paint0_linear_4238_74" x1="48.0003" y1="0.5" x2="48.0003" y2="95.5" gradientUnits="userSpaceOnUse">
-<stop stop-color="#F4CD79"/>
-<stop offset="1" stop-color="#C7983F"/>
-</linearGradient>
-<clipPath id="clip0_4238_74">
-<rect width="96" height="96" fill="white"/>
-</clipPath>
-</defs>
-</svg>
-</span>		<div><div class="label-muted-mb8">DIRECT LINE</div>
-            <div class="text-md-normal">07590283735</div>
-			</div>
-        </div>
-
-        <a class="contact-btn" href="tel:07590283735">
-            CALL NOW
-        </a>
-    </div>
-
-</div>
-`;
-
-	return h;
-}
-
 function toggleHomeMenu() {
 	var d = document.getElementById("home-menu-dropdown");
 	var b = document.getElementById("home-menu-btn");
@@ -11507,17 +11023,11 @@ function closeHomeMenu() {
 function rClubApp() {
 	var h =
 		'<button class="bk" onclick="CT=\'home\';render()"><img class="back-icon" src="./images/back-arrow.svg" alt="Back Icon"> Home</button>';
-	h += '<div class="stitle">YOUR CLUB APP</div>';
-	h += '<div class="padding-center-lg">';
-	h += '<div class="icon-huge-mb16">&#128241;</div>';
-	h += '<div class="title-xl-uppercase-mb8">Coming Soon</div>';
-	h +=
-		'<div class="text-md-muted-centered">Member features, club news, grading results and more are being developed.<br/><br/>Check back soon for updates from Elite Taekwon-Do.</div>';
-	h += "</div>";
+	h += '<div class="stitle">VISIT OUR WEBSITE</div>';
 	h += '<div class="stay-connected-box">';
-	h += '<div class="label-red-mb8">Stay Connected</div>';
+	h += '<div class="text-md-muted-centered">News, updates and more about the app.</div>';
 	h +=
-		'<a href="https://elitetkd.uk" target="_blank" class="btn-gold-outline">elitetkd.uk &#8599;</a>';
+		'<a href="https://tkdapp.uk/" target="_blank" rel="noopener" class="btn-gold-outline">tkdapp.uk &#8599;</a>';
 	h += "</div>";
 	return h;
 }
@@ -11588,9 +11098,7 @@ function render() {
 	else if (CT === "competition") c.innerHTML = rComp();
 	else if (CT === "sparring") c.innerHTML = rSpar();
 	else if (CT === "leaderboard") rLeaderboard().then(function(h){ c.innerHTML = h; });	
-	else if (CT === "ask") c.innerHTML = rAsk();
 	else if (CT === "stretch") c.innerHTML = rStretch();
-	else if (CT === "timetable") c.innerHTML = rTimetable();
 	else if (CT === "books") c.innerHTML = rBooks();
 	else if (CT === "clubapp") c.innerHTML = rClubApp();
 	else if (CT === "workouts") c.innerHTML = rWorkouts();
@@ -11749,7 +11257,6 @@ function aQ(i) {
 }, 1200);
 }
 
-var PWD = "tkd399";
 function checkPwd() {
 	var val = document.getElementById("pwd-input").value.trim().toLowerCase();
 	if (val === PWD) {
