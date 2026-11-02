@@ -9573,20 +9573,6 @@ function rHome() {
 	h += rHomeMenu();
 
 	h +=
-		'<div onclick="sT(\'ask\')" class="home-menu-card mb-10">' +
-		'<div class="home-menu-icon-wrap">' +
-		'<img src="./images/quiz-active.svg" >' +
-		"</div>" +
-		'<div class="home-menu-details">' +
-		'<div class="ask-master-header">' +
-		'<div class="home-menu-title">Ask Master Dutton</div>' +
-		"</div>" +
-		'<div class="home-menu-desc">Pattern help &middot; Technique &middot; Grading &middot; Theory</div>' +
-		"</div>" +
-		'<span class="home-menu-chevron"><img src="./images/chevron.svg" alt="Chevron" class="icon-lt"></span>' +
-		"</div>";
-
-	h +=
 		'<button onclick="logSession()" class="home-log-btn"> LOG TRAINING SESSION</button>';
 
 	h +=
